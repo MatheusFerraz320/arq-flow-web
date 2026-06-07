@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
+import { Users, FolderKanban, Plus } from "lucide-react";
 import { ClientCard } from "@/components/client-card";
 import { NewClientDialog } from "@/components/new-client-dialog";
 
@@ -13,15 +14,13 @@ interface Client {
     id: string;
     title: string;
     status: string;
-    description?: string | null;
   }[];
 }
 
-async function fetchWithAuth<T>(path: string, options?: RequestInit): Promise<T> {
+async function fetchWithAuth<T>(path: string): Promise<T> {
   const res = await fetch(`/api${path}`, {
     credentials: "include",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    ...options,
+    headers: { "Content-Type": "application/json" },
   });
   if (!res.ok) throw new Error("Erro na requisição");
   return res.json();
@@ -32,34 +31,65 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const loadClients = useCallback(async () => {
-    try {
-      const data = await fetchWithAuth<Client[]>("/clients");
-      setClients(data);
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Erro ao carregar clientes";
-      setError(message);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const data = await fetchWithAuth<Client[]>("/clients");
+        if (!cancelled) setClients(data);
+      } catch (err: unknown) {
+        if (!cancelled) {
+          const message =
+            err instanceof Error ? err.message : "Erro ao carregar clientes";
+          setError(message);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  useEffect(() => {
-    loadClients();
-  }, [loadClients]);
+  function handleCreated() {
+    setLoading(true);
+    setError("");
 
-  async function handleCreateClient(data: { name: string; email: string; phone?: string }) {
-    await fetchWithAuth("/clients", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    loadClients();
+    fetchWithAuth<Client[]>("/clients")
+      .then(setClients)
+      .catch((err: unknown) => {
+        const message =
+          err instanceof Error ? err.message : "Erro ao recarregar clientes";
+        setError(message);
+      })
+      .finally(() => setLoading(false));
   }
+
+  const totalProjects = clients.reduce((sum, c) => sum + c.projects.length, 0);
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-fade-in text-muted-foreground">Carregando...</div>
+      <div className="animate-fade-in space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-2">
+            <div className="h-7 w-32 animate-pulse rounded bg-muted" />
+            <div className="h-4 w-48 animate-pulse rounded bg-muted" />
+          </div>
+          <div className="h-8 w-28 animate-pulse rounded-lg bg-muted" />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={i}
+              className="animate-fade-in-up h-40 rounded-xl bg-muted/50"
+              style={{ animationDelay: `${i * 80}ms` }}
+            />
+          ))}
+        </div>
       </div>
     );
   }
@@ -67,25 +97,60 @@ export default function DashboardPage() {
   if (error) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="animate-fade-in text-destructive">{error}</div>
+        <div className="animate-fade-in text-center">
+          <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-destructive/10">
+            <span className="size-1.5 rounded-full bg-destructive" />
+          </div>
+          <p className="text-sm text-destructive">{error}</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <div className="animate-fade-in flex items-center justify-between">
+    <div className="animate-fade-in space-y-6">
+      {/* Page Header */}
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Clientes</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Clientes</h1>
           <p className="text-sm text-muted-foreground">
             {clients.length === 0
               ? "Nenhum cliente cadastrado ainda"
               : `${clients.length} ${clients.length === 1 ? "cliente cadastrado" : "clientes cadastrados"}`}
           </p>
         </div>
-        <NewClientDialog onCreated={loadClients} />
+        <NewClientDialog onCreated={handleCreated} />
       </div>
 
+      {/* Stats */}
+      {clients.length > 0 && (
+        <div className="animate-fade-in-up grid gap-4 sm:grid-cols-2">
+          <div className="flex items-center gap-3 rounded-xl border bg-card p-4">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-brand/10 text-brand">
+              <Users className="size-5" />
+            </div>
+            <div>
+              <p className="text-2xl font-semibold">{clients.length}</p>
+              <p className="text-xs text-muted-foreground">
+                Total de clientes
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 rounded-xl border bg-card p-4">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-[oklch(0.6_0.18_150)/0.1] text-[oklch(0.6_0.18_150)]">
+              <FolderKanban className="size-5" />
+            </div>
+            <div>
+              <p className="text-2xl font-semibold">{totalProjects}</p>
+              <p className="text-xs text-muted-foreground">
+                Total de projetos
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Client Cards */}
       {clients.length > 0 && (
         <div className="animate-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {clients.map((client) => (
@@ -99,16 +164,18 @@ export default function DashboardPage() {
         </div>
       )}
 
+      {/* Empty State */}
       {clients.length === 0 && (
         <div className="animate-fade-in-up flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-20 text-center">
-          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-muted text-xl">
-            +
+          <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-light text-white shadow-lg shadow-brand/25">
+            <Plus className="size-6" />
           </div>
           <h3 className="mb-1 font-semibold">Nenhum cliente ainda</h3>
-          <p className="mb-4 text-sm text-muted-foreground">
-            Crie seu primeiro cliente para começar
+          <p className="mb-6 max-w-sm text-sm text-muted-foreground">
+            Crie seu primeiro cliente para começar a gerenciar projetos e
+            acompanhar o fluxo de trabalho.
           </p>
-          <NewClientDialog onCreated={loadClients} />
+          <NewClientDialog onCreated={handleCreated} />
         </div>
       )}
     </div>

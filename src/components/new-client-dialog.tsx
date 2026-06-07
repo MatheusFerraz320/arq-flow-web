@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { User, Mail, Phone, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 interface NewClientDialogProps {
   onCreated: () => void;
@@ -56,6 +58,7 @@ export function NewClientDialog({ onCreated }: NewClientDialogProps) {
       setEmail("");
       setPhone("");
       setOpen(false);
+      toast.success("Cliente criado com sucesso");
       onCreated();
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Erro ao criar cliente";
@@ -81,49 +84,65 @@ export function NewClientDialog({ onCreated }: NewClientDialogProps) {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="name">Nome</Label>
-              <Input
-                id="name"
-                placeholder="Nome do cliente"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                autoFocus
-              />
+              <div className="relative">
+                <User className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  id="name"
+                  placeholder="Nome do cliente"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="h-10 pl-10"
+                  autoFocus
+                />
+              </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="cliente@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              <div className="relative">
+                <Mail className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="cliente@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="h-10 pl-10"
+                />
+              </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">Telefone (opcional)</Label>
-              <Input
-                id="phone"
-                placeholder="(11) 99999-8888"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
+              <div className="relative">
+                <Phone className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  id="phone"
+                  placeholder="(11) 99999-8888"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="h-10 pl-10"
+                />
+              </div>
             </div>
             {error && (
-              <div className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
+              <div className="flex items-center gap-2 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                <span className="size-1.5 shrink-0 rounded-full bg-destructive" />
                 {error}
               </div>
             )}
           </div>
           <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setOpen(false)}
-            >
+            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
               Cancelar
             </Button>
             <Button type="submit" disabled={loading}>
-              {loading ? "Salvando..." : "Salvar"}
+              {loading ? (
+                <>
+                  <Loader2 className="size-4 animate-spin" />
+                  Salvando
+                </>
+              ) : (
+                "Salvar"
+              )}
             </Button>
           </DialogFooter>
         </form>
