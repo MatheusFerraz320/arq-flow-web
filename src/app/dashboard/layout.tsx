@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/navbar";
 import type { User } from "@/lib/auth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -45,7 +45,7 @@ export default function DashboardLayout({
   if (checking) {
     return (
       <div className="flex min-h-dvh flex-col">
-        <div className="h-1 bg-gradient-to-r from-brand to-brand-light" />
+        <div className="h-1 animate-gradient bg-[linear-gradient(90deg,var(--brand),var(--brand-light),var(--brand))]" />
         <div className="flex flex-1 items-center justify-center">
           <div className="space-y-3 text-center">
             <div className="mx-auto size-8 animate-pulse rounded-full bg-muted" />
@@ -58,26 +58,7 @@ export default function DashboardLayout({
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <div className="h-1 bg-gradient-to-r from-brand to-brand-light" />
-
-      <header className="animate-slide-down sticky top-0 z-40 border-b bg-background/80 backdrop-blur-sm">
-        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-brand-light text-xs font-bold text-white shadow-sm">
-              AF
-            </div>
-            <span className="text-sm font-semibold">ArqFlow</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="hidden text-sm text-muted-foreground sm:inline">
-              {user?.name}
-            </span>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
-              Sair
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navbar user={user!} onLogout={handleLogout} />
 
       <main className="flex-1">
         <div className="mx-auto max-w-5xl px-4 py-6 sm:py-8">{children}</div>

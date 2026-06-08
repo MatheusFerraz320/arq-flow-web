@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { User, Mail, Phone, Loader2 } from "lucide-react";
+import { User, Mail, Phone, Plus, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -70,9 +70,14 @@ export function NewClientDialog({ onCreated }: NewClientDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={<Button size="sm" />}>
-        Novo Cliente
-      </DialogTrigger>
+      <DialogTrigger
+        render={
+          <Button size="sm" className="gap-1.5 shadow-xs hover:shadow-md">
+            <Plus className="size-4" />
+            Novo Cliente
+          </Button>
+        }
+      />
       <DialogContent className="sm:max-w-md">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
@@ -131,10 +136,10 @@ export function NewClientDialog({ onCreated }: NewClientDialogProps) {
             )}
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+            <Button type="button" variant="ghost" onClick={() => setOpen(false)}>
               Cancelar
             </Button>
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading} className="shadow-xs hover:shadow-md">
               {loading ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
