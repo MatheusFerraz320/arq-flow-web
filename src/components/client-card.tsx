@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { StatusBadge } from "@/components/status-badge";
 
@@ -56,15 +57,16 @@ export function ClientCard({ name, email, projects }: ClientCardProps) {
         {projects.length > 0 && (
           <div className="space-y-1.5">
             {projects.map((project) => (
-              <div
+              <Link
                 key={project.id}
-                className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2"
+                href={`/dashboard/projetos/${project.id}`}
+                className="flex items-center justify-between rounded-lg bg-muted/50 px-3 py-2 transition-colors hover:bg-muted/80"
               >
                 <span className="truncate text-sm font-medium">
                   {project.title}
                 </span>
                 <StatusBadge status={project.status} />
-              </div>
+              </Link>
             ))}
           </div>
         )}
