@@ -123,7 +123,7 @@ export function LoginForm() {
         {/* Submit */}
         <Button
           type="submit"
-          className="h-10 w-full transition-transform active:scale-[0.98]"
+          className="h-10 w-full transition-transform active:scale-[0.98] "
           disabled={loading}
         >
           {loading ? (
