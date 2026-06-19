@@ -2,12 +2,13 @@ import { type HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 const variantStyles = {
-  default: "bg-primary text-primary-foreground",
-  secondary: "bg-secondary text-secondary-foreground",
+  default: "bg-primary/10 text-primary",
+  secondary: "bg-muted text-muted-foreground",
   destructive: "bg-destructive/10 text-destructive",
-  outline: "border-border text-foreground",
-  ghost: "hover:bg-muted hover:text-muted-foreground",
-  link: "text-primary underline-offset-4 hover:underline",
+  success: "bg-success/10 text-success",
+  warning: "bg-warning/10 text-warning",
+  accent: "bg-accent/10 text-accent",
+  outline: "border border-border text-foreground",
 };
 
 interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {

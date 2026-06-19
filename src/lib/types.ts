@@ -16,3 +16,15 @@ export interface Project {
   updatedAt: string;
   updates: ProjectUpdate[];
 }
+
+export interface Client {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string | null;
+  projects: {
+    id: string;
+    title: string;
+    status: string;
+  }[];
+}

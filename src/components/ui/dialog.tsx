@@ -127,7 +127,7 @@ function DialogContent({
       ref={dialogRef}
       data-slot="dialog-content"
       className={cn(
-        "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-[calc(100%-2rem)] sm:max-w-sm gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 outline-none backdrop:bg-black/10 backdrop:backdrop-blur-xs open:animate-scale-in",
+        "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-[calc(100%-2rem)] sm:max-w-sm gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-border outline-none backdrop:bg-black/10 backdrop:backdrop-blur-xs open:animate-scale-in",
         className,
       )}
       onClick={handleBackdropClick}

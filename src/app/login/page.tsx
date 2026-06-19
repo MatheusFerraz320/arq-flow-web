@@ -8,7 +8,7 @@ export default function LoginPage() {
       {/* Left Panel — Branding */}
       <div className="relative hidden flex-col justify-between overflow-hidden lg:flex">
         {/* Gradient layer animado via transform (GPU, sem tremor) */}
-        <div className="animate-gradient absolute inset-y-0 left-0 w-[200%] bg-gradient-to-r from-[oklch(0.48_0.2_260)] via-[oklch(0.42_0.22_275)] to-[oklch(0.55_0.18_245)]" />
+        <div className="animate-gradient absolute inset-y-0 left-0 w-[200%] bg-gradient-to-r from-brand to-brand-light" />
 
         {/* Decorative geometric elements */}
         <div className="pointer-events-none absolute -right-24 -top-24 size-96 rounded-full border border-white/[0.06]" />

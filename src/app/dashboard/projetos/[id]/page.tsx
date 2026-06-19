@@ -26,13 +26,13 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
   return (
     <div className="animate-fade-in space-y-8">
       {/* Back link */}
-      <Link
-        href="/dashboard"
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all duration-200 hover:text-foreground hover:gap-2"
-      >
-        <ArrowLeft className="size-4" />
-        Voltar para clientes
-      </Link>
+        <Link
+          href={`/dashboard/clientes/${project.client.id}`}
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all duration-200 hover:text-foreground hover:gap-2"
+        >
+          <ArrowLeft className="size-4" />
+          Voltar para {project.client.name}
+        </Link>
 
       {/* Hero Header */}
       <div className="rounded-xl bg-gradient-to-br from-brand/[0.07] to-transparent p-6 ring-1 ring-brand/10 sm:p-8">
@@ -64,7 +64,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
         </div>
 
         <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
-          <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500/20 to-sky-500/5 text-sky-600 ring-1 ring-sky-500/10">
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
             <User className="size-5" />
           </div>
           <div className="min-w-0">
@@ -74,7 +74,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
         </div>
 
         <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
-          <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-500/5 text-amber-600 ring-1 ring-amber-500/10">
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
             <CalendarDays className="size-5" />
           </div>
           <div className="min-w-0">
@@ -86,7 +86,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
         </div>
 
         <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
-          <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 text-emerald-600 ring-1 ring-emerald-500/10">
+          <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-success/20 to-success/5 text-success ring-1 ring-success/10">
             <Clock className="size-5" />
           </div>
           <div className="min-w-0">

@@ -19,12 +19,12 @@ export function Search({
 }: SearchProps) {
   return (
     <div className={cn("group relative", className)}>
-      <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground transition-colors duration-200 group-focus-within:text-brand" />
+      <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground transition-colors duration-200 group-focus-within:text-primary" />
       <Input
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="h-10 w-full pl-10 transition-all duration-200 group-focus-within:ring-2 group-focus-within:ring-brand/20"
+        className="h-10 w-full pl-10 transition-all duration-200 group-focus-within:ring-2 group-focus-within:ring-primary/20"
       />
     </div>
   );

@@ -65,8 +65,8 @@ export function ProjectActions({ projectId, status }: ProjectActionsProps) {
       </CardHeader>
       <CardContent>
         {status === "CONCLUIDO" ? (
-          <div className="flex items-center gap-3 rounded-lg bg-emerald-500/10 px-4 py-3 text-sm font-medium text-emerald-600">
-            <div className="flex size-8 items-center justify-center rounded-full bg-emerald-500/20">
+          <div className="flex items-center gap-3 rounded-lg bg-success/10 px-4 py-3 text-sm font-medium text-success">
+            <div className="flex size-8 items-center justify-center rounded-full bg-success/20">
               <ThumbsUp className="size-4" />
             </div>
             Projeto já aprovado

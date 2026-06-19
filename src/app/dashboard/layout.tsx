@@ -1,5 +1,5 @@
 "use client";
-
+import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/navbar";
@@ -39,6 +39,7 @@ export default function DashboardLayout({
       method: "POST",
       credentials: "include",
     });
+    toast.success("Deslogado com sucesso");
     router.push("/login");
   }
 

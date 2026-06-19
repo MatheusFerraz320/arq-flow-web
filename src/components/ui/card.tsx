@@ -1,16 +1,21 @@
 import { type HTMLAttributes } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
+    <motion.div
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
       data-slot="card"
       className={cn(
-        "flex flex-col gap-4 overflow-hidden rounded-xl bg-card p-4 text-sm text-card-foreground ring-1 ring-foreground/10 transition-all duration-200 hover:ring-foreground/20",
+        "flex flex-col gap-4 rounded-xl bg-card p-5 text-sm text-card-foreground ring-1 ring-border",
         className,
       )}
-      {...props}
-    />
+      {...(props as React.ComponentPropsWithoutRef<typeof motion.div>)}
+    >
+      {props.children}
+    </motion.div>
   );
 }
 
@@ -63,10 +68,7 @@ function CardFooter({
   return (
     <div
       data-slot="card-footer"
-      className={cn(
-        "flex items-center rounded-b-xl border-t bg-muted/50 p-4",
-        className,
-      )}
+      className={cn("flex items-center pt-2", className)}
       {...props}
     />
   );

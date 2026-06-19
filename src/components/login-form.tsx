@@ -24,6 +24,7 @@ export function LoginForm() {
 
     if (!email || !password) {
       triggerError("Preencha todos os campos");
+      toast.warning("Preencha todos os campos");
       return;
     }
 
@@ -35,6 +36,7 @@ export function LoginForm() {
       router.push(user.role === "ARCHITECT" ? "/dashboard" : "/portal");
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Erro ao fazer login";
+      toast.error(message);
       triggerError(message);
     } finally {
       setLoading(false);
