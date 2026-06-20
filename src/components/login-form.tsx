@@ -57,7 +57,7 @@ export function LoginForm() {
           AF
         </div>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-          ArqFlow
+          ArchitectFlow
         </h1>
         <p className="mt-1.5 text-sm text-muted-foreground">
           Entre na sua conta

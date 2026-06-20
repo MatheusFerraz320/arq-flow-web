@@ -10,6 +10,7 @@ import { MetricCard } from "@/components/ui/metric-card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import { fadeIn, stagger } from "@/lib/animations";
+import { useAuth } from "@/lib/auth-context";
 import type { Client } from "@/lib/types";
 
 async function fetchWithAuth<T>(path: string): Promise<T> {
@@ -22,6 +23,7 @@ async function fetchWithAuth<T>(path: string): Promise<T> {
 }
 
 export default function DashboardPage() {
+  const { user } = useAuth();
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -127,6 +129,7 @@ const filteredClients = clients.filter((client) =>
       <motion.div variants={fadeIn} className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-gray-900">Dashboard</h1>
+          <p className = "text-sm text-gray-900">Olá, {user.name}</p>
           <p className="mt-0.5 text-sm text-muted-foreground">
             {clients.length === 0
               ? "Nenhum cliente cadastrado ainda"

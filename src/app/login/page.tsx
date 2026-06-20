@@ -6,7 +6,7 @@ export default function LoginPage() {
   return (
     <div className="grid min-h-dvh lg:grid-cols-2">
       {/* Left Panel — Branding */}
-      <div className="relative hidden flex-col justify-between overflow-hidden lg:flex">
+      <div className="relative hidden flex-col justify-between overflow-hidden lg:flex ">
         {/* Gradient layer animado via transform (GPU, sem tremor) */}
         <div className="animate-gradient absolute inset-y-0 left-0 w-[200%] bg-gradient-to-r from-brand to-brand-light" />
 
@@ -35,7 +35,7 @@ export default function LoginPage() {
               AF
             </div>
             <span className="text-lg font-medium tracking-tight text-white/90">
-              ArqFlow
+              ArchitectFlow
             </span>
           </div>
 
@@ -51,7 +51,7 @@ export default function LoginPage() {
                 AF
               </div>
               <div>
-                <p className="text-sm font-medium text-white">Equipe ArqFlow</p>
+                <p className="text-sm font-medium text-white">Equipe ArchitectFlow</p>
                 <p className="text-xs text-white/50">
                   Plataforma de aprovação de projetos
                 </p>
@@ -60,7 +60,7 @@ export default function LoginPage() {
           </div>
 
           <p className="text-xs text-white/30">
-            &copy; 2026 ArqFlow. Todos os direitos reservados.
+            &copy; 2026 ArchitectFlow. Todos os direitos reservados.
           </p>
         </div>
       </div>

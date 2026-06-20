@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/navbar";
+import { AuthProvider } from "@/lib/auth-context";
 import type { User } from "@/lib/auth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -57,12 +58,14 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-dvh">
-      <Navbar user={user!} onLogout={handleLogout} />
+    <AuthProvider user={user!} onLogout={handleLogout}>
+      <div className="flex min-h-dvh">
+        <Navbar />
 
-      <main className="ml-64 flex-1">
-        <div className="mx-auto max-w-5xl px-6 py-8">{children}</div>
-      </main>
-    </div>
+        <main className="ml-64 flex-1">
+          <div className="mx-auto max-w-5xl px-6 py-8">{children}</div>
+        </main>
+      </div>
+    </AuthProvider>
   );
 }

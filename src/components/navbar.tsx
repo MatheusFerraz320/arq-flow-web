@@ -4,13 +4,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutDashboard, Users, FolderKanban, LogOut } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
-import type { User } from "@/lib/auth";
+import { useAuth } from "@/lib/auth-context";
 import { cn } from "@/lib/utils";
-
-interface NavbarProps {
-  user: User;
-  onLogout: () => void;
-}
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -18,8 +13,9 @@ const NAV_ITEMS = [
   { href: "/dashboard/projetos", label: "Projetos", icon: FolderKanban },
 ];
 
-export function Navbar({ user, onLogout }: NavbarProps) {
+export function Navbar() {
   const pathname = usePathname();
+  const { user, onLogout } = useAuth();
 
   function isActive(href: string) {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -35,7 +31,7 @@ export function Navbar({ user, onLogout }: NavbarProps) {
         </div>
         <div className="flex flex-col">
           <h1 className="text-lg font-extrabold tracking-tight text-card-foreground">
-            ArqFlow
+            ArchitectFlow
           </h1>
           <span className="text-[11px] font-semibold tracking-[0.15em] text-muted-foreground/60 uppercase">
             Dashboard

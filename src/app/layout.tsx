@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ArqFlow",
+  title: "ArchitectFlow",
   description: "Portal de Aprovação e Acompanhamento de Projetos",
 };
 
