@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Plus, Loader2, FileText, AlignLeft } from "lucide-react";
+import { Plus, Loader2, FileText, AlignLeft, CalendarDays, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -35,6 +35,9 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [budget, setBudget] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [dueDate, setDueDate] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -56,10 +59,16 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
           title,
           description: description || undefined,
           clientId,
+          budget: budget ? Number(budget) : undefined,
+          startDate: startDate || undefined,
+          dueDate: dueDate || undefined,
         }),
       });
       setTitle("");
       setDescription("");
+      setBudget("");
+      setStartDate("");
+      setDueDate("");
       setOpen(false);
       toast.success("Projeto criado com sucesso");
       onCreated();
@@ -116,6 +125,49 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
                   className="flex w-full min-w-0 rounded-lg border border-input bg-transparent px-3 py-2 pl-10 text-sm transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
                   rows={3}
                 />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="budget">Orçamento (opcional)</Label>
+              <div className="relative">
+                <DollarSign className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  id="budget"
+                  type="number"
+                  step="0.01"
+                  placeholder="Valor do projeto"
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                  className="h-10 pl-10"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="startDate">Data de início (opcional)</Label>
+                <div className="relative">
+                  <CalendarDays className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="startDate"
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="h-10 pl-10"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="dueDate">Data de conclusão (opcional)</Label>
+                <div className="relative">
+                  <CalendarDays className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="dueDate"
+                    type="date"
+                    value={dueDate}
+                    onChange={(e) => setDueDate(e.target.value)}
+                    className="h-10 pl-10"
+                  />
+                </div>
               </div>
             </div>
             {error && (

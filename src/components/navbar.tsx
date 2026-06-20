@@ -3,15 +3,17 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutDashboard, Users, FolderKanban, LogOut } from "lucide-react";
-import { Avatar } from "@/components/ui/avatar";
 import { useAuth } from "@/lib/auth-context";
 import { cn } from "@/lib/utils";
+import { getInitials, bgForName } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/clientes", label: "Clientes", icon: Users },
   { href: "/dashboard/projetos", label: "Projetos", icon: FolderKanban },
 ];
+
+const AVATAR_BG = ["bg-brand/10 text-brand", "bg-accent/10 text-accent", "bg-muted text-muted-foreground"];
 
 export function Navbar() {
   const pathname = usePathname();
@@ -24,7 +26,6 @@ export function Navbar() {
 
   return (
     <aside className="fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-border bg-card shadow-sm">
-      {/* Brand */}
       <div className="flex items-center gap-3 px-6 pt-8 pb-6">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-light text-lg font-bold text-white shadow-lg shadow-brand/25">
           AF
@@ -39,7 +40,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 space-y-0.5 px-3">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
@@ -62,10 +62,11 @@ export function Navbar() {
         })}
       </nav>
 
-      {/* User + Logout */}
       <div className="border-t border-border px-3 py-4">
         <div className="flex items-center gap-3 rounded-lg px-3 py-2">
-          <Avatar name={user.name} size="sm" />
+          <div className={cn("flex size-8 items-center justify-center rounded-full text-xs font-semibold", AVATAR_BG[bgForName(user.name)])}>
+            {getInitials(user.name)}
+          </div>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-medium text-card-foreground">
               {user.name}

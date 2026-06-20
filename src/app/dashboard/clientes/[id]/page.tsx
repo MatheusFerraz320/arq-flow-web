@@ -1,18 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { ArrowLeft, FolderKanban, Plus, Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar } from "@/components/ui/avatar";
-import { StatusBadge } from "@/components/status-badge";
+import { StatusBadge } from "@/components/ui/badge";
 import { NewProjectDialog } from "@/components/new-project-dialog";
-import { Skeleton } from "@/components/ui/skeleton";
-import { EmptyState } from "@/components/ui/empty-state";
-import { fadeIn, stagger } from "@/lib/animations";
+import { cn } from "@/lib/utils";
+import { getInitials, bgForName } from "@/lib/utils";
 import type { Client } from "@/lib/types";
+
+const AVATAR_BG = ["bg-brand/10 text-brand", "bg-accent/10 text-accent", "bg-muted text-muted-foreground"];
 
 async function fetchWithAuth<T>(path: string): Promise<T> {
   const res = await fetch(`/api${path}`, {
@@ -55,16 +53,16 @@ export default function ClientPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <Skeleton variant="text" className="h-5 w-32" />
+        <div className="h-5 w-32 animate-pulse rounded bg-muted" />
         <div className="rounded-xl bg-gradient-to-br from-brand/[0.07] to-transparent p-6 ring-1 ring-brand/10 sm:p-8">
           <div className="space-y-3">
-            <Skeleton variant="text" className="h-8 w-48" />
-            <Skeleton variant="text" className="h-4 w-32" />
+            <div className="h-8 w-48 animate-pulse rounded bg-muted" />
+            <div className="h-4 w-32 animate-pulse rounded bg-muted" />
           </div>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Skeleton variant="card" />
-          <Skeleton variant="card" />
+          <div className="h-32 animate-pulse rounded-xl bg-muted" />
+          <div className="h-32 animate-pulse rounded-xl bg-muted" />
         </div>
       </div>
     );
@@ -73,29 +71,19 @@ export default function ClientPage() {
   if (error || !client) {
     return (
       <div className="flex items-center justify-center py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center"
-        >
+        <div className="text-center animate-fade-in">
           <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-destructive/10">
             <span className="size-1.5 rounded-full bg-destructive" />
           </div>
           <p className="text-sm text-destructive">{error || "Cliente não encontrado"}</p>
-        </motion.div>
+        </div>
       </div>
     );
   }
 
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={stagger}
-      className="space-y-8"
-    >
-      {/* Back link */}
-      <motion.div variants={fadeIn}>
+    <div className="space-y-8 animate-fade-in">
+      <div>
         <Link
           href="/dashboard"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all duration-200 hover:text-foreground hover:gap-2"
@@ -103,16 +91,14 @@ export default function ClientPage() {
           <ArrowLeft className="size-4" />
           Voltar para clientes
         </Link>
-      </motion.div>
+      </div>
 
-      {/* Hero Header */}
-      <motion.div
-        variants={fadeIn}
-        className="rounded-xl bg-gradient-to-br from-brand/[0.07] to-transparent p-6 ring-1 ring-brand/10 sm:p-8"
-      >
+      <div className="rounded-xl bg-gradient-to-br from-brand/[0.07] to-transparent p-6 ring-1 ring-brand/10 sm:p-8">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-4">
-            <Avatar name={client.name} size="lg" />
+            <div className={cn("flex size-12 items-center justify-center rounded-full text-sm font-semibold", AVATAR_BG[bgForName(client.name)])}>
+              {getInitials(client.name)}
+            </div>
             <div>
               <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
                 {client.name}
@@ -136,31 +122,24 @@ export default function ClientPage() {
             onCreated={handleProjectCreated}
           />
         </div>
-      </motion.div>
+      </div>
 
-      {/* Projects Section */}
       <div className="space-y-4">
-        <motion.div
-          variants={fadeIn}
-          className="flex items-center justify-between"
-        >
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <FolderKanban className="size-4 text-muted-foreground" />
             <h2 className="text-sm font-semibold tracking-tight">
               Projetos{client.projects.length > 0 && ` (${client.projects.length})`}
             </h2>
           </div>
-        </motion.div>
+        </div>
 
         {client.projects.length > 0 && (
-          <motion.div
-            variants={fadeIn}
-            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          >
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {client.projects.map((project) => (
               <Link key={project.id} href={`/dashboard/projetos/${project.id}`}>
-                <Card className="h-full cursor-pointer transition-all duration-200 hover:shadow-md">
-                  <CardContent className="flex h-full flex-col justify-between gap-3">
+                <div className="flex h-full cursor-pointer flex-col gap-4 rounded-xl bg-card p-5 text-sm text-card-foreground border border-border/60 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:-translate-y-1">
+                  <div className="flex h-full flex-col justify-between gap-3">
                     <div>
                       <h3 className="truncate font-medium">{project.title}</h3>
                     </div>
@@ -176,29 +155,29 @@ export default function ClientPage() {
                               : "Concluído"}
                       </span>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </Link>
             ))}
-          </motion.div>
+          </div>
         )}
 
         {client.projects.length === 0 && (
-          <motion.div variants={fadeIn}>
-            <EmptyState
-              icon={<Plus className="size-6" />}
-              title="Nenhum projeto ainda"
-              description="Crie o primeiro projeto para este cliente."
-              action={
-                <NewProjectDialog
-                  clientId={client.id}
-                  onCreated={handleProjectCreated}
-                />
-              }
+          <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-20 text-center transition-colors duration-200 hover:border-primary/30">
+            <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-light text-white shadow-lg shadow-brand/25">
+              <Plus className="size-6" />
+            </div>
+            <h3 className="mb-1 font-semibold">Nenhum projeto ainda</h3>
+            <p className="mb-6 max-w-sm text-sm text-muted-foreground">
+              Crie o primeiro projeto para este cliente.
+            </p>
+            <NewProjectDialog
+              clientId={client.id}
+              onCreated={handleProjectCreated}
             />
-          </motion.div>
+          </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

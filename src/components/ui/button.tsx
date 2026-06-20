@@ -1,12 +1,11 @@
 import { forwardRef, type ButtonHTMLAttributes } from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const variantStyles = {
   default:
-    "bg-primary text-primary-foreground shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-primary/90 hover:shadow-[0_2px_8px_var(--color-brand)/0.3]",
+    "bg-primary text-primary-foreground shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-primary/90",
   accent:
-    "bg-accent text-accent-foreground shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-accent/85 hover:shadow-[0_2px_8px_var(--color-accent)/0.3]",
+    "bg-accent text-accent-foreground shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-accent/85",
   outline:
     "border border-border bg-background hover:bg-muted hover:border-foreground/20",
   secondary:
@@ -36,18 +35,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "default", ...props }, ref) => {
     return (
-      <motion.button
+      <button
         ref={ref}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ duration: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
         className={cn(
           "inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent text-sm font-medium whitespace-nowrap transition-colors duration-200 select-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
           variantStyles[variant],
           sizeStyles[size],
           className,
         )}
-        {...(props as React.ComponentPropsWithoutRef<typeof motion.button>)}
+        {...props}
       />
     );
   },

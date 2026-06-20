@@ -1,13 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion } from "framer-motion";
 import { ImageIcon, Upload, X, Loader2, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { EmptyState } from "@/components/ui/empty-state";
-import { fadeIn, stagger } from "@/lib/animations";
 import type { ProjectPhoto } from "@/lib/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -106,7 +102,7 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
         <h2 className="text-sm font-semibold tracking-tight">Fotos</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
-            <Skeleton key={i} variant="card" className="h-48" />
+            <div key={i} className="h-48 animate-pulse rounded-xl bg-muted" />
           ))}
         </div>
       </section>
@@ -125,16 +121,8 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
   }
 
   return (
-    <motion.section
-      initial="initial"
-      animate="animate"
-      variants={stagger}
-      className="space-y-4"
-    >
-      <motion.div
-        variants={fadeIn}
-        className="flex items-center justify-between"
-      >
+    <section className="space-y-4">
+      <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold tracking-tight">
           Fotos{photos.length > 0 && ` (${photos.length})`}
         </h2>
@@ -162,17 +150,13 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
           )}
           {uploading ? "Enviando..." : "Adicionar"}
         </Button>
-      </motion.div>
+      </div>
 
       {photos.length > 0 && (
-        <motion.div
-          variants={fadeIn}
-          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {photos.map((photo) => (
-            <motion.div
+            <div
               key={photo.id}
-              variants={fadeIn}
               className="group relative overflow-hidden rounded-xl border bg-card"
             >
               <div className="aspect-[4/3] overflow-hidden">
@@ -200,26 +184,24 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
                   <Trash2 className="size-4" />
                 )}
               </button>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       )}
 
       {photos.length === 0 && (
-        <motion.div variants={fadeIn}>
-          <div className="group flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-14 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-sm">
-            <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10 transition-transform duration-200 group-hover:scale-110">
-              <ImageIcon className="size-6" />
-            </div>
-            <p className="text-sm font-medium text-muted-foreground">
-              Nenhuma foto adicionada
-            </p>
-            <p className="mt-1 text-xs text-muted-foreground/60">
-              Adicione fotos para documentar o processo.
-            </p>
+        <div className="group flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-14 text-center transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-sm">
+          <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10 transition-transform duration-200 group-hover:scale-110">
+            <ImageIcon className="size-6" />
           </div>
-        </motion.div>
+          <p className="text-sm font-medium text-muted-foreground">
+            Nenhuma foto adicionada
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground/60">
+            Adicione fotos para documentar o processo.
+          </p>
+        </div>
       )}
-    </motion.section>
+    </section>
   );
 }

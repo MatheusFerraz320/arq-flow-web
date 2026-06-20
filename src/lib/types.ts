@@ -12,6 +12,9 @@ export interface Project {
   description: string | null;
   status: ProjectStatus;
   client: { id: string; name: string };
+  budget: number | null;
+  startDate: string | null;
+  dueDate: string | null;
   createdAt: string;
   updatedAt: string;
   updates: ProjectUpdate[];

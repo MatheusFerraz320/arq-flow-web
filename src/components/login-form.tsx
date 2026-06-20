@@ -76,7 +76,7 @@ export function LoginForm() {
               placeholder="seu@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-10 pl-10 transition-shadow focus-visible:shadow-[0_0_0_4px_var(--brand)/0.1]"
+              className="h-10 pl-10 transition-shadow focus-visible:shadow-[0_0_0_4px_var(--color-brand)/0.1]"
               autoComplete="email"
               autoFocus
             />
@@ -103,7 +103,7 @@ export function LoginForm() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-10 pl-10 transition-shadow focus-visible:shadow-[0_0_0_4px_var(--brand)/0.1]"
+              className="h-10 pl-10 transition-shadow focus-visible:shadow-[0_0_0_4px_var(--color-brand)/0.1]"
               autoComplete="current-password"
             />
           </div>

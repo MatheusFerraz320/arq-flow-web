@@ -15,6 +15,13 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: keyof typeof variantStyles;
 }
 
+const STATUS_CONFIG: Record<string, { label: string; dot: string; variant: keyof typeof variantStyles }> = {
+  BRIEFING:  { label: "Briefing",  dot: "bg-warning", variant: "warning" },
+  PROJETO:   { label: "Projeto",   dot: "bg-primary", variant: "default" },
+  REVISAO:   { label: "Revisão",   dot: "bg-muted-foreground", variant: "outline" },
+  CONCLUIDO: { label: "Concluído", dot: "bg-success", variant: "success" },
+};
+
 function Badge({ className, variant = "default", ...props }: BadgeProps) {
   return (
     <span
@@ -29,4 +36,18 @@ function Badge({ className, variant = "default", ...props }: BadgeProps) {
   );
 }
 
-export { Badge };
+function StatusBadge({ status, className }: { status: string; className?: string }) {
+  const config = STATUS_CONFIG[status];
+  const label = config?.label ?? status;
+  const dot = config?.dot ?? "bg-muted-foreground";
+  const variant = config?.variant ?? "outline";
+
+  return (
+    <Badge variant={variant} className={cn("gap-1.5", className)}>
+      <span className={`size-1.5 shrink-0 rounded-full ${dot}`} />
+      {label}
+    </Badge>
+  );
+}
+
+export { Badge, StatusBadge };
