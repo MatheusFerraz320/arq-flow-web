@@ -26,9 +26,9 @@ function getAvatarColor(name: string): string {
     "bg-brand/80",
     "bg-success/70",
     "bg-accent/70",
-    "bg-[oklch(0.65_0.15_300)]",
-    "bg-[oklch(0.55_0.15_10)]",
-    "bg-[oklch(0.5_0.18_170)]",
+    "bg-warning/70",
+    "bg-destructive/70",
+    "bg-primary/80",
   ];
   let hash = 0;
   for (let i = 0; i < name.length; i++) {

@@ -33,7 +33,7 @@ export function LoginForm() {
     try {
       const user = await login(email, password);
       toast.success(`Bem-vindo, ${user.name}!`);
-      router.push(user.role === "ARCHITECT" ? "/dashboard" : "/portal");
+      router.push("/dashboard");
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Erro ao fazer login";
       toast.error(message);

@@ -46,7 +46,6 @@ export default function DashboardLayout({
   if (checking) {
     return (
       <div className="flex min-h-dvh flex-col">
-        <div className="h-1 animate-gradient bg-[linear-gradient(90deg,var(--brand),var(--brand-light),var(--brand))]" />
         <div className="flex flex-1 items-center justify-center">
           <div className="space-y-3 text-center">
             <div className="mx-auto size-8 animate-pulse rounded-full bg-muted" />
@@ -58,11 +57,11 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex min-h-dvh">
       <Navbar user={user!} onLogout={handleLogout} />
 
-      <main className="flex-1">
-        <div className="mx-auto max-w-5xl px-4 py-6 sm:py-8">{children}</div>
+      <main className="ml-64 flex-1">
+        <div className="mx-auto max-w-5xl px-6 py-8">{children}</div>
       </main>
     </div>
   );

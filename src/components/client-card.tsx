@@ -26,9 +26,9 @@ export function ClientCard({ clientId, name, email, projects }: ClientCardProps)
   const router = useRouter();
 
   return (
-    <motion.div variants={fadeIn}>
+    <motion.div variants={fadeIn}> 
       <Card
-        className="cursor-pointer transition-all duration-200 hover:shadow-md"
+        className="cursor-pointer transition-all duration-200 hover:scale-105 shadow-2xl"
         onClick={() => router.push(`/dashboard/clientes/${clientId}`)}
       >
         <CardContent className="space-y-4">

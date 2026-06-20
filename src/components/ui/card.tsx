@@ -9,7 +9,7 @@ function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
       transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
       data-slot="card"
       className={cn(
-        "flex flex-col gap-4 rounded-xl bg-card p-5 text-sm text-card-foreground ring-1 ring-border",
+        "flex flex-col gap-4 rounded-xl bg-card p-5 text-sm text-card-foreground ring-1 ring-border shadow-sm transition-shadow duration-200 hover:shadow-md",
         className,
       )}
       {...(props as React.ComponentPropsWithoutRef<typeof motion.div>)}

@@ -17,6 +17,15 @@ export interface Project {
   updates: ProjectUpdate[];
 }
 
+export interface ProjectPhoto {
+  id: string;
+  projectId: string;
+  url: string;
+  caption: string | null;
+  order: number;
+  createdAt: string;
+}
+
 export interface Client {
   id: string;
   name: string;

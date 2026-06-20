@@ -126,7 +126,7 @@ const filteredClients = clients.filter((client) =>
     >
       <motion.div variants={fadeIn} className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Clientes</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-gray-900">Dashboard</h1>
           <p className="mt-0.5 text-sm text-muted-foreground">
             {clients.length === 0
               ? "Nenhum cliente cadastrado ainda"
@@ -160,6 +160,11 @@ const filteredClients = clients.filter((client) =>
           />
         </motion.div>
       )}
+
+      <motion.div variants={fadeIn}
+        className="flex items-center justify-between">
+        <h2 className="text-2xl font-semibold tracking-tight text-gray-900">Clientes</h2>
+      </motion.div>
 
       {filteredClients.length > 0 && (
         <motion.div variants={fadeIn} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

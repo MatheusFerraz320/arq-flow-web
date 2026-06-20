@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { StatusBadge } from "@/components/status-badge";
-import { ProjectActions } from "@/components/project-actions";
+import { ProjectStatusSelector } from "@/components/project-status-selector";
 import { ProjectPhotos } from "@/components/project-photos";
 import { ProjectTimeline } from "@/components/project-timeline";
 import type { Project } from "@/lib/types";
@@ -57,9 +57,12 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
           <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
             <Info className="size-5" />
           </div>
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="text-xs text-muted-foreground">Status</p>
-            <p className="truncate text-sm font-medium">{project.status === "BRIEFING" ? "Briefing" : project.status === "PROJETO" ? "Em Projeto" : project.status === "REVISAO" ? "Em Revisão" : "Concluído"}</p>
+            <ProjectStatusSelector
+              projectId={project.id}
+              currentStatus={project.status}
+            />
           </div>
         </div>
 
@@ -99,10 +102,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
       </div>
 
       {/* Photos */}
-      <ProjectPhotos />
-
-      {/* Approval Actions */}
-      <ProjectActions projectId={project.id} status={project.status} />
+      <ProjectPhotos projectId={project.id} />
 
       {/* Timeline */}
       <ProjectTimeline updates={project.updates} />

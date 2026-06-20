@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils";
 
 const variantStyles = {
   default:
-    "bg-primary text-primary-foreground shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-primary/90 hover:shadow-[0_2px_8px_rgba(22,101,52,0.15)]",
+    "bg-primary text-primary-foreground shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-primary/90 hover:shadow-[0_2px_8px_var(--color-brand)/0.3]",
   accent:
-    "bg-accent text-accent-foreground shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-accent/85 hover:shadow-[0_2px_4px_rgba(0,0,0,0.06)]",
+    "bg-accent text-accent-foreground shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:bg-accent/85 hover:shadow-[0_2px_8px_var(--color-accent)/0.3]",
   outline:
     "border border-border bg-background hover:bg-muted hover:border-foreground/20",
   secondary:
