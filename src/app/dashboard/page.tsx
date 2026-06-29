@@ -131,7 +131,7 @@ export default function DashboardPage() {
         <>
           <div className="animate-stagger grid gap-4 sm:grid-cols-2">
             <div className="flex items-center gap-4 rounded-xl border bg-card p-4 shadow-md shadow-black/[0.03] transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10">
-              <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
+              <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10 animate-gradient" style={{ backgroundSize: "400% 100%" }}>
                 <Users className="size-5" />
               </div>
               <div>
@@ -140,7 +140,7 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="flex items-center gap-4 rounded-xl border bg-card p-4 shadow-md shadow-black/[0.03] transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10">
-              <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
+              <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10 animate-gradient" style={{ backgroundSize: "400% 100%" }}>
                 <FolderKanban className="size-5" />
               </div>
               <div>
