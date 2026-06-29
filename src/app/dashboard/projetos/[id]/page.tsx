@@ -89,7 +89,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
       <ProjectPhotos projectId={project.id} />
 
       {/* Timeline */}
-      <ProjectTimeline updates={project.updates} />
+      <ProjectTimeline projectId={project.id} updates={project.updates} />
     </div>
   );
 }
