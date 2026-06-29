@@ -49,13 +49,16 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
                 active
-                  ? "bg-brand/10 font-semibold text-brand"
-                  : "text-muted-foreground hover:bg-muted hover:text-card-foreground",
+                  ? "bg-brand-soft font-semibold text-brand"
+                  : "text-muted-foreground hover:bg-muted hover:text-card-foreground hover:translate-x-0.5",
               )}
             >
-              <Icon className="size-5 shrink-0" />
+              {active && (
+                <span className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-gradient-to-b from-brand to-brand-light" />
+              )}
+              <Icon className={cn("size-5 shrink-0 transition-all duration-200", active && "drop-shadow-sm")} />
               <span>{item.label}</span>
             </Link>
           );
