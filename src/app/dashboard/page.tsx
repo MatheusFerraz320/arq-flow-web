@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Users, FolderKanban, Plus, Search as SearchIcon } from "lucide-react";
+import { Users, FolderKanban, Plus, Search as SearchIcon, ClipboardList, PencilRuler, Search, CheckCircle2 } from "lucide-react";
 import { ClientCard } from "@/components/client-card";
 import { NewClientDialog } from "@/components/new-client-dialog";
 import { Input } from "@/components/ui/input";
@@ -64,6 +64,20 @@ export default function DashboardPage() {
   }
 
   const totalProjects = clients.reduce((sum, c) => sum + c.projects.length, 0);
+
+  const statusCounts = clients.reduce<Record<string, number>>((acc, client) => {
+    client.projects.forEach((p) => {
+      acc[p.status] = (acc[p.status] || 0) + 1;
+    });
+    return acc;
+  }, {});
+
+  const PIPELINE = [
+    { status: "BRIEFING", label: "Briefing", icon: ClipboardList, color: "text-warning", bg: "bg-warning/10", bar: "bg-warning" },
+    { status: "PROJETO", label: "Em Projeto", icon: PencilRuler, color: "text-primary", bg: "bg-primary/10", bar: "bg-primary" },
+    { status: "REVISAO", label: "Em Revisão", icon: Search, color: "text-muted-foreground", bg: "bg-muted", bar: "bg-muted-foreground" },
+    { status: "CONCLUIDO", label: "Concluído", icon: CheckCircle2, color: "text-success", bg: "bg-success/10", bar: "bg-success" },
+  ];
 
   const filteredClients = clients.filter((client) =>
     client.name.toLowerCase().includes(search.toLowerCase())
@@ -149,6 +163,38 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
+
+          {totalProjects > 0 && (
+            <div className="animate-fade-in rounded-xl border bg-card p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <FolderKanban className="size-4 text-muted-foreground" />
+                <h3 className="text-sm font-semibold">Projetos por etapa</h3>
+              </div>
+              <div className="flex items-center gap-3 sm:gap-0">
+                {PIPELINE.map((stage, i) => {
+                  const Icon = stage.icon;
+                  const count = statusCounts[stage.status] || 0;
+                  return (
+                    <div key={stage.status} className="flex flex-1 flex-col items-center gap-2 text-center sm:flex-row sm:gap-3">
+                      <div className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${stage.bg} ${stage.color} ring-1 ring-border`}>
+                        <Icon className="size-4" />
+                      </div>
+                      <div className="min-w-0 sm:flex-1">
+                        <p className="text-xs text-muted-foreground truncate">{stage.label}</p>
+                        <p className={`text-lg font-semibold tracking-tight ${stage.color}`}>
+                          {count}
+                          <span className="ml-0.5 text-xs font-normal text-muted-foreground">proj.</span>
+                        </p>
+                      </div>
+                      {i < PIPELINE.length - 1 && (
+                        <div className="hidden h-px flex-1 self-center border-t border-dashed border-border sm:block mx-2" />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           <div className="group relative">
             <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground transition-colors duration-200 group-focus-within:text-primary" />
