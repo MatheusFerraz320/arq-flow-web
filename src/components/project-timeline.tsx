@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Clock, Loader2, Send } from "lucide-react";
+import { Clock, Loader2, Send, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import type { ProjectUpdate } from "@/lib/types";
 
@@ -52,7 +52,7 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="flex gap-2 rounded-xl border bg-card p-3"
+        className="flex gap-2 rounded-xl border bg-card p-3 transition-all duration-200 focus-within:ring-2 focus-within:ring-brand/20 focus-within:border-brand/30"
       >
         <textarea
           value={message}
@@ -65,7 +65,7 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
         <button
           type="submit"
           disabled={saving || !message.trim()}
-          className="flex shrink-0 items-center gap-1.5 self-end rounded-lg bg-brand px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-brand/90 disabled:pointer-events-none disabled:opacity-50"
+          className="flex shrink-0 items-center gap-1.5 self-end rounded-lg bg-gradient-to-br from-brand to-brand-light px-3 py-2 text-sm font-medium text-white shadow-md shadow-brand/20 transition-all duration-200 hover:shadow-lg hover:shadow-brand/30 hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-50"
         >
           {saving ? (
             <Loader2 className="size-4 animate-spin" />
@@ -79,7 +79,7 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
       {/* Timeline */}
       {sorted.length === 0 && (
         <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-12 text-center transition-colors hover:border-muted-foreground/25">
-          <div className="mb-3 flex size-12 items-center justify-center rounded-xl bg-muted">
+          <div className="mb-3 flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-muted to-muted/50">
             <Clock className="size-5 text-muted-foreground" />
           </div>
           <p className="text-sm font-medium text-muted-foreground">
@@ -96,23 +96,25 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
               className="animate-fade-in-up relative flex gap-4 pb-8 last:pb-0"
               style={{ animationDelay: `${i * 80}ms` }}
             >
-              {/* Connector */}
+              {/* Connector with gradient dot */}
               <div className="flex flex-col items-center">
-                <div className="size-3 shrink-0 rounded-full bg-brand ring-[3px] ring-background" />
+                <div className="flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-brand to-brand-light text-white shadow-sm shadow-brand/20 ring-[2px] ring-background">
+                  <MessageSquare className="size-3" />
+                </div>
                 {i < sorted.length - 1 && (
-                  <div className="mt-1.5 w-0.5 flex-1 bg-gradient-to-b from-brand/40 to-transparent" />
+                  <div className="mt-2 w-0.5 flex-1 bg-gradient-to-b from-brand/30 to-transparent" />
                 )}
               </div>
 
               {/* Content Card */}
-              <div className="min-w-0 flex-1 rounded-lg border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm">
+              <div className="min-w-0 flex-1 rounded-lg border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10">
                 <p className="text-xs font-medium text-brand">
                   {new Intl.DateTimeFormat("pt-BR", {
                     dateStyle: "medium",
                     timeStyle: "short",
                   }).format(new Date(update.createdAt))}
                 </p>
-                <p className="mt-1 text-sm text-card-foreground">
+                <p className="mt-1 text-sm text-card-foreground leading-relaxed">
                   {update.message}
                 </p>
               </div>
