@@ -65,7 +65,7 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
         <button
           type="submit"
           disabled={saving || !message.trim()}
-          className="flex shrink-0 items-center gap-1.5 self-end rounded-lg bg-gradient-to-br from-brand to-brand-light px-3 py-2 text-sm font-medium text-white shadow-md shadow-brand/20 transition-all duration-200 hover:shadow-lg hover:shadow-brand/30 hover:-translate-y-0.5 disabled:pointer-events-none disabled:opacity-50"
+          className="flex shrink-0 items-center gap-1.5 self-end rounded-lg bg-gradient-to-br from-brand to-brand-light px-3 py-2 text-sm font-medium text-white shadow-md shadow-brand/20 transition-all duration-200 hover:shadow-lg hover:shadow-brand/30 disabled:pointer-events-none disabled:opacity-50"
         >
           {saving ? (
             <Loader2 className="size-4 animate-spin" />
@@ -107,7 +107,7 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
               </div>
 
               {/* Content Card */}
-              <div className="min-w-0 flex-1 rounded-lg border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10">
+              <div className="min-w-0 flex-1 rounded-lg border bg-card p-4 transition-all duration-200 hover:shadow-md hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10">
                 <p className="text-xs font-medium text-brand">
                   {new Intl.DateTimeFormat("pt-BR", {
                     dateStyle: "medium",

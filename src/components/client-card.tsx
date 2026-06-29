@@ -27,7 +27,7 @@ export function ClientCard({ clientId, name, email, projects }: ClientCardProps)
 
   return (
     <div
-      className="flex cursor-pointer flex-col gap-4 rounded-xl bg-card p-5 text-sm text-card-foreground border border-border/60 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:-translate-y-1 hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10"
+      className="flex cursor-pointer flex-col gap-4 rounded-xl bg-card p-5 text-sm text-card-foreground border border-border/60 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10"
       onClick={() => router.push(`/dashboard/clientes/${clientId}`)}
     >
       <div className="space-y-4">

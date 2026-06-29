@@ -104,7 +104,7 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
   return (
     <>
       {/* Budget Card */}
-      <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:shadow-md">
         <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
           <DollarSign className="size-5" />
         </div>
@@ -143,7 +143,7 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
       </div>
 
       {/* Deadline Card */}
-      <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+      <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:shadow-md">
         <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-success/20 to-success/5 text-success ring-1 ring-success/10">
           <Clock className="size-5" />
         </div>
