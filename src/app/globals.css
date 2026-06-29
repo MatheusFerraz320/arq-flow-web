@@ -92,3 +92,4 @@
 .animate-stagger > *:nth-child(4) { animation-delay: 240ms; }
 .animate-fade-in-up { animation: fade-in-up 0.5s ease-out; }
 .animate-gradient { animation: gradient-shift 12s ease-in-out infinite; }
+.animate-skeleton { background: linear-gradient(90deg, var(--color-muted) 25%, var(--color-muted)/60 50%, var(--color-muted) 75%); background-size: 200% 100%; animation: shimmer 2s ease-in-out infinite; }

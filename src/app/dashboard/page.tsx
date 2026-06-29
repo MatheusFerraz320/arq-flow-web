@@ -86,23 +86,24 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="rounded-xl bg-gradient-to-br from-brand/[0.07] to-transparent p-6 ring-1 ring-brand/10">
           <div className="space-y-2">
-            <div className="h-7 w-32 animate-pulse rounded-md bg-muted" />
-            <div className="h-4 w-48 animate-pulse rounded-md bg-muted" />
+            <div className="h-7 w-32 animate-skeleton rounded-md" />
+            <div className="h-4 w-48 animate-skeleton rounded-md" />
+            <div className="h-4 w-36 animate-skeleton rounded-md" />
           </div>
-          <div className="h-8 w-28 animate-pulse rounded-lg bg-muted" />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="h-20 animate-pulse rounded-xl bg-muted" />
-          <div className="h-20 animate-pulse rounded-xl bg-muted" />
+          <div className="h-20 animate-skeleton rounded-xl" />
+          <div className="h-20 animate-skeleton rounded-xl" />
         </div>
-        <div className="h-10 w-full animate-pulse rounded-lg bg-muted" />
+        <div className="h-24 animate-skeleton rounded-xl" />
+        <div className="h-10 w-full animate-skeleton rounded-lg" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
             <div
               key={i}
-              className="h-48 animate-pulse rounded-xl bg-muted animate-fade-in-up"
+              className="h-48 animate-skeleton rounded-xl animate-fade-in-up"
               style={{ animationDelay: `${i * 80}ms` }}
             />
           ))}
