@@ -15,6 +15,7 @@
   --color-secondary-foreground: #111827;
   --color-brand: #111827;
   --color-brand-light: #374151;
+  --color-brand-soft: oklch(0.2 0 0 / 5%);
   --color-primary: #111827;
   --color-primary-foreground: #FFFFFF;
   --color-accent: #374151;
@@ -25,6 +26,7 @@
   --color-border: #E5E7EB;
   --color-input: #E5E7EB;
   --color-ring: oklch(0.2 0 0 / 35%);
+  --color-glass: oklch(1 0 0 / 70%);
   --radius-sm: 0.3rem;
   --radius-md: 0.4rem;
   --radius-lg: 0.5rem;
