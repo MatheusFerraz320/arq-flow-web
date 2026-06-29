@@ -1,4 +1,5 @@
 import { type HTMLAttributes } from "react";
+import { ClipboardList, PencilRuler, Search, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const variantStyles = {
@@ -15,11 +16,11 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: keyof typeof variantStyles;
 }
 
-const STATUS_CONFIG: Record<string, { label: string; dot: string; variant: keyof typeof variantStyles }> = {
-  BRIEFING:  { label: "Briefing",  dot: "bg-warning", variant: "warning" },
-  PROJETO:   { label: "Projeto",   dot: "bg-primary", variant: "default" },
-  REVISAO:   { label: "Revisão",   dot: "bg-muted-foreground", variant: "outline" },
-  CONCLUIDO: { label: "Concluído", dot: "bg-success", variant: "success" },
+const STATUS_CONFIG: Record<string, { label: string; dot: string; variant: keyof typeof variantStyles; icon: typeof ClipboardList }> = {
+  BRIEFING:  { label: "Briefing",  dot: "bg-warning", variant: "warning", icon: ClipboardList },
+  PROJETO:   { label: "Projeto",   dot: "bg-primary", variant: "default", icon: PencilRuler },
+  REVISAO:   { label: "Revisão",   dot: "bg-muted-foreground", variant: "outline", icon: Search },
+  CONCLUIDO: { label: "Concluído", dot: "bg-success", variant: "success", icon: CheckCircle2 },
 };
 
 function Badge({ className, variant = "default", ...props }: BadgeProps) {
@@ -41,9 +42,11 @@ function StatusBadge({ status, className }: { status: string; className?: string
   const label = config?.label ?? status;
   const dot = config?.dot ?? "bg-muted-foreground";
   const variant = config?.variant ?? "outline";
+  const Icon = config?.icon;
 
   return (
     <Badge variant={variant} className={cn("gap-1.5", className)}>
+      {Icon && <Icon className="size-3" />}
       <span className={`size-1.5 shrink-0 rounded-full ${dot}`} />
       {label}
     </Badge>
