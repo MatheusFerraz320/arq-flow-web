@@ -54,7 +54,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
 
       {/* Info Cards Grid */}
       <div className="animate-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+        <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10">
           <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
             <Info className="size-5" />
           </div>
@@ -67,7 +67,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
           </div>
         </div>
 
-        <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
+          <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10">
           <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
             <User className="size-5" />
           </div>
