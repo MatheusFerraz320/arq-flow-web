@@ -36,7 +36,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
         </Link>
 
       {/* Hero Header */}
-      <div className="rounded-xl bg-gradient-to-br from-brand/[0.07] to-transparent p-6 ring-1 ring-brand/10 sm:p-8">
+      <div className="rounded-xl bg-gradient-to-r from-brand/[0.07] via-brand/[0.03] to-transparent p-6 ring-1 ring-brand/10 animate-gradient sm:p-8" style={{ backgroundSize: "200% 100%" }}>
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1.5">
             <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">

@@ -54,7 +54,7 @@ export default function ClientPage() {
     return (
       <div className="space-y-6">
         <div className="h-5 w-32 animate-pulse rounded bg-muted" />
-        <div className="rounded-xl bg-gradient-to-br from-brand/[0.07] to-transparent p-6 ring-1 ring-brand/10 sm:p-8">
+      <div className="rounded-xl bg-gradient-to-r from-brand/[0.07] via-brand/[0.03] to-transparent p-6 ring-1 ring-brand/10 animate-gradient sm:p-8" style={{ backgroundSize: "200% 100%" }}>
           <div className="space-y-3">
             <div className="h-8 w-48 animate-pulse rounded bg-muted" />
             <div className="h-4 w-32 animate-pulse rounded bg-muted" />

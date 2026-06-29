@@ -112,17 +112,19 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">Dashboard</h1>
-          <p className="text-sm text-foreground">Olá, {user.name}</p>
-          <p className="mt-0.5 text-sm text-muted-foreground">
-            {clients.length === 0
-              ? "Nenhum cliente cadastrado ainda"
-              : `${clients.length} ${clients.length === 1 ? "cliente cadastrado" : "clientes cadastrados"}`}
-          </p>
+      <div className="rounded-xl bg-gradient-to-r from-brand/[0.07] via-brand/[0.03] to-transparent p-6 ring-1 ring-brand/10 animate-gradient sm:p-8" style={{ backgroundSize: "200% 100%" }}>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground">Dashboard</h1>
+            <p className="text-sm text-foreground">Olá, {user.name}</p>
+            <p className="mt-0.5 text-sm text-muted-foreground">
+              {clients.length === 0
+                ? "Nenhum cliente cadastrado ainda"
+                : `${clients.length} ${clients.length === 1 ? "cliente cadastrado" : "clientes cadastrados"}`}
+            </p>
+          </div>
+          <NewClientDialog onCreated={handleCreated} />
         </div>
-        <NewClientDialog onCreated={handleCreated} />
       </div>
 
       {clients.length > 0 && (
