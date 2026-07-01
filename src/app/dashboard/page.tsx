@@ -121,71 +121,72 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-8 animate-fade-in">
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand/[0.12] via-brand/[0.06] to-transparent p-6 ring-1 ring-brand/15 sm:p-8">
-        <div className="animate-float pointer-events-none absolute -right-3 -top-3 size-16 rounded-full border border-brand/[0.15] sm:size-24" />
-        <div className="animate-float pointer-events-none absolute bottom-4 right-[20%] size-8 rounded-full bg-brand/[0.10]" style={{ animationDelay: "2s" }} />
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.15),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(99,102,241,0.1),transparent_50%)]" />
         <div className="relative">
-          <p className="text-base font-semibold text-muted-foreground/80 animate-fade-in-up" style={{ animationDelay: "100ms" }}>
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm animate-fade-in-up mb-4" style={{ animationDelay: "100ms" }}>
+            <span className="size-2 rounded-full bg-green-400 animate-pulse" />
             {greeting}
-          </p>
-          <h1 className="mt-1 text-4xl font-bold tracking-tight text-foreground animate-fade-in-up" style={{ animationDelay: "200ms" }}>
+          </div>
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl animate-fade-in-up" style={{ animationDelay: "200ms" }}>
             {user.name}
           </h1>
-          <p className="mt-1.5 text-sm text-muted-foreground animate-fade-in-up" style={{ animationDelay: "300ms" }}>
+          <p className="mt-3 max-w-2xl text-lg text-white/70 animate-fade-in-up" style={{ animationDelay: "300ms" }}>
             Bem-vindo ao ArqFlow · {clients.length} {clients.length === 1 ? "cliente" : "clientes"} e {totalProjects} {totalProjects === 1 ? "projeto" : "projetos"}
           </p>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="animate-stagger grid gap-4 sm:grid-cols-2">
-        <div className="group relative overflow-hidden rounded-xl border bg-card p-6 shadow-md shadow-black/[0.03] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10 sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand to-brand-light" />
+      <div className="animate-stagger grid gap-6 sm:grid-cols-2">
+        <div className="group relative overflow-hidden rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20 sm:p-8">
+          <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-accent to-indigo-400" />
           <div className="flex items-center gap-3 mb-5">
-            <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
-              <Users className="size-5" />
+            <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
+              <Users className="size-6" />
             </div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Clientes</span>
+            <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Clientes</span>
           </div>
-          <p className="text-5xl font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-brand">
+          <p className="text-6xl font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
             {animatedClients}
           </p>
-          <p className="mt-1.5 text-sm text-muted-foreground">clientes cadastrados</p>
-          <div className="mt-5 pt-4 border-t border-border flex items-center justify-between">
-            <p className="text-xs text-muted-foreground">
+          <p className="mt-2 text-base text-muted-foreground">clientes cadastrados</p>
+          <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
               {clientsWithProjects} {clientsWithProjects === 1 ? "com projeto ativo" : "com projetos ativos"}
             </p>
-            <span className="flex items-center gap-1 text-xs font-medium text-success">
-              <span className="size-1.5 rounded-full bg-success" />
+            <span className="flex items-center gap-1.5 text-sm font-medium text-success">
+              <span className="size-2 rounded-full bg-success" />
               +5 este mês
             </span>
           </div>
         </div>
-        <div className="group relative overflow-hidden rounded-xl border bg-card p-6 shadow-md shadow-black/[0.03] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10 sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand to-brand-light" />
+        <div className="group relative overflow-hidden rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20 sm:p-8">
+          <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-accent to-indigo-400" />
           <div className="flex items-center gap-3 mb-5">
-            <div className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
-              <FolderKanban className="size-5" />
+            <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
+              <FolderKanban className="size-6" />
             </div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Projetos</span>
+            <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Projetos</span>
           </div>
-          <p className="text-5xl font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-brand">
+          <p className="text-6xl font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
             {animatedProjects}
           </p>
-          <p className="mt-1.5 text-sm text-muted-foreground">projetos registrados</p>
-          <div className="mt-5 pt-4 border-t border-border space-y-1.5">
+          <p className="mt-2 text-base text-muted-foreground">projetos registrados</p>
+          <div className="mt-6 pt-4 border-t border-border space-y-2">
             {PIPELINE.map((stage) => {
               const count = statusCounts[stage.status] || 0;
               const Icon = stage.icon;
               return (
-                <div key={stage.status} className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-1.5">
-                    <Icon className={`size-3 ${stage.color}`} />
+                <div key={stage.status} className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-2">
+                    <Icon className={`size-4 ${stage.color}`} />
                     <span className="text-muted-foreground">{stage.label}</span>
                   </div>
-                  <span className={`font-medium ${stage.color}`}>{count}</span>
+                  <span className={`font-semibold ${stage.color}`}>{count}</span>
                 </div>
               );
             })}
@@ -194,74 +195,78 @@ export default function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="animate-fade-in rounded-xl border bg-card p-5">
-        <div className="flex items-center gap-2 mb-4">
-          <BarChart3 className="size-4 text-muted-foreground" />
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Ações rápidas</h3>
+      <div className="animate-fade-in rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04]">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <BarChart3 className="size-5" />
+          </div>
+          <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Ações rápidas</h3>
         </div>
         <div className="flex flex-wrap gap-3">
           <Link
             href="/dashboard/clientes"
-            className="inline-flex items-center gap-2 rounded-xl border border-border bg-background px-4 py-2.5 text-sm font-medium text-foreground transition-all duration-200 hover:bg-muted hover:border-foreground/20 hover:shadow-sm"
+            className="inline-flex items-center gap-2 rounded-xl bg-accent text-white px-5 py-3 text-base font-medium transition-all duration-200 hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/25"
           >
-            <Plus className="size-4" />
+            <Plus className="size-5" />
             Novo Cliente
           </Link>
           <button
             disabled
-            className="inline-flex items-center gap-2 rounded-xl border border-dashed border-border px-4 py-2.5 text-sm font-medium text-muted-foreground/50 cursor-not-allowed"
+            className="inline-flex items-center gap-2 rounded-xl border border-dashed border-border px-5 py-3 text-base font-medium text-muted-foreground/50 cursor-not-allowed"
             title="Em breve"
           >
-            <Plus className="size-4" />
+            <Plus className="size-5" />
             Novo Projeto
-            <span className="ml-1 rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">Em breve</span>
+            <span className="ml-1 rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">Em breve</span>
           </button>
           <button
             disabled
-            className="inline-flex items-center gap-2 rounded-xl border border-dashed border-border px-4 py-2.5 text-sm font-medium text-muted-foreground/50 cursor-not-allowed"
+            className="inline-flex items-center gap-2 rounded-xl border border-dashed border-border px-5 py-3 text-base font-medium text-muted-foreground/50 cursor-not-allowed"
             title="Em breve"
           >
-            <BarChart3 className="size-4" />
+            <BarChart3 className="size-5" />
             Relatórios
-            <span className="ml-1 rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">Em breve</span>
+            <span className="ml-1 rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">Em breve</span>
           </button>
         </div>
       </div>
 
       {/* Kanban Pipeline */}
-      <div className="animate-fade-in rounded-xl border bg-card p-6">
+      <div className="animate-fade-in rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04]">
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <FolderKanban className="size-4 text-muted-foreground" />
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Projetos por etapa</h3>
+          <div className="flex items-center gap-3">
+            <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <FolderKanban className="size-5" />
+            </div>
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Projetos por etapa</h3>
           </div>
           {totalProjects > 0 && (
-            <span className="text-xs text-muted-foreground tabular-nums">
+            <span className="text-sm text-muted-foreground tabular-nums">
               Total: <span className="font-semibold text-foreground">{totalProjects}</span> projetos
             </span>
           )}
         </div>
         {totalProjects > 0 ? (
-          <div className="space-y-5">
+          <div className="space-y-6">
             {PIPELINE.map((stage) => {
               const Icon = stage.icon;
               const count = statusCounts[stage.status] || 0;
               const pct = Math.round((count / totalProjects) * 100);
               return (
-                <div key={stage.status} className="space-y-1.5 group/progress">
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <div className={`flex size-8 shrink-0 items-center justify-center rounded-lg ${stage.bg} ${stage.color} ring-1 ring-border transition-transform duration-200 group-hover/progress:scale-110`}>
-                        <Icon className="size-3.5" />
+                <div key={stage.status} className="space-y-2 group/progress">
+                  <div className="flex items-center justify-between text-base">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${stage.bg} ${stage.color} ring-1 ring-border transition-transform duration-200 group-hover/progress:scale-110`}>
+                        <Icon className="size-4" />
                       </div>
                       <span className="font-medium text-foreground truncate">{stage.label}</span>
                     </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className={`text-xl font-bold tracking-tight ${stage.color}`}>{count}</span>
-                      <span className="text-xs text-muted-foreground tabular-nums">{pct}%</span>
+                    <div className="flex items-center gap-3 shrink-0">
+                      <span className={`text-2xl font-bold tracking-tight ${stage.color}`}>{count}</span>
+                      <span className="text-sm text-muted-foreground tabular-nums">{pct}%</span>
                     </div>
                   </div>
-                  <div className="h-2.5 w-full rounded-full bg-muted overflow-hidden">
+                  <div className="h-3 w-full rounded-full bg-muted overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all duration-700 ease-out ${stage.bar}`}
                       style={{ width: `${pct}%` }}
@@ -276,21 +281,23 @@ export default function DashboardPage() {
             })}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-10 text-center">
-            <div className="mb-3 flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-muted to-muted/50">
-              <FolderKanban className="size-4 text-muted-foreground" />
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <div className="mb-4 flex size-14 items-center justify-center rounded-xl bg-gradient-to-br from-muted to-muted/50">
+              <FolderKanban className="size-6 text-muted-foreground" />
             </div>
-            <p className="text-sm font-medium text-muted-foreground">Nenhum projeto cadastrado ainda</p>
-            <p className="mt-0.5 text-xs text-muted-foreground">Crie projetos a partir da página de clientes</p>
+            <p className="text-base font-medium text-muted-foreground">Nenhum projeto cadastrado ainda</p>
+            <p className="mt-1 text-sm text-muted-foreground/70">Crie projetos a partir da página de clientes</p>
           </div>
         )}
       </div>
 
       {/* Recent Activity */}
-      <div className="animate-fade-in rounded-xl border bg-card p-6">
-        <div className="flex items-center gap-2 mb-6">
-          <Clock className="size-4 text-muted-foreground" />
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Atividade recente</h3>
+      <div className="animate-fade-in rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04]">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <Clock className="size-5" />
+          </div>
+          <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Atividade recente</h3>
         </div>
         <div className="space-y-0">
           {[
@@ -300,20 +307,20 @@ export default function DashboardPage() {
           ].map((item, i) => (
             <div key={i} className="relative flex gap-4 pb-6 last:pb-0">
               {i < 2 && (
-                <div className="absolute left-[11px] top-5 bottom-0 w-px bg-border" />
+                <div className="absolute left-[13px] top-6 bottom-0 w-px bg-border" />
               )}
-              <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted ring-2 ring-background">
-                <span className="size-1.5 rounded-full bg-muted-foreground/40" />
+              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-muted ring-2 ring-background">
+                <span className="size-2 rounded-full bg-accent/40" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <p className="text-sm text-foreground truncate">
-                    <span className="font-medium">{item.name}</span>{" "}
+                  <p className="text-base text-foreground truncate">
+                    <span className="font-semibold">{item.name}</span>{" "}
                     <span className="text-muted-foreground">{item.action}</span>
                   </p>
-                  <span className="shrink-0 rounded-md bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">Em breve</span>
+                  <span className="shrink-0 rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">Em breve</span>
                 </div>
-                <p className="text-xs text-muted-foreground/60 mt-0.5">{item.project} · {item.time}</p>
+                <p className="text-sm text-muted-foreground/60 mt-0.5">{item.project} · {item.time}</p>
               </div>
             </div>
           ))}

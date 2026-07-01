@@ -131,57 +131,61 @@ export default function ClientsPage() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-8 animate-fade-in">
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand/[0.12] via-brand/[0.06] to-transparent p-6 ring-1 ring-brand/15 sm:p-8">
-        <div className="animate-float pointer-events-none absolute -right-3 -top-3 size-20 rounded-full border border-brand/[0.15] sm:size-28" />
-        <div className="animate-float pointer-events-none absolute bottom-4 right-[20%] size-10 rounded-full bg-brand/[0.10]" style={{ animationDelay: "2s" }} />
-        <div className="animate-float pointer-events-none absolute left-[10%] top-1/3 size-4 rounded-full bg-brand/[0.08]" style={{ animationDelay: "4s" }} />
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.15),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(99,102,241,0.1),transparent_50%)]" />
         <div className="relative">
-          <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground/70 animate-fade-in-up" style={{ animationDelay: "100ms" }}>
-            Seção de Clientes
-          </p>
-          <div className="flex items-center gap-3 mt-1 animate-fade-in-up" style={{ animationDelay: "200ms" }}>
-            <h1 className="text-4xl font-bold tracking-tight text-foreground">Clientes</h1>
-            <span className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10">
-              <Users className="size-5" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm animate-fade-in-up mb-4" style={{ animationDelay: "100ms" }}>
+            <Users className="size-4" />
+            GERENCIAMENTO
+          </div>
+          <div className="flex items-center gap-4 animate-fade-in-up" style={{ animationDelay: "200ms" }}>
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">Clientes</h1>
+            <span className="flex size-14 items-center justify-center rounded-2xl bg-white/10 text-white ring-1 ring-white/20 backdrop-blur-sm">
+              <Users className="size-7" />
             </span>
           </div>
-          <p className="mt-2 text-sm text-muted-foreground animate-fade-in-up" style={{ animationDelay: "300ms" }}>
+          <p className="mt-3 max-w-2xl text-lg text-white/70 animate-fade-in-up" style={{ animationDelay: "300ms" }}>
             Gerencie todos os seus clientes, acompanhe projetos e mantenha o fluxo de trabalho organizado.
           </p>
+          <div className="mt-6 flex items-center gap-3 animate-fade-in-up" style={{ animationDelay: "400ms" }}>
+            <span className="text-3xl font-bold text-white">{animatedTotal}</span>
+            <span className="text-base text-white/60">clientes cadastrados</span>
+          </div>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="animate-stagger grid gap-4 sm:grid-cols-3">
-        <div className="rounded-xl border bg-card p-5 shadow-md shadow-black/[0.03]">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Total</p>
-          <p className="mt-1 text-3xl font-bold tracking-tight text-foreground">{animatedTotal}</p>
-          <p className="text-xs text-muted-foreground mt-0.5">clientes cadastrados</p>
+      <div className="animate-stagger grid gap-5 sm:grid-cols-3">
+        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04]">
+          <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Total</p>
+          <p className="mt-2 text-4xl font-bold tracking-tight text-foreground">{animatedTotal}</p>
+          <p className="text-sm text-muted-foreground mt-1">clientes cadastrados</p>
         </div>
-        <div className="rounded-xl border bg-card p-5 shadow-md shadow-black/[0.03]">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Com projetos</p>
-          <p className="mt-1 text-3xl font-bold tracking-tight text-success">{animatedWithProjects}</p>
-          <p className="text-xs text-muted-foreground mt-0.5">clientes ativos</p>
+        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04]">
+          <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Com projetos</p>
+          <p className="mt-2 text-4xl font-bold tracking-tight text-success">{animatedWithProjects}</p>
+          <p className="text-sm text-muted-foreground mt-1">clientes ativos</p>
         </div>
-        <div className="rounded-xl border bg-card p-5 shadow-md shadow-black/[0.03]">
-          <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Sem projetos</p>
-          <p className="mt-1 text-3xl font-bold tracking-tight text-muted-foreground">{clients.length - clientsWithProjects}</p>
-          <p className="text-xs text-muted-foreground mt-0.5">clientes inativos</p>
+        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04]">
+          <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Sem projetos</p>
+          <p className="mt-2 text-4xl font-bold tracking-tight text-muted-foreground">{clients.length - clientsWithProjects}</p>
+          <p className="text-sm text-muted-foreground mt-1">clientes inativos</p>
         </div>
       </div>
 
       {/* Search + Actions */}
       {clients.length > 0 && (
-        <div className="animate-fade-in flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="animate-fade-in flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="group relative flex-1 max-w-md">
-            <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground transition-colors duration-200 group-focus-within:text-primary" />
+            <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground transition-colors duration-200 group-focus-within:text-primary" />
             <Input
               placeholder="Buscar clientes..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="h-11 w-full pl-10 transition-all duration-200 group-focus-within:ring-2 group-focus-within:ring-primary/20"
+              className="h-12 w-full pl-11 text-base transition-all duration-200 group-focus-within:ring-2 group-focus-within:ring-accent/20"
             />
           </div>
           <NewClientDialog onCreated={handleCreated} />
@@ -192,7 +196,7 @@ export default function ClientsPage() {
       {clients.length > 0 && (
         <>
           {filteredClients.length > 0 && (
-            <div className="animate-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="animate-stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {filteredClients.map((client) => (
                 <ClientCard
                   key={client.id}
@@ -206,14 +210,14 @@ export default function ClientsPage() {
           )}
 
           {filteredClients.length === 0 && (
-            <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-16 text-center transition-colors hover:border-primary/30">
-              <div className="mb-3 flex size-12 items-center justify-center rounded-xl bg-muted">
-                <SearchIcon className="size-5 text-muted-foreground" />
+            <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-20 text-center transition-colors hover:border-accent/30">
+              <div className="mb-4 flex size-14 items-center justify-center rounded-xl bg-muted">
+                <SearchIcon className="size-6 text-muted-foreground" />
               </div>
-              <p className="text-sm font-medium text-muted-foreground">
+              <p className="text-base font-medium text-muted-foreground">
                 Nenhum cliente encontrado para &ldquo;{search}&rdquo;
               </p>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <p className="mt-1 text-sm text-muted-foreground">
                 Tente buscar por outro nome
               </p>
             </div>
@@ -223,15 +227,15 @@ export default function ClientsPage() {
 
       {/* Empty state - no clients */}
       {clients.length === 0 && (
-        <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-20 text-center transition-colors hover:border-primary/30">
-          <div className="mb-4 flex size-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-light text-white shadow-lg shadow-brand/25">
-            <UserPlus className="size-7" />
+        <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-24 text-center transition-colors hover:border-accent/30">
+          <div className="mb-5 flex size-20 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-indigo-500 text-white shadow-lg shadow-accent/25">
+            <UserPlus className="size-9" />
           </div>
-          <h3 className="text-lg font-semibold text-foreground">Nenhum cliente ainda</h3>
-          <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+          <h3 className="text-xl font-semibold text-foreground">Nenhum cliente ainda</h3>
+          <p className="mt-2 max-w-md text-base text-muted-foreground">
             Crie seu primeiro cliente para começar a gerenciar projetos e acompanhar o fluxo de trabalho.
           </p>
-          <div className="mt-6">
+          <div className="mt-8">
             <NewClientDialog onCreated={handleCreated} />
           </div>
         </div>

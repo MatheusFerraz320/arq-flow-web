@@ -85,32 +85,35 @@ export default function ClientPage() {
     <div className="space-y-8 animate-fade-in">
       <div>
         <Link
-          href="/dashboard"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-all duration-200 hover:text-foreground hover:gap-2"
+          href="/dashboard/clientes"
+          className="inline-flex items-center gap-2 text-base text-muted-foreground transition-all duration-200 hover:text-foreground hover:gap-3"
         >
-          <ArrowLeft className="size-4" />
+          <ArrowLeft className="size-5" />
           Voltar para clientes
         </Link>
       </div>
 
-      <div className="rounded-xl bg-gradient-to-br from-brand/[0.07] to-transparent p-6 ring-1 ring-brand/10 sm:p-8">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className={cn("flex size-12 items-center justify-center rounded-full text-sm font-semibold", AVATAR_BG[bgForName(client.name)])}>
+      {/* Hero */}
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.15),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(99,102,241,0.1),transparent_50%)]" />
+        <div className="relative flex items-start justify-between gap-6">
+          <div className="flex items-center gap-5">
+            <div className={cn("flex size-16 items-center justify-center rounded-2xl text-xl font-bold shadow-lg shadow-black/20 ring-2 ring-white/20", AVATAR_BG[bgForName(client.name)])}>
               {getInitials(client.name)}
             </div>
             <div>
-              <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+              <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
                 {client.name}
               </h1>
-              <div className="mt-1 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1">
-                  <Mail className="size-3.5" />
+              <div className="mt-2 flex flex-wrap items-center gap-4 text-base text-white/70">
+                <span className="flex items-center gap-2">
+                  <Mail className="size-4" />
                   {client.email}
                 </span>
                 {client.phone && (
-                  <span className="flex items-center gap-1">
-                    <Phone className="size-3.5" />
+                  <span className="flex items-center gap-2">
+                    <Phone className="size-4" />
                     {client.phone}
                   </span>
                 )}
@@ -124,28 +127,31 @@ export default function ClientPage() {
         </div>
       </div>
 
-      <div className="space-y-4">
+      {/* Projects Section */}
+      <div className="space-y-5">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <FolderKanban className="size-4 text-muted-foreground" />
-            <h2 className="text-sm font-semibold tracking-tight">
+          <div className="flex items-center gap-3">
+            <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
+              <FolderKanban className="size-5" />
+            </div>
+            <h2 className="text-base font-semibold tracking-tight">
               Projetos{client.projects.length > 0 && ` (${client.projects.length})`}
             </h2>
           </div>
         </div>
 
         {client.projects.length > 0 && (
-          <div className="animate-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="animate-stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {client.projects.map((project) => (
               <Link key={project.id} href={`/dashboard/projetos/${project.id}`}>
-                <div className="flex h-full cursor-pointer flex-col gap-4 rounded-xl bg-card p-5 text-sm text-card-foreground border border-border/60 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-brand/10">
+                <div className="flex h-full cursor-pointer flex-col gap-4 rounded-xl bg-card p-6 text-base text-card-foreground border border-border/60 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20">
                   <div className="flex h-full flex-col justify-between gap-3">
                     <div>
-                      <h3 className="truncate font-medium">{project.title}</h3>
+                      <h3 className="truncate font-semibold text-lg">{project.title}</h3>
                     </div>
                     <div className="flex items-center justify-between">
                       <StatusBadge status={project.status} />
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-sm text-muted-foreground">
                         {project.status === "BRIEFING"
                           ? "Em briefing"
                           : project.status === "PROJETO"
@@ -163,12 +169,12 @@ export default function ClientPage() {
         )}
 
         {client.projects.length === 0 && (
-          <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-20 text-center transition-colors duration-200 hover:border-primary/30">
-            <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-light text-white shadow-lg shadow-brand/25">
-              <Plus className="size-6" />
+          <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-24 text-center transition-colors duration-200 hover:border-accent/30">
+            <div className="mb-5 flex size-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-indigo-500 text-white shadow-lg shadow-accent/25">
+              <Plus className="size-7" />
             </div>
-            <h3 className="mb-1 font-semibold">Nenhum projeto ainda</h3>
-            <p className="mb-6 max-w-sm text-sm text-muted-foreground">
+            <h3 className="text-xl font-semibold text-foreground mb-1">Nenhum projeto ainda</h3>
+            <p className="mb-8 max-w-md text-base text-muted-foreground">
               Crie o primeiro projeto para este cliente.
             </p>
             <NewProjectDialog
