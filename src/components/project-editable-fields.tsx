@@ -8,13 +8,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
-interface ProjectEditableFieldsProps {
-  projectId: string;
-  budget: number | null;
-  startDate: string | null;
-  dueDate: string | null;
-}
-
 function calcDaysRemaining(dueDate: string): number | null {
   const due = new Date(dueDate);
   const now = new Date();
@@ -30,39 +23,32 @@ function formatDate(dateStr: string): string {
   }).format(new Date(dateStr));
 }
 
-export function ProjectEditableFields({ projectId, budget, startDate, dueDate }: ProjectEditableFieldsProps) {
+export function BudgetCard({
+  projectId,
+  budget,
+}: {
+  projectId: string;
+  budget: number | null;
+}) {
   const router = useRouter();
-  const [editing, setEditing] = useState<"budget" | "deadline" | null>(null);
+  const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
-
   const [editBudget, setEditBudget] = useState(budget?.toString() ?? "");
-  const [editStartDate, setEditStartDate] = useState(startDate ?? "");
-  const [editDueDate, setEditDueDate] = useState(dueDate ?? "");
-
-  const budgetRef = useRef<HTMLInputElement>(null);
-  const startRef = useRef<HTMLInputElement>(null);
-  const dueRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (editing === "budget") budgetRef.current?.focus();
-    if (editing === "deadline") startRef.current?.focus();
+    if (editing) inputRef.current?.focus();
   }, [editing]);
 
-  function resetBudget() {
+  function reset() {
     setEditBudget(budget?.toString() ?? "");
-    setEditing(null);
+    setEditing(false);
   }
 
-  function resetDeadline() {
-    setEditStartDate(startDate ?? "");
-    setEditDueDate(dueDate ?? "");
-    setEditing(null);
-  }
-
-  async function saveBudget() {
+  async function save() {
     const val = editBudget ? Number(editBudget) : undefined;
     if (val !== undefined && (isNaN(val) || val < 0)) return;
-    if (val === budget) { resetBudget(); return; }
+    if (val === budget) { reset(); return; }
 
     setSaving(true);
     try {
@@ -74,20 +60,118 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
       });
       if (!res.ok) throw new Error();
       toast.success("Orçamento atualizado");
-      setEditing(null);
+      setEditing(false);
       router.refresh();
     } catch {
-      resetBudget();
+      reset();
       toast.error("Erro ao atualizar orçamento");
     } finally {
       setSaving(false);
     }
   }
 
-  async function saveDeadline() {
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === "Enter") save();
+    if (e.key === "Escape") reset();
+  }
+
+  return (
+    <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+      <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-accent to-indigo-400" />
+      <div className="flex items-center justify-between mb-1">
+        <div className="flex items-center gap-2">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
+            <DollarSign className="size-4" />
+          </div>
+          <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Orçamento</span>
+        </div>
+        {!editing && budget && (
+          <button
+            onClick={() => { setEditBudget(budget?.toString() ?? ""); setEditing(true); }}
+            className="rounded-md p-1 text-muted-foreground/40 transition-colors hover:bg-muted hover:text-muted-foreground"
+          >
+            <Pencil className="size-3.5" />
+          </button>
+        )}
+      </div>
+
+      <div className="mt-3">
+        {editing ? (
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm text-muted-foreground">R$</span>
+              <Input
+                ref={inputRef}
+                type="number"
+                step="0.01"
+                value={editBudget}
+                onChange={(e) => setEditBudget(e.target.value)}
+                onKeyDown={handleKeyDown}
+                onBlur={save}
+                className="h-9 w-full max-w-[160px] text-base"
+                disabled={saving}
+              />
+              {saving && <Loader2 className="size-4 animate-spin shrink-0 text-muted-foreground" />}
+            </div>
+            <div className="flex gap-1.5">
+              <Button size="xs" onClick={save} disabled={saving}>Salvar</Button>
+              <Button size="xs" variant="ghost" onClick={reset} disabled={saving}>Cancelar</Button>
+            </div>
+          </div>
+        ) : (
+          <>
+            {budget ? (
+              <p className="text-xl font-bold tracking-tight text-foreground">
+                {new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(budget)}
+              </p>
+            ) : (
+              <div
+                className="group flex cursor-pointer items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => { setEditBudget(""); setEditing(true); }}
+              >
+                <div className="flex size-8 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
+                  <Plus className="size-4" />
+                </div>
+                <span className="text-sm font-medium">Definir</span>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function DeadlineCard({
+  projectId,
+  startDate,
+  dueDate,
+}: {
+  projectId: string;
+  startDate: string | null;
+  dueDate: string | null;
+}) {
+  const router = useRouter();
+  const [editing, setEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [editStartDate, setEditStartDate] = useState(startDate ?? "");
+  const [editDueDate, setEditDueDate] = useState(dueDate ?? "");
+  const startRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (editing) startRef.current?.focus();
+  }, [editing]);
+
+  function reset() {
+    setEditStartDate(startDate ?? "");
+    setEditDueDate(dueDate ?? "");
+    setEditing(false);
+  }
+
+  async function save() {
     const s = editStartDate || undefined;
     const d = editDueDate || undefined;
-    if (s === startDate && d === dueDate) { resetDeadline(); return; }
+    if (s === startDate && d === dueDate) { reset(); return; }
 
     setSaving(true);
     try {
@@ -99,168 +183,82 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
       });
       if (!res.ok) throw new Error();
       toast.success("Prazo atualizado");
-      setEditing(null);
+      setEditing(false);
       router.refresh();
     } catch {
-      resetDeadline();
+      reset();
       toast.error("Erro ao atualizar prazo");
     } finally {
       setSaving(false);
     }
   }
 
-  function handleBudgetKeyDown(e: KeyboardEvent) {
-    if (e.key === "Enter") saveBudget();
-    if (e.key === "Escape") resetBudget();
-  }
-
-  function handleDeadlineKeyDown(e: KeyboardEvent) {
-    if (e.key === "Escape") resetDeadline();
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === "Escape") reset();
   }
 
   const daysRemaining = dueDate ? calcDaysRemaining(dueDate) : null;
 
   return (
-    <>
-      {/* Budget Card */}
-      <div className="relative overflow-hidden rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
-        <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-accent to-indigo-400" />
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
-              <DollarSign className="size-5" />
-            </div>
-            <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Orçamento</span>
+    <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-success/20">
+      <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-success to-success/60" />
+      <div className="flex items-center justify-between mb-1">
+        <div className="flex items-center gap-2">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-success/20 to-success/5 text-success ring-1 ring-success/10">
+            <CalendarDays className="size-4" />
           </div>
-          {editing !== "budget" && (
-            <button
-              onClick={() => { setEditBudget(budget?.toString() ?? ""); setEditing("budget"); }}
-              className="rounded-lg p-2 text-muted-foreground/50 transition-colors hover:bg-muted hover:text-muted-foreground"
-            >
-              <Pencil className="size-4" />
-            </button>
-          )}
+          <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Prazo</span>
         </div>
-
-        {editing === "budget" ? (
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="text-lg text-muted-foreground font-medium">R$</span>
-              <Input
-                ref={budgetRef}
-                type="number"
-                step="0.01"
-                value={editBudget}
-                onChange={(e) => setEditBudget(e.target.value)}
-                onKeyDown={handleBudgetKeyDown}
-                onBlur={saveBudget}
-                className="h-10 w-full max-w-xs text-lg"
-                disabled={saving}
-                autoFocus
-              />
-              {saving && <Loader2 className="size-5 animate-spin shrink-0 text-muted-foreground" />}
-            </div>
-            <div className="flex gap-2">
-              <Button size="sm" onClick={saveBudget} disabled={saving}>
-                Salvar
-              </Button>
-              <Button size="sm" variant="ghost" onClick={resetBudget} disabled={saving}>
-                Cancelar
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div>
-            {budget ? (
-              <p className="text-3xl font-bold tracking-tight text-foreground">
-                {new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(budget)}
-              </p>
-            ) : (
-              <div
-                className="group flex cursor-pointer items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => { setEditBudget(""); setEditing("budget"); }}
-              >
-                <div className="flex size-10 items-center justify-center rounded-lg border border-dashed border-border transition-colors group-hover:border-accent/50">
-                  <Plus className="size-5" />
-                </div>
-                <span className="text-base font-medium">Definir orçamento</span>
-              </div>
-            )}
-            {budget && (
-              <p className="mt-1 text-sm text-muted-foreground">orçamento registrado</p>
-            )}
-          </div>
+        {!editing && startDate && dueDate && (
+          <button
+            onClick={() => { setEditStartDate(startDate ?? ""); setEditDueDate(dueDate ?? ""); setEditing(true); }}
+            className="rounded-md p-1 text-muted-foreground/40 transition-colors hover:bg-muted hover:text-muted-foreground"
+          >
+            <Pencil className="size-3.5" />
+          </button>
         )}
       </div>
 
-      {/* Deadline Card */}
-      <div className="relative overflow-hidden rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-success/20">
-        <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-success to-success/60" />
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-success/20 to-success/5 text-success ring-1 ring-success/10">
-              <CalendarDays className="size-5" />
-            </div>
-            <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Prazo</span>
-          </div>
-          {editing !== "deadline" && (
-            <button
-              onClick={() => { setEditStartDate(startDate ?? ""); setEditDueDate(dueDate ?? ""); setEditing("deadline"); }}
-              className="rounded-lg p-2 text-muted-foreground/50 transition-colors hover:bg-muted hover:text-muted-foreground"
-            >
-              <Pencil className="size-4" />
-            </button>
-          )}
-        </div>
-
-        {editing === "deadline" ? (
-          <div className="space-y-3">
-            <div className="flex flex-wrap items-center gap-2">
+      <div className="mt-3">
+        {editing ? (
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-1.5">
               <Input
                 ref={startRef}
                 type="date"
                 value={editStartDate}
                 onChange={(e) => setEditStartDate(e.target.value)}
-                onKeyDown={handleDeadlineKeyDown}
-                className="h-10 w-40 text-base"
+                onKeyDown={handleKeyDown}
+                className="h-9 w-[140px] text-sm"
                 disabled={saving}
               />
-              <span className="text-base text-muted-foreground">→</span>
+              <span className="text-sm text-muted-foreground">→</span>
               <Input
-                ref={dueRef}
                 type="date"
                 value={editDueDate}
                 onChange={(e) => setEditDueDate(e.target.value)}
-                onBlur={saveDeadline}
-                onKeyDown={handleDeadlineKeyDown}
-                className="h-10 w-40 text-base"
+                onBlur={save}
+                onKeyDown={handleKeyDown}
+                className="h-9 w-[140px] text-sm"
                 disabled={saving}
               />
-              {saving && <Loader2 className="size-5 animate-spin shrink-0 text-muted-foreground" />}
+              {saving && <Loader2 className="size-4 animate-spin shrink-0 text-muted-foreground" />}
             </div>
-            <div className="flex gap-2">
-              <Button size="sm" onClick={saveDeadline} disabled={saving}>
-                Salvar
-              </Button>
-              <Button size="sm" variant="ghost" onClick={resetDeadline} disabled={saving}>
-                Cancelar
-              </Button>
+            <div className="flex gap-1.5">
+              <Button size="xs" onClick={save} disabled={saving}>Salvar</Button>
+              <Button size="xs" variant="ghost" onClick={reset} disabled={saving}>Cancelar</Button>
             </div>
           </div>
         ) : (
-          <div>
+          <>
             {startDate && dueDate ? (
-              <>
-                <p className="text-lg font-semibold text-foreground">
-                  {formatDate(startDate)}
-                </p>
-                <p className="text-lg font-semibold text-foreground flex items-center gap-2">
-                  <span className="text-muted-foreground/50">→</span>
-                  {formatDate(dueDate)}
+              <div>
+                <p className="text-base font-semibold text-foreground">
+                  {formatDate(startDate)} <span className="text-muted-foreground/40">→</span> {formatDate(dueDate)}
                 </p>
                 {daysRemaining !== null && (
-                  <p className={cn(
-                    "mt-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium",
+                  <span className={cn(
+                    "mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium",
                     daysRemaining > 30 ? "bg-success/10 text-success" :
                     daysRemaining > 7 ? "bg-warning/10 text-warning" :
                     "bg-destructive/10 text-destructive"
@@ -272,27 +270,27 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
                       "bg-destructive"
                     )} />
                     {daysRemaining > 0
-                      ? `${daysRemaining} dias restantes`
+                      ? `${daysRemaining} dias`
                       : Math.abs(daysRemaining) === 0
                         ? "Vence hoje"
                         : `Vencido há ${Math.abs(daysRemaining)} dias`}
-                  </p>
+                  </span>
                 )}
-              </>
+              </div>
             ) : (
               <div
                 className="group flex cursor-pointer items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => { setEditStartDate(""); setEditDueDate(""); setEditing("deadline"); }}
+                onClick={() => { setEditStartDate(""); setEditDueDate(""); setEditing(true); }}
               >
-                <div className="flex size-10 items-center justify-center rounded-lg border border-dashed border-border transition-colors group-hover:border-accent/50">
-                  <Plus className="size-5" />
+                <div className="flex size-8 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
+                  <Plus className="size-4" />
                 </div>
-                <span className="text-base font-medium">Definir prazo</span>
+                <span className="text-sm font-medium">Definir</span>
               </div>
             )}
-          </div>
+          </>
         )}
       </div>
-    </>
+    </div>
   );
 }
