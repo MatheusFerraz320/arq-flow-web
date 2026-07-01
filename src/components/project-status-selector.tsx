@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Loader2 } from "lucide-react";
+import { ClipboardList, PencilRuler, Search, CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import type { ProjectStatus } from "@/lib/types";
 
-const STATUS_OPTIONS: { value: ProjectStatus; label: string }[] = [
-  { value: "BRIEFING", label: "Briefing" },
-  { value: "PROJETO", label: "Em Projeto" },
-  { value: "REVISAO", label: "Em Revisão" },
-  { value: "CONCLUIDO", label: "Concluído" },
+const STATUS_ITEMS: { value: ProjectStatus; label: string; icon: typeof ClipboardList; color: string; bg: string; ring: string }[] = [
+  { value: "BRIEFING", label: "Briefing", icon: ClipboardList, color: "text-warning", bg: "bg-warning/15", ring: "ring-warning/30" },
+  { value: "PROJETO", label: "Em Projeto", icon: PencilRuler, color: "text-accent", bg: "bg-accent/15", ring: "ring-accent/30" },
+  { value: "REVISAO", label: "Em Revisão", icon: Search, color: "text-muted-foreground", bg: "bg-muted", ring: "ring-border" },
+  { value: "CONCLUIDO", label: "Concluído", icon: CheckCircle2, color: "text-success", bg: "bg-success/15", ring: "ring-success/30" },
 ];
 
 interface ProjectStatusSelectorProps {
@@ -28,7 +28,7 @@ export function ProjectStatusSelector({
   const [updating, setUpdating] = useState(false);
 
   async function handleChange(newStatus: ProjectStatus) {
-    if (newStatus === status) return;
+    if (newStatus === status || updating) return;
     const previous = status;
     setStatus(newStatus);
     setUpdating(true);
@@ -54,33 +54,29 @@ export function ProjectStatusSelector({
   }
 
   return (
-    <div className="relative">
-      <select
-        value={status}
-        onChange={(e) => handleChange(e.target.value as ProjectStatus)}
-        disabled={updating}
-        className={cn(
-          "w-full appearance-none rounded-lg border bg-transparent py-2.5 pl-3.5 pr-9 text-base font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30",
-          status === "BRIEFING" && "border-warning/30 text-warning",
-          status === "PROJETO" && "border-primary/30 text-primary",
-          status === "REVISAO" && "border-muted-foreground/30 text-muted-foreground",
-          status === "CONCLUIDO" && "border-success/30 text-success",
-          updating && "cursor-not-allowed opacity-60",
-        )}
-      >
-        {STATUS_OPTIONS.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
-      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2.5">
-        {updating ? (
-          <Loader2 className="size-4 animate-spin text-muted-foreground" />
-        ) : (
-          <ChevronDown className="size-4 text-muted-foreground" />
-        )}
-      </div>
+    <div className="flex flex-wrap gap-2">
+      {STATUS_ITEMS.map((item) => {
+        const Icon = item.icon;
+        const active = status === item.value;
+        return (
+          <button
+            key={item.value}
+            type="button"
+            onClick={() => handleChange(item.value)}
+            disabled={updating}
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200",
+              active
+                ? `${item.bg} ${item.color} border-transparent ring-1 ${item.ring} shadow-sm`
+                : "border-border bg-transparent text-muted-foreground hover:border-muted-foreground/30 hover:text-foreground",
+              updating && "pointer-events-none opacity-60",
+            )}
+          >
+            <Icon className="size-4" />
+            {item.label}
+          </button>
+        );
+      })}
     </div>
   );
 }

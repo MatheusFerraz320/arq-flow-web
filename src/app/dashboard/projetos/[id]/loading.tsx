@@ -15,18 +15,21 @@ export default function Loading() {
         </div>
       </div>
 
-      {/* Info cards skeleton */}
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Info cards skeleton — 2 columns */}
+      <div className="grid gap-5 sm:grid-cols-2">
         {Array.from({ length: 4 }).map((_, i) => (
           <div
             key={i}
-            className="flex items-center gap-4 rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] animate-fade-in-up"
+            className="rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04] animate-fade-in-up"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <div className="size-12 animate-skeleton rounded-xl" />
-            <div className="space-y-2 flex-1">
-              <div className="h-4 w-16 animate-skeleton rounded" />
-              <div className="h-5 w-28 animate-skeleton rounded" />
+            <div className="flex items-center gap-3 mb-5">
+              <div className="size-10 animate-skeleton rounded-lg" />
+              <div className="h-4 w-24 animate-skeleton rounded" />
+            </div>
+            <div className="space-y-3">
+              <div className="h-8 w-48 animate-skeleton rounded" />
+              <div className="h-5 w-32 animate-skeleton rounded" />
             </div>
           </div>
         ))}
