@@ -72,8 +72,8 @@ export function NewClientDialog({ onCreated }: NewClientDialogProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button size="sm" className="gap-1.5 shadow-xs hover:shadow-md">
-            <Plus className="size-4" />
+          <Button className="gap-2 shadow-xs hover:shadow-md">
+            <Plus className="size-5" />
             Novo Cliente
           </Button>
         }
@@ -81,55 +81,55 @@ export function NewClientDialog({ onCreated }: NewClientDialogProps) {
       <DialogContent className="sm:max-w-md">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Novo Cliente</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-xl">Novo Cliente</DialogTitle>
+            <DialogDescription className="text-base">
               Adicione um novo cliente para começar um projeto.
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4 py-4">
+          <div className="space-y-5 py-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Nome</Label>
+              <Label htmlFor="name" className="text-sm">Nome</Label>
               <div className="relative">
-                <User className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <User className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="name"
                   placeholder="Nome do cliente"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="h-10 pl-10"
+                  className="pl-11"
                   autoFocus
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-sm">Email</Label>
               <div className="relative">
-                <Mail className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Mail className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
                   placeholder="cliente@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-10 pl-10"
+                  className="pl-11"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="phone">Telefone (opcional)</Label>
+              <Label htmlFor="phone" className="text-sm">Telefone (opcional)</Label>
               <div className="relative">
-                <Phone className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Phone className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="phone"
                   placeholder="(11) 99999-8888"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="h-10 pl-10"
+                  className="pl-11"
                 />
               </div>
             </div>
             {error && (
-              <div className="flex items-center gap-2 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
+              <div className="flex items-center gap-2 rounded-lg bg-destructive/10 px-3 py-2.5 text-sm text-destructive">
                 <span className="size-1.5 shrink-0 rounded-full bg-destructive" />
                 {error}
               </div>
@@ -139,7 +139,7 @@ export function NewClientDialog({ onCreated }: NewClientDialogProps) {
             <Button type="button" variant="ghost" onClick={() => setOpen(false)}>
               Cancelar
             </Button>
-            <Button type="submit" disabled={loading} className="shadow-xs hover:shadow-md">
+            <Button type="submit" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />

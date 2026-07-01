@@ -84,8 +84,8 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button size="sm" className="gap-1.5 shadow-xs hover:shadow-md">
-            <Plus className="size-4" />
+          <Button className="gap-2 shadow-xs hover:shadow-md">
+            <Plus className="size-5" />
             Novo Projeto
           </Button>
         }
@@ -93,44 +93,44 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
       <DialogContent className="sm:max-w-md">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Novo Projeto</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-xl">Novo Projeto</DialogTitle>
+            <DialogDescription className="text-base">
               Crie um novo projeto para este cliente.
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4 py-4">
+          <div className="space-y-5 py-4">
             <div className="space-y-2">
-              <Label htmlFor="title">Título</Label>
+              <Label htmlFor="title" className="text-sm">Título</Label>
               <div className="relative">
-                <FileText className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <FileText className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="title"
                   placeholder="Nome do projeto"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="h-10 pl-10"
+                  className="pl-11"
                   autoFocus
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="description">Descrição (opcional)</Label>
+              <Label htmlFor="description" className="text-sm">Descrição (opcional)</Label>
               <div className="relative">
-                <AlignLeft className="pointer-events-none absolute left-3 top-3 size-4 text-muted-foreground" />
+                <AlignLeft className="pointer-events-none absolute left-3.5 top-3.5 size-5 text-muted-foreground" />
                 <textarea
                   id="description"
                   placeholder="Breve descrição do projeto"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="flex w-full min-w-0 rounded-lg border border-input bg-transparent px-3 py-2 pl-10 text-sm transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
+                  className="flex w-full min-w-0 rounded-lg border border-input bg-transparent px-3 py-2.5 pl-11 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
                   rows={3}
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="budget">Orçamento (opcional)</Label>
+              <Label htmlFor="budget" className="text-sm">Orçamento (opcional)</Label>
               <div className="relative">
-                <DollarSign className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <DollarSign className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="budget"
                   type="number"
@@ -138,40 +138,40 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
                   placeholder="Valor do projeto"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
-                  className="h-10 pl-10"
+                  className="pl-11"
                 />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="startDate">Data de início (opcional)</Label>
+                <Label htmlFor="startDate" className="text-sm">Data de início (opcional)</Label>
                 <div className="relative">
-                  <CalendarDays className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <CalendarDays className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     id="startDate"
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="h-10 pl-10"
+                    className="pl-11"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="dueDate">Data de conclusão (opcional)</Label>
+                <Label htmlFor="dueDate" className="text-sm">Data de conclusão (opcional)</Label>
                 <div className="relative">
-                  <CalendarDays className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <CalendarDays className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     id="dueDate"
                     type="date"
                     value={dueDate}
                     onChange={(e) => setDueDate(e.target.value)}
-                    className="h-10 pl-10"
+                    className="pl-11"
                   />
                 </div>
               </div>
             </div>
             {error && (
-              <div className="flex items-center gap-2 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
+              <div className="flex items-center gap-2 rounded-lg bg-destructive/10 px-3 py-2.5 text-sm text-destructive">
                 <span className="size-1.5 shrink-0 rounded-full bg-destructive" />
                 {error}
               </div>

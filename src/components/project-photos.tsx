@@ -99,10 +99,13 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
   if (loading) {
     return (
       <section className="space-y-4">
-        <h2 className="text-sm font-semibold tracking-tight">Fotos</h2>
+        <div className="flex items-center gap-3">
+          <div className="size-9 animate-skeleton rounded-lg" />
+          <div className="h-5 w-16 animate-skeleton rounded" />
+        </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-48 animate-pulse rounded-xl bg-muted" />
+            <div key={i} className="h-48 animate-skeleton rounded-xl" />
           ))}
         </div>
       </section>
@@ -112,9 +115,12 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
   if (error) {
     return (
       <section className="space-y-4">
-        <h2 className="text-sm font-semibold tracking-tight">Fotos</h2>
+        <div className="flex items-center gap-3">
+          <div className="size-9 animate-skeleton rounded-lg" />
+          <div className="h-5 w-16 animate-skeleton rounded" />
+        </div>
         <div className="flex items-center justify-center rounded-xl border-2 border-dashed py-14 text-center">
-          <p className="text-sm text-destructive">{error}</p>
+          <p className="text-base text-destructive">{error}</p>
         </div>
       </section>
     );
@@ -123,9 +129,14 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
   return (
     <section className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold tracking-tight">
-          Fotos{photos.length > 0 && ` (${photos.length})`}
-        </h2>
+        <div className="flex items-center gap-3">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <ImageIcon className="size-5" />
+          </div>
+          <h2 className="text-base font-semibold tracking-tight">
+            Fotos{photos.length > 0 && ` (${photos.length})`}
+          </h2>
+        </div>
         <input
           ref={inputRef}
           type="file"
@@ -140,13 +151,12 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
         <Button
           onClick={() => inputRef.current?.click()}
           disabled={uploading}
-          size="sm"
-          className="gap-1.5"
+          className="gap-2"
         >
           {uploading ? (
-            <Loader2 className="size-4 animate-spin" />
+            <Loader2 className="size-5 animate-spin" />
           ) : (
-            <Upload className="size-4" />
+            <Upload className="size-5" />
           )}
           {uploading ? "Enviando..." : "Adicionar"}
         </Button>
@@ -190,14 +200,14 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
       )}
 
       {photos.length === 0 && (
-        <div className="group flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-14 text-center transition-all duration-200 hover:border-brand/30 hover:shadow-sm">
-          <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand/20 to-brand/5 text-brand ring-1 ring-brand/10 transition-transform duration-200 group-hover:scale-110">
+        <div className="group flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-16 text-center transition-all duration-200 hover:border-accent/30 hover:shadow-sm">
+          <div className="mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10 transition-transform duration-200 group-hover:scale-110">
             <ImageIcon className="size-6" />
           </div>
-          <p className="text-sm font-medium text-muted-foreground">
+          <p className="text-base font-medium text-muted-foreground">
             Nenhuma foto adicionada
           </p>
-          <p className="mt-1 text-xs text-muted-foreground/60">
+          <p className="mt-1 text-sm text-muted-foreground/60">
             Adicione fotos para documentar o processo.
           </p>
         </div>

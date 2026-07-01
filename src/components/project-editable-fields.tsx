@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
-import { CalendarDays, Clock, DollarSign, Loader2, Pencil } from "lucide-react";
+import { CalendarDays, DollarSign, Loader2, Pencil } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
@@ -104,15 +104,15 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
   return (
     <>
       {/* Budget Card */}
-      <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:shadow-md">
-        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
-          <DollarSign className="size-5" />
+      <div className="flex items-center gap-4 rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20">
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
+          <DollarSign className="size-6" />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-xs text-muted-foreground">Orçamento</p>
+          <p className="text-sm text-muted-foreground">Orçamento</p>
           {editing === "budget" ? (
             <div className="flex items-center gap-1">
-              <span className="text-sm text-muted-foreground">R$</span>
+              <span className="text-base text-muted-foreground">R$</span>
               <Input
                 ref={budgetRef}
                 type="number"
@@ -121,7 +121,7 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
                 onChange={(e) => setEditBudget(e.target.value)}
                 onKeyDown={handleBudgetKeyDown}
                 onBlur={saveBudget}
-                className="h-8 w-28 text-sm"
+                className="h-9 w-32 text-base"
                 disabled={saving}
               />
               {saving && <Loader2 className="size-4 animate-spin text-muted-foreground" />}
@@ -131,24 +131,24 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
               className="group flex cursor-pointer items-center gap-2"
               onClick={() => { setEditBudget(budget?.toString() ?? ""); setEditing("budget"); }}
             >
-              <p className="truncate text-sm font-medium">
+              <p className="truncate text-base font-medium">
                 {budget
                   ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(budget)
                   : "Não definido"}
               </p>
-              <Pencil className="size-3 shrink-0 text-muted-foreground/0 transition-colors group-hover:text-muted-foreground/50" />
+              <Pencil className="size-4 shrink-0 text-muted-foreground/0 transition-colors group-hover:text-muted-foreground/50" />
             </div>
           )}
         </div>
       </div>
 
       {/* Deadline Card */}
-      <div className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-all duration-200 hover:shadow-md">
-        <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-success/20 to-success/5 text-success ring-1 ring-success/10">
-          <Clock className="size-5" />
+      <div className="flex items-center gap-4 rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20">
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-success/20 to-success/5 text-success ring-1 ring-success/10">
+          <CalendarDays className="size-6" />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-xs text-muted-foreground">Prazo</p>
+          <p className="text-sm text-muted-foreground">Prazo</p>
           {editing === "deadline" ? (
             <div className="flex items-center gap-2">
               <Input
@@ -157,10 +157,10 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
                 value={editStartDate}
                 onChange={(e) => setEditStartDate(e.target.value)}
                 onKeyDown={handleDeadlineKeyDown}
-                className="h-8 text-xs"
+                className="h-9 text-sm"
                 disabled={saving}
               />
-              <span className="text-xs text-muted-foreground">→</span>
+              <span className="text-sm text-muted-foreground">→</span>
               <Input
                 ref={dueRef}
                 type="date"
@@ -168,7 +168,7 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
                 onChange={(e) => setEditDueDate(e.target.value)}
                 onBlur={saveDeadline}
                 onKeyDown={handleDeadlineKeyDown}
-                className="h-8 text-xs"
+                className="h-9 text-sm"
                 disabled={saving}
               />
               {saving && <Loader2 className="size-4 shrink-0 animate-spin text-muted-foreground" />}
@@ -178,12 +178,12 @@ export function ProjectEditableFields({ projectId, budget, startDate, dueDate }:
               className="group flex cursor-pointer items-center gap-2"
               onClick={() => { setEditStartDate(startDate ?? ""); setEditDueDate(dueDate ?? ""); setEditing("deadline"); }}
             >
-              <p className="truncate text-sm font-medium">
+              <p className="truncate text-base font-medium">
                 {startDate && dueDate
                   ? `${new Intl.DateTimeFormat("pt-BR").format(new Date(startDate))} → ${new Intl.DateTimeFormat("pt-BR").format(new Date(dueDate))}`
                   : "Não definido"}
               </p>
-              <Pencil className="size-3 shrink-0 text-muted-foreground/0 transition-colors group-hover:text-muted-foreground/50" />
+              <Pencil className="size-4 shrink-0 text-muted-foreground/0 transition-colors group-hover:text-muted-foreground/50" />
             </div>
           )}
         </div>

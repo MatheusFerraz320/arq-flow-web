@@ -60,7 +60,7 @@ export function ProjectStatusSelector({
         onChange={(e) => handleChange(e.target.value as ProjectStatus)}
         disabled={updating}
         className={cn(
-          "w-full appearance-none rounded-lg border bg-transparent py-2 pl-3 pr-9 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand/30",
+          "w-full appearance-none rounded-lg border bg-transparent py-2.5 pl-3.5 pr-9 text-base font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-accent/30",
           status === "BRIEFING" && "border-warning/30 text-warning",
           status === "PROJETO" && "border-primary/30 text-primary",
           status === "REVISAO" && "border-muted-foreground/30 text-muted-foreground",
