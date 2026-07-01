@@ -53,30 +53,30 @@ export function LoginForm() {
     <div className="animate-stagger space-y-6">
       {/* Logo & Header */}
       <div className="text-center">
-        <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-light text-xl font-bold text-white shadow-lg shadow-brand/25">
+        <div className="mx-auto mb-5 flex size-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-light text-2xl font-bold text-white shadow-lg shadow-brand/25">
           AF
         </div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-3xl font-semibold tracking-tight text-foreground">
           ArchitectFlow
         </h1>
-        <p className="mt-1.5 text-sm text-muted-foreground">
+        <p className="mt-2 text-base text-muted-foreground">
           Entre na sua conta
         </p>
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <div className="relative">
-            <Mail className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Mail className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="email"
               type="email"
               placeholder="seu@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-10 pl-10 transition-shadow focus-visible:shadow-[0_0_0_4px_var(--color-brand)/0.1]"
+              className="pl-11 transition-shadow focus-visible:shadow-[0_0_0_4px_var(--color-accent)/0.15]"
               autoComplete="email"
               autoFocus
             />
@@ -88,7 +88,7 @@ export function LoginForm() {
             <Label htmlFor="password">Senha</Label>
             <a
               href="#"
-              className="text-xs text-muted-foreground transition-colors hover:text-primary"
+              className="text-sm text-muted-foreground transition-colors hover:text-primary"
               tabIndex={-1}
               onClick={(e) => e.preventDefault()}
             >
@@ -96,14 +96,14 @@ export function LoginForm() {
             </a>
           </div>
           <div className="relative">
-            <Lock className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Lock className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
             <Input
               id="password"
               type="password"
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-10 pl-10 transition-shadow focus-visible:shadow-[0_0_0_4px_var(--color-brand)/0.1]"
+              className="pl-11 transition-shadow focus-visible:shadow-[0_0_0_4px_var(--color-accent)/0.15]"
               autoComplete="current-password"
             />
           </div>
@@ -125,12 +125,12 @@ export function LoginForm() {
         {/* Submit */}
         <Button
           type="submit"
-          className="h-10 w-full transition-transform active:scale-[0.98] "
+          className="w-full transition-transform active:scale-[0.98]"
           disabled={loading}
         >
           {loading ? (
             <>
-              <Loader2 className="size-4 animate-spin" />
+              <Loader2 className="size-5 animate-spin" />
               Entrando
             </>
           ) : (
@@ -144,7 +144,7 @@ export function LoginForm() {
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
-        <div className="relative flex justify-center text-xs uppercase">
+        <div className="relative flex justify-center text-sm uppercase">
           <span className="bg-card px-2 text-muted-foreground">ou</span>
         </div>
       </div>
@@ -153,10 +153,10 @@ export function LoginForm() {
       <Button
         type="button"
         variant="outline"
-        className="h-10 w-full"
+        className="w-full"
         disabled
       >
-        <Globe className="size-4" />
+        <Globe className="size-5" />
         Continuar com Google
       </Button>
     </div>
