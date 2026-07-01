@@ -17,14 +17,14 @@ const variantStyles = {
 };
 
 const sizeStyles = {
-  default: "h-9 gap-1.5 px-3.5",
-  xs: "h-7 gap-1 rounded-lg px-2.5 text-xs",
-  sm: "h-8 gap-1 rounded-lg px-3 text-sm",
-  lg: "h-10 gap-2 px-4 text-sm",
-  icon: "size-9",
-  "icon-xs": "size-7 rounded-lg",
-  "icon-sm": "size-8 rounded-lg",
-  "icon-lg": "size-10",
+  default: "h-10 gap-1.5 px-4",
+  xs: "h-8 gap-1 rounded-lg px-3 text-xs",
+  sm: "h-9 gap-1 rounded-lg px-3.5 text-sm",
+  lg: "h-11 gap-2 px-5 text-base",
+  icon: "size-10",
+  "icon-xs": "size-8 rounded-lg",
+  "icon-sm": "size-9 rounded-lg",
+  "icon-lg": "size-11",
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

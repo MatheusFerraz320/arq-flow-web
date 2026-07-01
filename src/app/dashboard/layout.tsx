@@ -62,8 +62,8 @@ export default function DashboardLayout({
       <div className="flex min-h-dvh">
         <Navbar />
 
-        <main className="ml-64 flex-1">
-          <div className="mx-auto max-w-5xl px-6 py-8">{children}</div>
+        <main className="ml-64 flex-1 bg-gradient-to-b from-background to-muted/30">
+          <div className="mx-auto max-w-6xl px-8 py-10">{children}</div>
         </main>
       </div>
     </AuthProvider>

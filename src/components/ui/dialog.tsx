@@ -127,7 +127,7 @@ function DialogContent({
       ref={dialogRef}
       data-slot="dialog-content"
       className={cn(
-        "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-[calc(100%-2rem)] sm:max-w-sm gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-border outline-none backdrop:bg-black/10 backdrop:backdrop-blur-xs open:animate-scale-in",
+        "fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-[calc(100%-2rem)] sm:max-w-md gap-5 rounded-xl bg-popover p-6 text-base text-popover-foreground ring-1 ring-border outline-none backdrop:bg-black/10 backdrop:backdrop-blur-xs open:animate-scale-in",
         className,
       )}
       onClick={handleBackdropClick}
@@ -169,7 +169,7 @@ function DialogFooter({
     <div
       data-slot="dialog-footer"
       className={cn(
-        "-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-4 sm:flex-row sm:justify-end",
+        "-mx-6 -mb-6 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-5 sm:flex-row sm:justify-end",
         className,
       )}
       {...props}
@@ -184,7 +184,7 @@ function DialogTitle({
   return (
     <h2
       data-slot="dialog-title"
-      className={cn("text-base leading-none font-medium", className)}
+      className={cn("text-lg leading-none font-semibold", className)}
       {...props}
     />
   );
@@ -198,7 +198,7 @@ function DialogDescription({
     <p
       data-slot="dialog-description"
       className={cn(
-        "text-sm text-muted-foreground",
+        "text-base text-muted-foreground",
         className,
       )}
       {...props}
