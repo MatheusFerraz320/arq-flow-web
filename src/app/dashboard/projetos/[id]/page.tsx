@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { StatusBadge } from "@/components/ui/badge";
 import { ProjectStatusSelector } from "@/components/project-status-selector";
-import { BudgetCard, DeadlineCard } from "@/components/project-editable-fields";
+import { BudgetCard, DeadlineCard, TypeCard } from "@/components/project-editable-fields";
 import { ProjectPhotos } from "@/components/project-photos";
 import { ProjectTimeline } from "@/components/project-timeline";
 import { getInitials } from "@/lib/utils";
@@ -88,8 +88,8 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
         </div>
       </div>
 
-      {/* Data Row: Status · Budget · Deadline */}
-      <div className="animate-stagger grid gap-4 sm:grid-cols-3">
+      {/* Data Row: Status · Type · Budget · Deadline */}
+      <div className="animate-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Status Card */}
         <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
           <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-accent to-indigo-400" />
@@ -104,6 +104,11 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
             currentStatus={project.status}
           />
         </div>
+
+        <TypeCard
+          projectId={project.id}
+          type={project.type}
+        />
 
         <BudgetCard
           projectId={project.id}

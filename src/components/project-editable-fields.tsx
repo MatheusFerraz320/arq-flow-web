@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
-import { DollarSign, CalendarDays, Loader2, Pencil, Plus } from "lucide-react";
+import { DollarSign, CalendarDays, Loader2, Pencil, Plus, Building2, Home, Layout, Wrench, Map, FolderKanban } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -281,6 +281,144 @@ export function DeadlineCard({
               <div
                 className="group flex cursor-pointer items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => { setEditStartDate(""); setEditDueDate(""); setEditing(true); }}
+              >
+                <div className="flex size-8 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
+                  <Plus className="size-4" />
+                </div>
+                <span className="text-sm font-medium">Definir</span>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const TYPE_CONFIG: Record<string, { label: string; icon: typeof Building2 }> = {
+  RESIDENCIAL: { label: "Residencial", icon: Home },
+  COMERCIAL: { label: "Comercial", icon: Building2 },
+  INTERIORES: { label: "Interiores", icon: Layout },
+  REFORMA: { label: "Reforma", icon: Wrench },
+  URBANISMO: { label: "Urbanismo", icon: Map },
+  OUTRO: { label: "Outro", icon: FolderKanban },
+};
+
+export function TypeCard({
+  projectId,
+  type,
+}: {
+  projectId: string;
+  type: string | null;
+}) {
+  const router = useRouter();
+  const [editing, setEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [editType, setEditType] = useState(type ?? "");
+  const selectRef = useRef<HTMLSelectElement>(null);
+
+  useEffect(() => {
+    if (editing) selectRef.current?.focus();
+  }, [editing]);
+
+  function reset() {
+    setEditType(type ?? "");
+    setEditing(false);
+  }
+
+  async function save() {
+    const val = editType || undefined;
+    if (val === type) { reset(); return; }
+
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/projects/${projectId}`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: val }),
+      });
+      if (!res.ok) throw new Error();
+      toast.success("Tipo atualizado");
+      setEditing(false);
+      router.refresh();
+    } catch {
+      reset();
+      toast.error("Erro ao atualizar tipo");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === "Escape") reset();
+  }
+
+  const config = type ? TYPE_CONFIG[type] : null;
+  const TypeIcon = config?.icon ?? Building2;
+
+  return (
+    <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+      <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-accent to-indigo-400" />
+      <div className="flex items-center justify-between mb-1">
+        <div className="flex items-center gap-2">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
+            <Building2 className="size-4" />
+          </div>
+          <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tipo</span>
+        </div>
+        {!editing && type && (
+          <button
+            onClick={() => { setEditType(type); setEditing(true); }}
+            className="rounded-md p-1 text-muted-foreground/40 transition-colors hover:bg-muted hover:text-muted-foreground"
+          >
+            <Pencil className="size-3.5" />
+          </button>
+        )}
+      </div>
+
+      <div className="mt-3">
+        {editing ? (
+          <div className="space-y-2">
+            <select
+              ref={selectRef}
+              value={editType}
+              onChange={(e) => setEditType(e.target.value)}
+              onBlur={save}
+              onKeyDown={handleKeyDown}
+              className="flex h-9 w-full rounded-lg border border-input bg-transparent px-3 py-1 text-base transition-colors outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={saving}
+            >
+              <option value="">Não definido</option>
+              {Object.entries(TYPE_CONFIG).map(([value, { label }]) => (
+                <option key={value} value={value}>{label}</option>
+              ))}
+            </select>
+            <div className="flex gap-1.5">
+              <Button size="xs" onClick={save} disabled={saving}>
+                {saving ? (
+                  <>
+                    <Loader2 className="size-3.5 animate-spin" />
+                    Salvando
+                  </>
+                ) : "Salvar"}
+              </Button>
+              <Button size="xs" variant="ghost" onClick={reset} disabled={saving}>Cancelar</Button>
+            </div>
+          </div>
+        ) : (
+          <>
+            {type && config ? (
+              <div className="flex items-center gap-2">
+                <TypeIcon className="size-5 text-accent" />
+                <span className="text-xl font-bold tracking-tight text-foreground">
+                  {config.label}
+                </span>
+              </div>
+            ) : (
+              <div
+                className="group flex cursor-pointer items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => { setEditType(""); setEditing(true); }}
               >
                 <div className="flex size-8 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
                   <Plus className="size-4" />

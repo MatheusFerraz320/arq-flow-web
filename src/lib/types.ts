@@ -1,5 +1,7 @@
 export type ProjectStatus = "BRIEFING" | "PROJETO" | "REVISAO" | "CONCLUIDO";
 
+export type ProjectType = "RESIDENCIAL" | "COMERCIAL" | "INTERIORES" | "REFORMA" | "URBANISMO" | "OUTRO";
+
 export interface ProjectUpdate {
   id: string;
   message: string;
@@ -11,6 +13,7 @@ export interface Project {
   title: string;
   description: string | null;
   status: ProjectStatus;
+  type: ProjectType | null;
   client: { id: string; name: string };
   budget: number | null;
   startDate: string | null;
@@ -38,5 +41,6 @@ export interface Client {
     id: string;
     title: string;
     status: string;
+    type?: string | null;
   }[];
 }

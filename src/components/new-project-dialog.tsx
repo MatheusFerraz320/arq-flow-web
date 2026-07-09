@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Plus, Loader2, FileText, AlignLeft, CalendarDays, DollarSign } from "lucide-react";
+import { Plus, Loader2, FileText, AlignLeft, CalendarDays, DollarSign, Building2, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -38,6 +38,7 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
   const [budget, setBudget] = useState("");
   const [startDate, setStartDate] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [type, setType] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -59,6 +60,7 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
           title,
           description: description || undefined,
           clientId,
+          type: type || undefined,
           budget: budget ? Number(budget) : undefined,
           startDate: startDate || undefined,
           dueDate: dueDate || undefined,
@@ -69,6 +71,7 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
       setBudget("");
       setStartDate("");
       setDueDate("");
+      setType("");
       setOpen(false);
       toast.success("Projeto criado com sucesso");
       onCreated();
@@ -125,6 +128,27 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
                   className="flex w-full min-w-0 rounded-lg border border-input bg-transparent px-3 py-2.5 pl-11 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 resize-none"
                   rows={3}
                 />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="type" className="text-sm">Tipo (opcional)</Label>
+              <div className="relative">
+                <Building2 className="pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
+                <select
+                  id="type"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  className="flex w-full min-w-0 rounded-lg border border-input bg-transparent px-3 py-2.5 pl-11 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 appearance-none"
+                >
+                  <option value="">Selecione um tipo</option>
+                  <option value="RESIDENCIAL">Residencial</option>
+                  <option value="COMERCIAL">Comercial</option>
+                  <option value="INTERIORES">Interiores</option>
+                  <option value="REFORMA">Reforma</option>
+                  <option value="URBANISMO">Urbanismo</option>
+                  <option value="OUTRO">Outro</option>
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               </div>
             </div>
             <div className="space-y-2">
