@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/navbar";
+import { Sidebar } from "@/components/sidebar";
 import { AuthProvider } from "@/lib/auth-context";
 import type { User } from "@/lib/auth";
 
@@ -61,8 +62,9 @@ export default function DashboardLayout({
     <AuthProvider user={user!} onLogout={handleLogout}>
       <div className="flex min-h-dvh">
         <Navbar />
+        <Sidebar />
 
-        <main className="ml-64 flex-1 bg-gradient-to-b from-background to-muted/30">
+        <main className="ml-64 mt-16 flex-1 bg-gradient-to-b from-background to-muted/30">
           <div className="mx-auto max-w-6xl px-8 py-10">{children}</div>
         </main>
       </div>
