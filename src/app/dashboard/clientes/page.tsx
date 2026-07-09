@@ -150,10 +150,6 @@ export default function ClientsPage() {
           <p className="mt-3 max-w-2xl text-lg text-white/70 animate-fade-in-up" style={{ animationDelay: "300ms" }}>
             Gerencie todos os seus clientes, acompanhe projetos e mantenha o fluxo de trabalho organizado.
           </p>
-          <div className="mt-6 flex items-center gap-3 animate-fade-in-up" style={{ animationDelay: "400ms" }}>
-            <span className="text-3xl font-bold text-white">{animatedTotal}</span>
-            <span className="text-base text-white/60">clientes cadastrados</span>
-          </div>
         </div>
       </div>
 

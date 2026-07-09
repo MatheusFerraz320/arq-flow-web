@@ -135,14 +135,14 @@ export default function DashboardPage() {
             {user.name}
           </h1>
           <p className="mt-3 max-w-2xl text-lg text-white/70 animate-fade-in-up" style={{ animationDelay: "300ms" }}>
-            Bem-vindo ao ArqFlow · {clients.length} {clients.length === 1 ? "cliente" : "clientes"} e {totalProjects} {totalProjects === 1 ? "projeto" : "projetos"}
+            Bem-vindo ao ArchitectFlow
           </p>
         </div>
       </div>
 
       {/* Stats */}
       <div className="animate-stagger grid gap-6 sm:grid-cols-2">
-        <div className="group relative overflow-hidden rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20 sm:p-8">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20 sm:p-8">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-accent to-indigo-400" />
           <div className="flex items-center gap-3 mb-5">
             <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
@@ -150,7 +150,7 @@ export default function DashboardPage() {
             </div>
             <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Clientes</span>
           </div>
-          <p className="text-6xl font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
+          <p className="text-6xl font-bold tracking-tight text-transparent bg-gradient-to-r from-foreground to-accent bg-clip-text transition-colors duration-200 group-hover:from-accent group-hover:to-indigo-400">
             {animatedClients}
           </p>
           <p className="mt-2 text-base text-muted-foreground">clientes cadastrados</p>
@@ -159,12 +159,12 @@ export default function DashboardPage() {
               {clientsWithProjects} {clientsWithProjects === 1 ? "com projeto ativo" : "com projetos ativos"}
             </p>
             <span className="flex items-center gap-1.5 text-sm font-medium text-success">
-              <span className="size-2 rounded-full bg-success" />
+              <span className="size-2 rounded-full bg-success animate-pulse-soft" />
               +5 este mês
             </span>
           </div>
         </div>
-        <div className="group relative overflow-hidden rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20 sm:p-8">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20 sm:p-8">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-accent to-indigo-400" />
           <div className="flex items-center gap-3 mb-5">
             <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
@@ -172,7 +172,7 @@ export default function DashboardPage() {
             </div>
             <span className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Projetos</span>
           </div>
-          <p className="text-6xl font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-accent">
+          <p className="text-6xl font-bold tracking-tight text-transparent bg-gradient-to-r from-foreground to-accent bg-clip-text transition-colors duration-200 group-hover:from-accent group-hover:to-indigo-400">
             {animatedProjects}
           </p>
           <p className="mt-2 text-base text-muted-foreground">projetos registrados</p>
@@ -195,9 +195,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="animate-fade-in rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04]">
+      <div className="animate-fade-in rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06]">
         <div className="flex items-center gap-3 mb-5">
-          <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
             <BarChart3 className="size-5" />
           </div>
           <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Ações rápidas</h3>
@@ -232,10 +232,10 @@ export default function DashboardPage() {
       </div>
 
       {/* Kanban Pipeline */}
-      <div className="animate-fade-in rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04]">
+      <div className="animate-fade-in rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-black/[0.06]">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
+            <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
               <FolderKanban className="size-5" />
             </div>
             <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Projetos por etapa</h3>
@@ -292,9 +292,9 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="animate-fade-in rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04]">
+      <div className="animate-fade-in rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-black/[0.06]">
         <div className="flex items-center gap-3 mb-6">
-          <div className="flex size-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
             <Clock className="size-5" />
           </div>
           <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Atividade recente</h3>

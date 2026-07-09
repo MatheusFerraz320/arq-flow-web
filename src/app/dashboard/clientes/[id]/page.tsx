@@ -144,7 +144,7 @@ export default function ClientPage() {
           <div className="animate-stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {client.projects.map((project) => (
               <Link key={project.id} href={`/dashboard/projetos/${project.id}`}>
-                <div className="flex h-full cursor-pointer flex-col gap-4 rounded-xl bg-card p-6 text-base text-card-foreground border border-border/60 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20">
+                <div className="flex h-full cursor-pointer flex-col gap-4 rounded-xl bg-gradient-to-br from-card to-muted/20 p-7 text-base text-card-foreground border border-border/60 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20">
                   <div className="flex h-full flex-col justify-between gap-3">
                     <div>
                       <h3 className="truncate font-semibold text-lg">{project.title}</h3>

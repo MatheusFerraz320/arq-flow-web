@@ -91,10 +91,10 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
       {/* Data Row: Status · Type · Budget · Deadline */}
       <div className="animate-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Status Card */}
-        <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
-          <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-accent to-indigo-400" />
+        <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+          <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-accent to-indigo-400 rounded-r-sm" />
           <div className="flex items-center gap-2 mb-3">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
+            <div className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
               <Info className="size-4" />
             </div>
             <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Status</span>

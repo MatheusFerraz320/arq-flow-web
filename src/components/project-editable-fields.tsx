@@ -76,11 +76,11 @@ export function BudgetCard({
   }
 
   return (
-    <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
-      <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-accent to-indigo-400" />
+    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+      <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-accent to-indigo-400 rounded-r-sm" />
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
             <DollarSign className="size-4" />
           </div>
           <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Orçamento</span>
@@ -108,7 +108,7 @@ export function BudgetCard({
                 onChange={(e) => setEditBudget(e.target.value)}
                 onKeyDown={handleKeyDown}
                 onBlur={save}
-                className="h-9 w-full max-w-[160px] text-base"
+                className="h-9 w-full max-w-[180px] text-base"
                 disabled={saving}
               />
               {saving && <Loader2 className="size-4 animate-spin shrink-0 text-muted-foreground" />}
@@ -121,7 +121,7 @@ export function BudgetCard({
         ) : (
           <>
             {budget ? (
-              <p className="text-xl font-bold tracking-tight text-foreground">
+              <p className="text-2xl font-bold tracking-tight text-foreground">
                 {new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(budget)}
               </p>
             ) : (
@@ -129,7 +129,7 @@ export function BudgetCard({
                 className="group flex cursor-pointer items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => { setEditBudget(""); setEditing(true); }}
               >
-                <div className="flex size-8 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
+                <div className="flex size-9 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
                   <Plus className="size-4" />
                 </div>
                 <span className="text-sm font-medium">Definir</span>
@@ -200,11 +200,11 @@ export function DeadlineCard({
   const daysRemaining = dueDate ? calcDaysRemaining(dueDate) : null;
 
   return (
-    <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-success/20">
-      <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-success to-success/60" />
+    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-success/20">
+      <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-success to-success/60 rounded-r-sm" />
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-success/20 to-success/5 text-success ring-1 ring-success/10">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-success/20 to-success/5 text-success ring-1 ring-success/10">
             <CalendarDays className="size-4" />
           </div>
           <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Prazo</span>
@@ -229,7 +229,7 @@ export function DeadlineCard({
                 value={editStartDate}
                 onChange={(e) => setEditStartDate(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="h-9 w-[140px] text-sm"
+                className="h-9 w-[150px] text-sm"
                 disabled={saving}
               />
               <span className="text-sm text-muted-foreground">→</span>
@@ -239,7 +239,7 @@ export function DeadlineCard({
                 onChange={(e) => setEditDueDate(e.target.value)}
                 onBlur={save}
                 onKeyDown={handleKeyDown}
-                className="h-9 w-[140px] text-sm"
+                className="h-9 w-[150px] text-sm"
                 disabled={saving}
               />
               {saving && <Loader2 className="size-4 animate-spin shrink-0 text-muted-foreground" />}
@@ -253,12 +253,12 @@ export function DeadlineCard({
           <>
             {startDate && dueDate ? (
               <div>
-                <p className="text-base font-semibold text-foreground">
+                <p className="text-lg font-semibold text-foreground">
                   {formatDate(startDate)} <span className="text-muted-foreground/40">→</span> {formatDate(dueDate)}
                 </p>
                 {daysRemaining !== null && (
                   <span className={cn(
-                    "mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium",
+                    "mt-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium",
                     daysRemaining > 30 ? "bg-success/10 text-success" :
                     daysRemaining > 7 ? "bg-warning/10 text-warning" :
                     "bg-destructive/10 text-destructive"
@@ -282,7 +282,7 @@ export function DeadlineCard({
                 className="group flex cursor-pointer items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => { setEditStartDate(""); setEditDueDate(""); setEditing(true); }}
               >
-                <div className="flex size-8 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
+                <div className="flex size-9 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
                   <Plus className="size-4" />
                 </div>
                 <span className="text-sm font-medium">Definir</span>
@@ -358,11 +358,11 @@ export function TypeCard({
   const TypeIcon = config?.icon ?? Building2;
 
   return (
-    <div className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
-      <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-accent to-indigo-400" />
+    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+      <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-accent to-indigo-400 rounded-r-sm" />
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
             <Building2 className="size-4" />
           </div>
           <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tipo</span>
@@ -410,8 +410,8 @@ export function TypeCard({
           <>
             {type && config ? (
               <div className="flex items-center gap-2">
-                <TypeIcon className="size-5 text-accent" />
-                <span className="text-xl font-bold tracking-tight text-foreground">
+                <TypeIcon className="size-6 text-accent" />
+                <span className="text-2xl font-bold tracking-tight text-foreground">
                   {config.label}
                 </span>
               </div>
@@ -420,7 +420,7 @@ export function TypeCard({
                 className="group flex cursor-pointer items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => { setEditType(""); setEditing(true); }}
               >
-                <div className="flex size-8 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
+                <div className="flex size-9 items-center justify-center rounded-lg border border-dashed border-border group-hover:border-accent/50">
                   <Plus className="size-4" />
                 </div>
                 <span className="text-sm font-medium">Definir</span>

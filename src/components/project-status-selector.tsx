@@ -65,7 +65,7 @@ export function ProjectStatusSelector({
             onClick={() => handleChange(item.value)}
             disabled={updating}
             className={cn(
-              "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200",
+              "inline-flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-200",
               active
                 ? `${item.bg} ${item.color} border-transparent ring-1 ${item.ring} shadow-sm`
                 : "border-border bg-transparent text-muted-foreground hover:border-muted-foreground/30 hover:text-foreground",
