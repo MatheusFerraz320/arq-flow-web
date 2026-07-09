@@ -17,6 +17,7 @@ export default function DashboardLayout({
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [checking, setChecking] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
     async function check() {
@@ -61,10 +62,10 @@ export default function DashboardLayout({
   return (
     <AuthProvider user={user!} onLogout={handleLogout}>
       <div className="flex min-h-dvh">
-        <Navbar />
-        <Sidebar />
+        <Navbar sidebarOpen={sidebarOpen} onToggleSidebar={() => setSidebarOpen((v) => !v)} />
+        <Sidebar sidebarOpen={sidebarOpen} onToggle={() => setSidebarOpen((v) => !v)} />
 
-        <main className="ml-64 mt-16 flex-1 bg-gradient-to-b from-background to-muted/30">
+        <main className={`mt-16 flex-1 bg-gradient-to-b from-background to-muted/30 transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-16"}`}>
           <div className="mx-auto max-w-6xl px-8 py-10">{children}</div>
         </main>
       </div>

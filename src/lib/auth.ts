@@ -5,6 +5,7 @@ export interface User {
   name: string;
   email: string;
   role: "ARCHITECT" | "CLIENT";
+  photo?: string | null;
 }
 
 let currentUser: User | null = null;
