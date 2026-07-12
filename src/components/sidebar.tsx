@@ -4,14 +4,10 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   LogOut,
-  LayoutDashboard,
-  Users,
-  FolderKanban,
   User,
   Settings,
   HelpCircle,
   ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import { cn } from "@/lib/utils";
@@ -21,13 +17,10 @@ import { toast } from "sonner";
 const AVATAR_BG = ["bg-brand/10 text-brand", "bg-accent/10 text-accent", "bg-muted text-muted-foreground"];
 
 const REAL_NAV = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/dashboard/clientes", label: "Clientes", icon: Users },
-  { href: "/dashboard/projetos", label: "Projetos", icon: FolderKanban },
+  { href: "/dashboard/perfil", label: "Perfil", icon: User },
 ];
 
 const MOCK_NAV = [
-  { label: "Perfil", icon: User },
   { label: "Configurações", icon: Settings },
   { label: "Ajuda", icon: HelpCircle },
 ];

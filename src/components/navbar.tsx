@@ -3,9 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { LayoutDashboard, Users, FolderKanban, PanelLeftClose, PanelLeft } from "lucide-react";
-import { useAuth } from "@/lib/auth-context";
 import { cn } from "@/lib/utils";
-import { getInitials, bgForName } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -13,11 +11,8 @@ const NAV_ITEMS = [
   { href: "/dashboard/projetos", label: "Projetos", icon: FolderKanban },
 ];
 
-const AVATAR_BG = ["bg-brand/10 text-brand", "bg-accent/10 text-accent", "bg-muted text-muted-foreground"];
-
 export function Navbar({ sidebarOpen, onToggleSidebar }: { sidebarOpen: boolean; onToggleSidebar: () => void }) {
   const pathname = usePathname();
-  const { user } = useAuth();
 
   function isActive(href: string) {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -65,21 +60,6 @@ export function Navbar({ sidebarOpen, onToggleSidebar }: { sidebarOpen: boolean;
           );
         })}
       </nav>
-
-      <div className="flex items-center gap-3 px-6">
-        <div className="flex items-center gap-3 rounded-lg px-3 py-1.5">
-          {user.photo ? (
-            <img src={user.photo} alt={user.name} className="size-8 rounded-full object-cover ring-2 ring-border" />
-          ) : (
-            <div className={cn("flex size-8 items-center justify-center rounded-full text-xs font-semibold", AVATAR_BG[bgForName(user.name)])}>
-              {getInitials(user.name)}
-            </div>
-          )}
-          <span className="hidden text-sm font-medium text-card-foreground sm:block">
-            {user.name.split(" ")[0]}
-          </span>
-        </div>
-      </div>
     </header>
   );
 }
