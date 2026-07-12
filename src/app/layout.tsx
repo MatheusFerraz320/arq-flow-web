@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/lib/theme-context";
 
 const fontSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -19,6 +20,8 @@ export const metadata: Metadata = {
   description: "Portal de Aprovação e Acompanhamento de Projetos",
 };
 
+const themeScript = `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,10 +30,15 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
+      suppressHydrationWarning
       className={`${fontSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}
-          <Toaster richColors position="top-right" />
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-full">
+        <ThemeProvider>{children}</ThemeProvider>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );

@@ -60,7 +60,7 @@ export default function FinanceiroPage() {
 
       {/* Resumo cards */}
       <div className="animate-stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-success/5 to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-success/20">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-success/5 to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-success/20">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-success to-emerald-400" />
           <div className="flex items-center gap-3 mb-4">
             <div className="flex size-10 items-center justify-center rounded-xl bg-success/10 text-success ring-1 ring-success/10">
@@ -75,7 +75,7 @@ export default function FinanceiroPage() {
           </div>
         </div>
 
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-warning/5 to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-warning/20">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-warning/5 to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-warning/20">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-warning to-amber-400" />
           <div className="flex items-center gap-3 mb-4">
             <div className="flex size-10 items-center justify-center rounded-xl bg-warning/10 text-warning ring-1 ring-warning/10">
@@ -90,7 +90,7 @@ export default function FinanceiroPage() {
           </div>
         </div>
 
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-destructive/5 to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-destructive/20">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-destructive/5 to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-destructive/20">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-destructive to-red-400" />
           <div className="flex items-center gap-3 mb-4">
             <div className="flex size-10 items-center justify-center rounded-xl bg-destructive/10 text-destructive ring-1 ring-destructive/10">
@@ -105,7 +105,7 @@ export default function FinanceiroPage() {
           </div>
         </div>
 
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-accent/5 to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-accent/5 to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-accent to-indigo-400" />
           <div className="flex items-center gap-3 mb-4">
             <div className="flex size-10 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-accent/10">
@@ -124,7 +124,7 @@ export default function FinanceiroPage() {
       {/* 3 colunas */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Receitas */}
-        <div className="animate-fade-in-up rounded-xl border bg-gradient-to-br from-success/[0.03] to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:shadow-xl hover:ring-1 hover:ring-success/10" style={{ animationDelay: "100ms" }}>
+        <div className="animate-fade-in-up rounded-xl border bg-gradient-to-br from-success/[0.03] to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:shadow-xl hover:ring-1 hover:ring-success/10" style={{ animationDelay: "100ms" }}>
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-3">
               <div className="flex size-9 items-center justify-center rounded-lg bg-success/10 text-success">
@@ -153,7 +153,7 @@ export default function FinanceiroPage() {
         </div>
 
         {/* Contas a receber */}
-        <div className="animate-fade-in-up rounded-xl border bg-gradient-to-br from-warning/[0.03] to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:shadow-xl hover:ring-1 hover:ring-warning/10" style={{ animationDelay: "200ms" }}>
+        <div className="animate-fade-in-up rounded-xl border bg-gradient-to-br from-warning/[0.03] to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:shadow-xl hover:ring-1 hover:ring-warning/10" style={{ animationDelay: "200ms" }}>
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-3">
               <div className="flex size-9 items-center justify-center rounded-lg bg-warning/10 text-warning">
@@ -195,7 +195,7 @@ export default function FinanceiroPage() {
         </div>
 
         {/* Despesas */}
-        <div className="animate-fade-in-up rounded-xl border bg-gradient-to-br from-destructive/[0.03] to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:shadow-xl hover:ring-1 hover:ring-destructive/10" style={{ animationDelay: "300ms" }}>
+        <div className="animate-fade-in-up rounded-xl border bg-gradient-to-br from-destructive/[0.03] to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:shadow-xl hover:ring-1 hover:ring-destructive/10" style={{ animationDelay: "300ms" }}>
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-3">
               <div className="flex size-9 items-center justify-center rounded-lg bg-destructive/10 text-destructive">

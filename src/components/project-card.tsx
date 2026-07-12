@@ -32,7 +32,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <div
-      className="group relative cursor-pointer overflow-hidden rounded-xl bg-gradient-to-br from-card to-muted/20 p-6 text-base text-card-foreground border border-border/60 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20"
+      className="group relative cursor-pointer overflow-hidden rounded-xl bg-gradient-to-br from-card to-muted/20 p-6 text-base text-card-foreground border border-border/60 shadow-lg shadow-foreground/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20"
       onClick={() => router.push(`/dashboard/projetos/${project.id}`)}
     >
       <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-accent to-indigo-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />

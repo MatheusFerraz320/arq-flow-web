@@ -2,7 +2,7 @@ export default function ClientLoading() {
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="h-5 w-32 animate-skeleton rounded" />
-      <div className="rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 sm:p-10 lg:p-12">
+      <div className="rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 p-8 sm:p-10 lg:p-12">
         <div className="flex items-start justify-between gap-6">
           <div className="flex items-center gap-5">
             <div className="size-16 animate-skeleton rounded-2xl" />

@@ -123,7 +123,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(99,102,241,0.1),transparent_50%)]" />
         <div className="relative">
@@ -142,7 +142,7 @@ export default function DashboardPage() {
 
       {/* Stats */}
       <div className="animate-stagger grid gap-6 sm:grid-cols-2">
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20 sm:p-8">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-foreground/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20 sm:p-8">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-accent to-indigo-400" />
           <div className="flex items-center gap-3 mb-5">
             <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
@@ -164,7 +164,7 @@ export default function DashboardPage() {
             </span>
           </div>
         </div>
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20 sm:p-8">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-foreground/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20 sm:p-8">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-accent to-indigo-400" />
           <div className="flex items-center gap-3 mb-5">
             <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
@@ -195,7 +195,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="animate-fade-in rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06]">
+      <div className="animate-fade-in rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-foreground/[0.06]">
         <div className="flex items-center gap-3 mb-5">
           <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
             <BarChart3 className="size-5" />
@@ -232,7 +232,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Kanban Pipeline */}
-      <div className="animate-fade-in rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-black/[0.06]">
+      <div className="animate-fade-in rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-foreground/[0.06]">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">

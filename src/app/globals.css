@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
 @theme {
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
@@ -33,6 +34,33 @@
   --radius-xl: 0.85rem;
 }
 
+.dark {
+  --color-background: #0F0E0D;
+  --color-foreground: #E8E4DE;
+  --color-card: #1A1918;
+  --color-card-foreground: #E8E4DE;
+  --color-popover: #1A1918;
+  --color-popover-foreground: #E8E4DE;
+  --color-muted: #2A2826;
+  --color-muted-foreground: #9A9189;
+  --color-secondary: #2A2826;
+  --color-secondary-foreground: #E8E4DE;
+  --color-brand: #E8E4DE;
+  --color-brand-light: #B8B2AA;
+  --color-brand-soft: oklch(0.85 0 0 / 6%);
+  --color-primary: #E8E4DE;
+  --color-primary-foreground: #0F0E0D;
+  --color-accent: #818CF8;
+  --color-accent-foreground: #0F0E0D;
+  --color-destructive: oklch(0.62 0.18 25);
+  --color-success: oklch(0.65 0.13 140);
+  --color-warning: oklch(0.78 0.14 75);
+  --color-border: #3A3735;
+  --color-input: #3A3735;
+  --color-ring: oklch(0.85 0 0 / 30%);
+  --color-glass: oklch(0.1 0 0 / 80%);
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -50,6 +78,12 @@
       radial-gradient(ellipse 40% 50% at 50% 0%, oklch(0.55 0.12 270 / 2%) 0%, transparent 100%);
     pointer-events: none;
     z-index: -1;
+  }
+  .dark body::before {
+    background:
+      radial-gradient(ellipse 70% 60% at 0% 20%, oklch(0.55 0.12 270 / 6%) 0%, transparent 100%),
+      radial-gradient(ellipse 50% 40% at 100% 80%, oklch(0.55 0.12 270 / 4%) 0%, transparent 100%),
+      radial-gradient(ellipse 40% 50% at 50% 0%, oklch(0.55 0.12 270 / 3%) 0%, transparent 100%);
   }
 }
 

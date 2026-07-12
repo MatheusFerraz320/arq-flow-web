@@ -133,7 +133,7 @@ export default function ClientsPage() {
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(99,102,241,0.1),transparent_50%)]" />
         <div className="relative">
@@ -155,17 +155,17 @@ export default function ClientsPage() {
 
       {/* Stats */}
       <div className="animate-stagger grid gap-5 sm:grid-cols-3">
-        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04]">
+        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-foreground/[0.04]">
           <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Total</p>
           <p className="mt-2 text-4xl font-bold tracking-tight text-foreground">{animatedTotal}</p>
           <p className="text-sm text-muted-foreground mt-1">clientes cadastrados</p>
         </div>
-        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04]">
+        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-foreground/[0.04]">
           <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Com projetos</p>
           <p className="mt-2 text-4xl font-bold tracking-tight text-success">{animatedWithProjects}</p>
           <p className="text-sm text-muted-foreground mt-1">clientes ativos</p>
         </div>
-        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-black/[0.04]">
+        <div className="rounded-xl border bg-card p-6 shadow-lg shadow-foreground/[0.04]">
           <p className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Sem projetos</p>
           <p className="mt-2 text-4xl font-bold tracking-tight text-muted-foreground">{clients.length - clientsWithProjects}</p>
           <p className="text-sm text-muted-foreground mt-1">clientes inativos</p>

@@ -5,7 +5,7 @@ export default function Loading() {
       <div className="h-5 w-36 animate-skeleton rounded" />
 
       {/* Hero skeleton */}
-      <div className="rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 sm:p-10 lg:p-12">
+      <div className="rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 p-8 sm:p-10 lg:p-12">
         <div className="flex items-start justify-between gap-6">
           <div className="space-y-3 flex-1">
             <div className="h-9 w-72 animate-skeleton rounded" />
@@ -16,7 +16,7 @@ export default function Loading() {
       </div>
 
       {/* Client Sub-Hero skeleton */}
-      <div className="rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04] sm:p-8">
+      <div className="rounded-xl border bg-card p-7 shadow-lg shadow-foreground/[0.04] sm:p-8">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-5">
             <div className="size-14 animate-skeleton rounded-2xl" />
@@ -35,7 +35,7 @@ export default function Loading() {
         {Array.from({ length: 3 }).map((_, i) => (
           <div
             key={i}
-            className="rounded-xl border bg-card p-5 shadow-lg shadow-black/[0.04] animate-fade-in-up"
+            className="rounded-xl border bg-card p-5 shadow-lg shadow-foreground/[0.04] animate-fade-in-up"
             style={{ animationDelay: `${i * 80}ms` }}
           >
             <div className="flex items-center gap-2 mb-4">
@@ -70,7 +70,7 @@ export default function Loading() {
               style={{ animationDelay: `${i * 80}ms` }}
             >
               <div className="size-10 shrink-0 mt-1 animate-skeleton rounded-full" />
-              <div className="flex-1 space-y-2 rounded-lg border bg-card p-5 shadow-lg shadow-black/[0.04]">
+              <div className="flex-1 space-y-2 rounded-lg border bg-card p-5 shadow-lg shadow-foreground/[0.04]">
                 <div className="h-4 w-28 animate-skeleton rounded" />
                 <div className="h-5 w-48 animate-skeleton rounded" />
               </div>

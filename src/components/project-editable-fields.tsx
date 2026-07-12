@@ -76,7 +76,7 @@ export function BudgetCard({
   }
 
   return (
-    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-foreground/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
       <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-accent to-indigo-400 rounded-r-sm" />
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
@@ -200,7 +200,7 @@ export function DeadlineCard({
   const daysRemaining = dueDate ? calcDaysRemaining(dueDate) : null;
 
   return (
-    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-success/20">
+    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-foreground/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-success/20">
       <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-success to-success/60 rounded-r-sm" />
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
@@ -358,7 +358,7 @@ export function TypeCard({
   const TypeIcon = config?.icon ?? Building2;
 
   return (
-    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+    <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-foreground/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
       <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-accent to-indigo-400 rounded-r-sm" />
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">

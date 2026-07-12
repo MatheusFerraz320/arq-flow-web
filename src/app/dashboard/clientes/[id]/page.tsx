@@ -94,12 +94,12 @@ export default function ClientPage() {
       </div>
 
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(99,102,241,0.1),transparent_50%)]" />
         <div className="relative flex items-start justify-between gap-6">
           <div className="flex items-center gap-5">
-            <div className={cn("flex size-16 items-center justify-center rounded-2xl text-xl font-bold shadow-lg shadow-black/20 ring-2 ring-white/20", AVATAR_BG[bgForName(client.name)])}>
+            <div className={cn("flex size-16 items-center justify-center rounded-2xl text-xl font-bold shadow-lg shadow-foreground/20 ring-2 ring-white/20", AVATAR_BG[bgForName(client.name)])}>
               {getInitials(client.name)}
             </div>
             <div>
@@ -144,7 +144,7 @@ export default function ClientPage() {
           <div className="animate-stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {client.projects.map((project) => (
               <Link key={project.id} href={`/dashboard/projetos/${project.id}`}>
-                <div className="flex h-full cursor-pointer flex-col gap-4 rounded-xl bg-gradient-to-br from-card to-muted/20 p-7 text-base text-card-foreground border border-border/60 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20">
+                <div className="flex h-full cursor-pointer flex-col gap-4 rounded-xl bg-gradient-to-br from-card to-muted/20 p-7 text-base text-card-foreground border border-border/60 shadow-lg shadow-foreground/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/5 hover:ring-1 hover:ring-accent/20">
                   <div className="flex h-full flex-col justify-between gap-3">
                     <div>
                       <h3 className="truncate font-semibold text-lg">{project.title}</h3>

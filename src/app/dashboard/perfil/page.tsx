@@ -56,7 +56,7 @@ export default function ProfilePage() {
             <div className="h-4 w-64 animate-skeleton rounded-md" />
           </div>
         </div>
-        <div className="flex flex-col items-center gap-6 rounded-xl border bg-card p-8 shadow-lg shadow-black/[0.04]">
+        <div className="flex flex-col items-center gap-6 rounded-xl border bg-card p-8 shadow-lg shadow-foreground/[0.04]">
           <div className="size-32 animate-skeleton rounded-full" />
           <div className="space-y-3 text-center">
             <div className="mx-auto h-7 w-48 animate-skeleton rounded-md" />
@@ -84,7 +84,7 @@ export default function ProfilePage() {
   return (
     <div className="space-y-8 animate-fade-in">
       {/* Hero */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(99,102,241,0.1),transparent_50%)]" />
         <div className="relative">
@@ -106,7 +106,7 @@ export default function ProfilePage() {
 
       {/* Profile Card */}
       {profile && (
-        <div className="flex flex-col items-center gap-8 rounded-xl border bg-card p-8 shadow-lg shadow-black/[0.04] animate-fade-in-up" style={{ animationDelay: "150ms" }}>
+        <div className="flex flex-col items-center gap-8 rounded-xl border bg-card p-8 shadow-lg shadow-foreground/[0.04] animate-fade-in-up" style={{ animationDelay: "150ms" }}>
           {/* Avatar + Camera overlay */}
           <div className="relative group">
             {profile.photo ? (

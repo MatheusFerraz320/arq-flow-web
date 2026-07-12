@@ -37,7 +37,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
       </Link>
 
       {/* Hero Header */}
-      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
+      <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 p-8 ring-1 ring-white/10 sm:p-10 lg:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(99,102,241,0.15),transparent_50%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(99,102,241,0.1),transparent_50%)]" />
         <div className="relative flex items-start justify-between gap-6">
@@ -58,11 +58,11 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
       </div>
 
       {/* Client Sub-Hero */}
-      <div className="relative overflow-hidden rounded-xl border bg-card p-7 shadow-lg shadow-black/[0.04] sm:p-8">
+      <div className="relative overflow-hidden rounded-xl border bg-card p-7 shadow-lg shadow-foreground/[0.04] sm:p-8">
         <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-brand to-brand-light" />
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-5">
-            <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl text-xl font-bold shadow-sm ring-1 ring-black/5 bg-accent/10 text-accent">
+            <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl text-xl font-bold shadow-sm ring-1 ring-foreground/5 bg-accent/10 text-accent">
               {getInitials(project.client.name)}
             </div>
             <div>
@@ -91,7 +91,7 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
       {/* Data Row: Status · Type · Budget · Deadline */}
       <div className="animate-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Status Card */}
-        <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-black/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
+        <div className="relative overflow-hidden rounded-xl border bg-gradient-to-br from-card to-muted/20 p-6 shadow-lg shadow-foreground/[0.06] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-accent/20">
           <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-accent to-indigo-400 rounded-r-sm" />
           <div className="flex items-center gap-2 mb-3">
             <div className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">

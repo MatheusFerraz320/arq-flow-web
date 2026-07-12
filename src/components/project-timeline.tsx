@@ -57,7 +57,7 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="flex gap-2 rounded-xl border bg-card p-4 shadow-lg shadow-black/[0.04] transition-all duration-200 focus-within:ring-2 focus-within:ring-accent/20 focus-within:border-accent/30"
+        className="flex gap-2 rounded-xl border bg-card p-4 shadow-lg shadow-foreground/[0.04] transition-all duration-200 focus-within:ring-2 focus-within:ring-accent/20 focus-within:border-accent/30"
       >
         <textarea
           value={message}
@@ -112,7 +112,7 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
               </div>
 
               {/* Content Card */}
-              <div className="min-w-0 flex-1 rounded-lg border bg-card p-5 shadow-lg shadow-black/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20">
+              <div className="min-w-0 flex-1 rounded-lg border bg-card p-5 shadow-lg shadow-foreground/[0.04] transition-all duration-200 hover:shadow-xl hover:bg-glass hover:backdrop-blur-xs hover:ring-1 hover:ring-accent/20">
                 <p className="text-sm font-medium text-accent">
                   {new Intl.DateTimeFormat("pt-BR", {
                     dateStyle: "medium",

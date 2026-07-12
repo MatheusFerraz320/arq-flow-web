@@ -2,8 +2,9 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, Users, FolderKanban, DollarSign, PanelLeftClose, PanelLeft } from "lucide-react";
+import { LayoutDashboard, Users, FolderKanban, DollarSign, PanelLeftClose, PanelLeft, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/lib/theme-context";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -14,6 +15,7 @@ const NAV_ITEMS = [
 
 export function Navbar({ sidebarOpen, onToggleSidebar }: { sidebarOpen: boolean; onToggleSidebar: () => void }) {
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
 
   function isActive(href: string) {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -61,6 +63,16 @@ export function Navbar({ sidebarOpen, onToggleSidebar }: { sidebarOpen: boolean;
           );
         })}
       </nav>
+
+      <div className="flex items-center gap-2 px-4">
+        <button
+          onClick={toggleTheme}
+          className="flex size-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-card-foreground"
+          title={theme === "dark" ? "Modo claro" : "Modo escuro"}
+        >
+          {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
+        </button>
+      </div>
     </header>
   );
 }

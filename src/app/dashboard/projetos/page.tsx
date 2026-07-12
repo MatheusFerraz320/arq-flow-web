@@ -140,7 +140,7 @@ export default function ProjetosPage() {
 
       {/* Stats */}
       <div className="animate-stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-purple-500/5 to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-purple-500/20">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-purple-500/5 to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-purple-500/20">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-purple-500 to-violet-400" />
           <div className="flex items-center gap-3 mb-3">
             <div className="flex size-10 items-center justify-center rounded-xl bg-purple-500/10 text-purple-600 ring-1 ring-purple-500/10">
@@ -152,7 +152,7 @@ export default function ProjetosPage() {
           <p className="mt-1 text-sm text-muted-foreground">projetos</p>
         </div>
 
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-warning/5 to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-warning/20">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-warning/5 to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-warning/20">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-warning to-amber-400" />
           <div className="flex items-center gap-3 mb-3">
             <div className="flex size-10 items-center justify-center rounded-xl bg-warning/10 text-warning ring-1 ring-warning/10">
@@ -164,7 +164,7 @@ export default function ProjetosPage() {
           <p className="mt-1 text-sm text-muted-foreground">em fase inicial</p>
         </div>
 
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-primary/5 to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-primary/20">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-primary/5 to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-primary/20">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary to-slate-600" />
           <div className="flex items-center gap-3 mb-3">
             <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/10">
@@ -176,7 +176,7 @@ export default function ProjetosPage() {
           <p className="mt-1 text-sm text-muted-foreground">em andamento</p>
         </div>
 
-        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-success/5 to-card p-6 shadow-lg shadow-black/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-success/20">
+        <div className="group relative overflow-hidden rounded-xl border bg-gradient-to-br from-success/5 to-card p-6 shadow-lg shadow-foreground/[0.04] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:ring-1 hover:ring-success/20">
           <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-success to-emerald-400" />
           <div className="flex items-center gap-3 mb-3">
             <div className="flex size-10 items-center justify-center rounded-xl bg-success/10 text-success ring-1 ring-success/10">
