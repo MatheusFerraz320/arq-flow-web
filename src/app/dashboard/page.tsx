@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Users, FolderKanban, ClipboardList, PencilRuler, Search, CheckCircle2, Plus, Clock, BarChart3 } from "lucide-react";
+import { Users, FolderKanban, ClipboardList, PencilRuler, Search, CheckCircle2, Plus, BarChart3 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 import type { Client } from "@/lib/types";
 
@@ -291,41 +291,6 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* Recent Activity */}
-      <div className="animate-fade-in rounded-xl border bg-gradient-to-br from-card to-muted/20 p-7 shadow-lg shadow-black/[0.06]">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-accent/5 text-accent ring-1 ring-accent/10">
-            <Clock className="size-5" />
-          </div>
-          <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">Atividade recente</h3>
-        </div>
-        <div className="space-y-0">
-          {[
-            { name: "Ana Silva", project: "Residencial Carvalho", action: "atualizou o projeto", time: "há 2 horas" },
-            { name: "Carlos Mendes", project: "Comercial Centro", action: "adicionou fotos", time: "há 5 horas" },
-            { name: "Juliana Costa", project: "Apto 101", action: "enviou para revisão", time: "há 1 dia" },
-          ].map((item, i) => (
-            <div key={i} className="relative flex gap-4 pb-6 last:pb-0">
-              {i < 2 && (
-                <div className="absolute left-[13px] top-6 bottom-0 w-px bg-border" />
-              )}
-              <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-muted ring-2 ring-background">
-                <span className="size-2 rounded-full bg-accent/40" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <p className="text-base text-foreground truncate">
-                    <span className="font-semibold">{item.name}</span>{" "}
-                    <span className="text-muted-foreground">{item.action}</span>
-                  </p>
-                  <span className="shrink-0 rounded-md bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">Em breve</span>
-                </div>
-                <p className="text-sm text-muted-foreground/60 mt-0.5">{item.project} · {item.time}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

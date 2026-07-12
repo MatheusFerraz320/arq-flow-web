@@ -2,13 +2,14 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { LayoutDashboard, Users, FolderKanban, PanelLeftClose, PanelLeft } from "lucide-react";
+import { LayoutDashboard, Users, FolderKanban, DollarSign, PanelLeftClose, PanelLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/clientes", label: "Clientes", icon: Users },
   { href: "/dashboard/projetos", label: "Projetos", icon: FolderKanban },
+  { href: "/dashboard/financeiro", label: "Financeiro", icon: DollarSign },
 ];
 
 export function Navbar({ sidebarOpen, onToggleSidebar }: { sidebarOpen: boolean; onToggleSidebar: () => void }) {

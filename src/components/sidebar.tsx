@@ -5,6 +5,8 @@ import Link from "next/link";
 import {
   LogOut,
   User,
+  ClipboardList,
+  FileText,
   Settings,
   HelpCircle,
   ChevronLeft,
@@ -21,6 +23,8 @@ const REAL_NAV = [
 ];
 
 const MOCK_NAV = [
+  { label: "Briefings", icon: ClipboardList },
+  { label: "Templates", icon: FileText },
   { label: "Configurações", icon: Settings },
   { label: "Ajuda", icon: HelpCircle },
 ];
