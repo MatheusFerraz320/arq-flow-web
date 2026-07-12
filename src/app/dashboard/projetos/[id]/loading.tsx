@@ -5,7 +5,7 @@ export default function Loading() {
       <div className="h-5 w-36 animate-skeleton rounded" />
 
       {/* Hero skeleton */}
-      <div className="rounded-xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 p-8 sm:p-10 lg:p-12">
+      <div className="rounded-xl bg-gradient-to-br from-brand via-brand/95 to-brand-light dark:from-slate-900 dark:via-slate-800 dark:to-slate-700 p-8 sm:p-10 lg:p-12">
         <div className="flex items-start justify-between gap-6">
           <div className="space-y-3 flex-1">
             <div className="h-9 w-72 animate-skeleton rounded" />
