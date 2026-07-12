@@ -29,11 +29,11 @@ export default async function ProjectPage(props: PageProps<"/dashboard/projetos/
     <div className="animate-fade-in space-y-8">
       {/* Back link */}
       <Link
-        href={`/dashboard/clientes/${project.client.id}`}
+        href="/dashboard/projetos"
         className="inline-flex items-center gap-2 text-base text-muted-foreground transition-all duration-200 hover:text-foreground hover:gap-3"
       >
         <ArrowLeft className="size-5" />
-        Voltar para {project.client.name}
+        Voltar para Projetos
       </Link>
 
       {/* Hero Header */}
