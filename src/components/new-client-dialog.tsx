@@ -15,19 +15,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { api } from "@/lib/api";
 
 interface NewClientDialogProps {
   onCreated: () => void;
-}
-
-async function fetchWithAuth(path: string, options?: RequestInit) {
-  const res = await fetch(`/api${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    ...options,
-  });
-  if (!res.ok) throw new Error("Erro na requisição");
-  return res.json();
 }
 
 export function NewClientDialog({ onCreated }: NewClientDialogProps) {
@@ -50,10 +41,7 @@ export function NewClientDialog({ onCreated }: NewClientDialogProps) {
     setLoading(true);
 
     try {
-      await fetchWithAuth("/clients", {
-        method: "POST",
-        body: JSON.stringify({ name, email, phone: phone || undefined }),
-      });
+      await api.post("/clients", { name, email, phone: phone || undefined });
       setName("");
       setEmail("");
       setPhone("");

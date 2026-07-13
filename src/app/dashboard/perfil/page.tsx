@@ -16,7 +16,7 @@ const AVATAR_BG = ["bg-brand/10 text-brand", "bg-accent/10 text-accent", "bg-mut
 type ProfileUser = Pick<UserType, "id" | "name" | "email" | "photo" | "role">;
 
 async function fetchProfile(): Promise<ProfileUser> {
-  const res = await fetch(`${API_URL}/users/me`, {
+  const res = await fetch("/api/users/me", {
     credentials: "include",
   });
   if (!res.ok) throw new Error("Erro ao carregar perfil");
@@ -68,7 +68,7 @@ export default function ProfilePage() {
     formData.append("file", file);
 
     try {
-      const res = await fetch(`${API_URL}/users/me/photo`, {
+      const res = await fetch("/api/users/me/photo", {
         method: "POST",
         credentials: "include",
         body: formData,

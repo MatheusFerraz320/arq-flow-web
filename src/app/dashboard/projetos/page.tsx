@@ -5,16 +5,8 @@ import { FolderKanban, Search as SearchIcon, ClipboardList, PencilRuler, CheckCi
 import { ProjectCard } from "@/components/project-card";
 import { Input } from "@/components/ui/input";
 import { PageLoader } from "@/components/ui/page-loader";
+import { api } from "@/lib/api";
 import type { Project } from "@/lib/types";
-
-async function fetchWithAuth<T>(path: string): Promise<T> {
-  const res = await fetch(`/api${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (!res.ok) throw new Error("Erro na requisição");
-  return res.json();
-}
 
 function useCountUp(end: number, duration = 1200): number {
   const [count, setCount] = useState(0);
@@ -47,7 +39,7 @@ export default function ProjetosPage() {
 
     async function load() {
       try {
-        const data = await fetchWithAuth<Project[]>("/projects");
+        const data = await api.get<Project[]>("/projects");
         if (!cancelled) setProjects(data);
       } catch (err: unknown) {
         if (!cancelled) {

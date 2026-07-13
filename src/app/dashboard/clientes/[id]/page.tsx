@@ -8,18 +8,10 @@ import { StatusBadge } from "@/components/ui/badge";
 import { NewProjectDialog } from "@/components/new-project-dialog";
 import { cn } from "@/lib/utils";
 import { getInitials, bgForName } from "@/lib/utils";
+import { api } from "@/lib/api";
 import type { Client } from "@/lib/types";
 
 const AVATAR_BG = ["bg-brand/10 text-brand", "bg-accent/10 text-accent", "bg-muted text-muted-foreground"];
-
-async function fetchWithAuth<T>(path: string): Promise<T> {
-  const res = await fetch(`/api${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (!res.ok) throw new Error("Erro na requisição");
-  return res.json();
-}
 
 export default function ClientPage() {
   const params = useParams();
@@ -31,7 +23,7 @@ export default function ClientPage() {
 
   async function load() {
     try {
-      const data = await fetchWithAuth<Client>(`/clients/${id}`);
+      const data = await api.get<Client>(`/clients/${id}`);
       setClient(data);
     } catch (err: unknown) {
       const message =

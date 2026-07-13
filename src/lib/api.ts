@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const BASE_URL = "/api";
 
 class ApiError extends Error {
   status: number;
@@ -26,19 +26,19 @@ const defaultOptions: RequestInit = {
 };
 
 export const api = {
-  get: (path: string) =>
+  get: <T = unknown>(path: string): Promise<T> =>
     fetch(`${BASE_URL}${path}`, { ...defaultOptions, method: "GET" }).then(
       handleResponse,
     ),
 
-  post: (path: string, body?: unknown) =>
+  post: <T = unknown>(path: string, body?: unknown): Promise<T> =>
     fetch(`${BASE_URL}${path}`, {
       ...defaultOptions,
       method: "POST",
       body: body ? JSON.stringify(body) : undefined,
     }).then(handleResponse),
 
-  patch: (path: string, body: unknown) =>
+  patch: <T = unknown>(path: string, body: unknown): Promise<T> =>
     fetch(`${BASE_URL}${path}`, {
       ...defaultOptions,
       method: "PATCH",

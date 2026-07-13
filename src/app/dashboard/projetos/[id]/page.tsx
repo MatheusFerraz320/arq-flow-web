@@ -15,10 +15,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 export default async function ProjectPage(props: PageProps<"/dashboard/projetos/[id]">) {
   const { id } = await props.params;
   const cookieStore = await cookies();
+  const token = cookieStore.get("arqflow_token")?.value;
 
-  const res = await fetch(`${API_URL}/projects/${id}`, {
-    headers: { Cookie: cookieStore.toString() },
-  });
+  const headers: Record<string, string> = {};
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  const res = await fetch(`${API_URL}/projects/${id}`, { headers });
 
   if (res.status === 404) notFound();
   if (!res.ok) throw new Error("Erro ao carregar projeto");

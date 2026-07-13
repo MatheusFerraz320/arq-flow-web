@@ -8,8 +8,6 @@ import { PageLoader } from "@/components/ui/page-loader";
 import { AuthProvider } from "@/lib/auth-context";
 import type { User } from "@/lib/auth";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
-
 export default function DashboardLayout({
   children,
 }: {
@@ -23,7 +21,7 @@ export default function DashboardLayout({
   useEffect(() => {
     async function check() {
       try {
-        const res = await fetch(`${API_URL}/auth/me`, {
+        const res = await fetch("/api/auth/me", {
           credentials: "include",
         });
         if (!res.ok) throw new Error("Não autenticado");
@@ -40,7 +38,7 @@ export default function DashboardLayout({
   }, []);
 
   async function handleLogout() {
-    await fetch(`${API_URL}/auth/logout`, {
+    await fetch("/api/auth/logout", {
       method: "POST",
       credentials: "include",
     });

@@ -15,20 +15,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { api } from "@/lib/api";
 
 interface NewProjectDialogProps {
   clientId: string;
   onCreated: () => void;
-}
-
-async function fetchWithAuth(path: string, options?: RequestInit) {
-  const res = await fetch(`/api${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    ...options,
-  });
-  if (!res.ok) throw new Error("Erro na requisição");
-  return res.json();
 }
 
 export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps) {
@@ -54,17 +45,14 @@ export function NewProjectDialog({ clientId, onCreated }: NewProjectDialogProps)
     setLoading(true);
 
     try {
-      await fetchWithAuth("/projects", {
-        method: "POST",
-        body: JSON.stringify({
-          title,
-          description: description || undefined,
-          clientId,
-          type: type || undefined,
-          budget: budget ? Number(budget) : undefined,
-          startDate: startDate || undefined,
-          dueDate: dueDate || undefined,
-        }),
+      await api.post("/projects", {
+        title,
+        description: description || undefined,
+        clientId,
+        type: type || undefined,
+        budget: budget ? Number(budget) : undefined,
+        startDate: startDate || undefined,
+        dueDate: dueDate || undefined,
       });
       setTitle("");
       setDescription("");

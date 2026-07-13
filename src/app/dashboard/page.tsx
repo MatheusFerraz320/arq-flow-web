@@ -5,16 +5,8 @@ import Link from "next/link";
 import { Users, FolderKanban, ClipboardList, PencilRuler, Search, CheckCircle2, Plus, BarChart3 } from "lucide-react";
 import { PageLoader } from "@/components/ui/page-loader";
 import { useAuth } from "@/lib/auth-context";
+import { api } from "@/lib/api";
 import type { Client } from "@/lib/types";
-
-async function fetchWithAuth<T>(path: string): Promise<T> {
-  const res = await fetch(`/api${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (!res.ok) throw new Error("Erro na requisição");
-  return res.json();
-}
 
 const PIPELINE = [
   { status: "BRIEFING", label: "Briefing", icon: ClipboardList, color: "text-warning", bg: "bg-warning/10", bar: "bg-warning" },
@@ -54,7 +46,7 @@ export default function DashboardPage() {
 
     async function load() {
       try {
-        const data = await fetchWithAuth<Client[]>("/clients");
+        const data = await api.get<Client[]>("/clients");
         if (!cancelled) setClients(data);
       } catch (err: unknown) {
         if (!cancelled) {

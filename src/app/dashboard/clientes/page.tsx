@@ -6,16 +6,8 @@ import { ClientCard } from "@/components/client-card";
 import { NewClientDialog } from "@/components/new-client-dialog";
 import { Input } from "@/components/ui/input";
 import { PageLoader } from "@/components/ui/page-loader";
+import { api } from "@/lib/api";
 import type { Client } from "@/lib/types";
-
-async function fetchWithAuth<T>(path: string): Promise<T> {
-  const res = await fetch(`/api${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (!res.ok) throw new Error("Erro na requisição");
-  return res.json();
-}
 
 function useCountUp(end: number, duration = 1000): number {
   const [count, setCount] = useState(0);
@@ -48,7 +40,7 @@ export default function ClientsPage() {
 
     async function load() {
       try {
-        const data = await fetchWithAuth<Client[]>("/clients");
+        const data = await api.get<Client[]>("/clients");
         if (!cancelled) setClients(data);
       } catch (err: unknown) {
         if (!cancelled) {
@@ -71,7 +63,7 @@ export default function ClientsPage() {
     setLoading(true);
     setError("");
 
-    fetchWithAuth<Client[]>("/clients")
+    api.get<Client[]>("/clients")
       .then(setClients)
       .catch((err: unknown) => {
         const message =

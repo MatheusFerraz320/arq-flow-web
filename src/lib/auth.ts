@@ -19,8 +19,8 @@ export function setUser(user: User | null): void {
 }
 
 export async function login(email: string, password: string): Promise<User> {
-  const data = await api.post("/auth/login", { email, password });
-  const user: User = data.user ?? data;
+  const data = await api.post<{ user: User }>("/auth/login", { email, password });
+  const user: User = data.user;
   currentUser = user;
   return user;
 }
@@ -32,7 +32,7 @@ export async function logout(): Promise<void> {
 
 export async function fetchCurrentUser(): Promise<User | null> {
   try {
-    const user = await api.get("/auth/me");
+    const user = await api.get<User>("/auth/me");
     currentUser = user;
     return user;
   } catch {
