@@ -1,6 +1,5 @@
 import { ArrowLeft, User, Info, Building2, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { StatusBadge } from "@/components/ui/badge";
 import { ProjectStatusSelector } from "@/components/project-status-selector";
@@ -8,19 +7,13 @@ import { BudgetCard, DeadlineCard, TypeCard } from "@/components/project-editabl
 import { ProjectPhotos } from "@/components/project-photos";
 import { ProjectTimeline } from "@/components/project-timeline";
 import { getInitials } from "@/lib/utils";
+import { serverFetch } from "@/lib/server/api";
 import type { Project } from "@/lib/types";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 export default async function ProjectPage(props: PageProps<"/dashboard/projetos/[id]">) {
   const { id } = await props.params;
-  const cookieStore = await cookies();
-  const token = cookieStore.get("arqflow_token")?.value;
 
-  const headers: Record<string, string> = {};
-  if (token) headers.Authorization = `Bearer ${token}`;
-
-  const res = await fetch(`${API_URL}/projects/${id}`, { headers });
+  const res = await serverFetch(`/projects/${id}`);
 
   if (res.status === 404) notFound();
   if (!res.ok) throw new Error("Erro ao carregar projeto");

@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+import { requireServerEnv } from "@/lib/env";
+import { AUTH_COOKIE_NAME, buildAuthHeader } from "@/lib/server/auth-cookie";
 
 async function proxyRequest(request: NextRequest, path: string) {
-  const token = request.cookies.get("arqflow_token")?.value;
+  const API_URL = requireServerEnv("API_INTERNAL_URL");
+  const token = request.cookies.get(AUTH_COOKIE_NAME)?.value;
 
-  const headers = new Headers();
+  const headers = new Headers(buildAuthHeader(token));
   const contentType = request.headers.get("content-type");
   if (contentType) headers.set("Content-Type", contentType);
-  if (token) headers.set("Authorization", `Bearer ${token}`);
 
   const init: RequestInit = { method: request.method, headers };
 
