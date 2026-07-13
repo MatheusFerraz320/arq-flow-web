@@ -62,11 +62,11 @@ export default function ProfilePage() {
 
     setUploading(true);
     const formData = new FormData();
-    formData.append("photo", file);
+    formData.append("file", file);
 
     try {
-      const res = await fetch(`${API_URL}/users/me`, {
-        method: "PATCH",
+      const res = await fetch(`${API_URL}/users/me/photo`, {
+        method: "POST",
         credentials: "include",
         body: formData,
       });
