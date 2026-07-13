@@ -1,17 +1,18 @@
 "use client";
 
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
 import type { User } from "./auth";
 
 interface AuthContextType {
   user: User;
+  updateUser: (patch: Partial<User>) => void;
   onLogout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({
-  user,
+  user: initialUser,
   onLogout,
   children,
 }: {
@@ -19,8 +20,14 @@ export function AuthProvider({
   onLogout: () => void;
   children: ReactNode;
 }) {
+  const [user, setUser] = useState(initialUser);
+
+  const updateUser = useCallback((patch: Partial<User>) => {
+    setUser((prev) => ({ ...prev, ...patch }));
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, onLogout }}>
+    <AuthContext.Provider value={{ user, updateUser, onLogout }}>
       {children}
     </AuthContext.Provider>
   );

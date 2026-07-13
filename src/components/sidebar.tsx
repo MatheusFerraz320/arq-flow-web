@@ -16,6 +16,8 @@ import { cn } from "@/lib/utils";
 import { getInitials, bgForName } from "@/lib/utils";
 import { toast } from "sonner";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 const AVATAR_BG = ["bg-brand/10 text-brand", "bg-accent/10 text-accent", "bg-muted text-muted-foreground"];
 
 const REAL_NAV = [
@@ -60,7 +62,7 @@ export function Sidebar({ sidebarOpen, onToggle }: { sidebarOpen: boolean; onTog
       <div className={cn("flex shrink-0 flex-col items-center pt-8", sidebarOpen ? "gap-4 px-6" : "gap-2 px-2")}>
         {user.photo ? (
           <img
-            src={user.photo}
+            src={`${API_URL}${user.photo}`}
             alt={user.name}
             className={cn("shrink-0 rounded-full object-cover ring-4 ring-border", sidebarOpen ? "size-20" : "size-10")}
           />

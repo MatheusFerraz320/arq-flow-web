@@ -5,6 +5,7 @@ import { User, Mail, Shield, Camera, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { getInitials, bgForName, cn } from "@/lib/utils";
+import { useAuth } from "@/lib/auth-context";
 import type { User as UserType } from "@/lib/auth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
@@ -22,6 +23,7 @@ async function fetchProfile(): Promise<ProfileUser> {
 }
 
 export default function ProfilePage() {
+  const { updateUser } = useAuth();
   const [profile, setProfile] = useState<ProfileUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -73,6 +75,7 @@ export default function ProfilePage() {
       if (!res.ok) throw new Error("Erro ao atualizar foto");
       const updated: ProfileUser = await res.json();
       setProfile(updated);
+      updateUser({ photo: updated.photo });
       toast.success("Foto atualizada com sucesso");
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Erro ao atualizar foto";
