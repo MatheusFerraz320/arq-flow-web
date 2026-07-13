@@ -8,23 +8,30 @@ export default function LoginPage() {
       {/* Left Panel — Branding */}
       <div className="relative hidden flex-col justify-between overflow-hidden lg:flex ">
         {/* Gradient layer animado via transform (GPU, sem tremor) */}
-        <div className="animate-gradient absolute inset-y-0 left-0 w-[200%] bg-gradient-to-r from-brand to-brand-light" />
+        <div className="animate-gradient absolute inset-y-0 left-0 w-[200%] bg-gradient-to-r from-brand to-brand-light 
+        dark:from-slate-900 dark:to-slate-800" />
 
         {/* Decorative geometric elements */}
-        <div className="pointer-events-none absolute -right-24 -top-24 size-96 rounded-full border border-white/[0.06]" />
-        <div className="pointer-events-none absolute -bottom-16 -left-16 size-72 rounded-full border border-white/[0.06]" />
-        <div className="pointer-events-none absolute right-1/3 top-1/4 size-48 rounded-full border border-white/[0.04]" />
+        <div className="pointer-events-none absolute -right-24 -top-24 size-96 rounded-full border border-white/[0.06] 
+        dark:border-white/[0.04]" />
+        <div className="pointer-events-none absolute -bottom-16 -left-16 size-72 rounded-full border border-white/[0.06] 
+        dark:border-white/[0.04]" />
+        <div className="pointer-events-none absolute right-1/3 top-1/4 size-48 rounded-full border border-white/[0.04]
+         dark:border-white/[0.02]" />
 
         <div
-          className="animate-float pointer-events-none absolute right-[15%] top-1/3 size-4 rounded-full bg-white/20"
+          className="animate-float pointer-events-none absolute right-[15%] top-1/3 size-4 rounded-full bg-white/20 
+          dark:bg-white/10"
           style={{ animationDelay: "0s" }}
         />
         <div
-          className="animate-float pointer-events-none absolute bottom-1/3 left-[20%] size-3 rounded-full bg-white/15"
+          className="animate-float pointer-events-none absolute bottom-1/3 left-[20%] size-3 rounded-full bg-white/15 
+          dark:bg-white/10"
           style={{ animationDelay: "2s" }}
         />
         <div
-          className="animate-float pointer-events-none absolute right-1/4 top-[15%] size-2 rounded-full bg-white/10"
+          className="animate-float pointer-events-none absolute right-1/4 top-[15%] size-2 rounded-full bg-white/10 
+          dark:bg-white/5"
           style={{ animationDelay: "4s" }}
         />
 

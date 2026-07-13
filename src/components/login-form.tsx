@@ -53,7 +53,7 @@ export function LoginForm() {
     <div className="animate-stagger space-y-6">
       {/* Logo & Header */}
       <div className="text-center">
-        <div className="mx-auto mb-5 flex size-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-light text-2xl font-bold text-white shadow-lg shadow-brand/25">
+        <div className="mx-auto mb-5 flex size-16 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand-light dark:from-slate-800 dark:to-slate-700 text-2xl font-bold text-white shadow-lg shadow-brand/25 dark:shadow-black/25">
           AF
         </div>
         <h1 className="text-3xl font-semibold tracking-tight text-foreground">

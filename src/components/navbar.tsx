@@ -31,7 +31,7 @@ export function Navbar({ sidebarOpen, onToggleSidebar }: { sidebarOpen: boolean;
         >
           {sidebarOpen ? <PanelLeftClose className="size-5" /> : <PanelLeft className="size-5" />}
         </button>
-        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand via-brand-light to-accent text-base font-bold text-white shadow-md shadow-brand/25">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand via-brand-light to-accent dark:from-slate-800 dark:via-slate-700 dark:to-accent text-base font-bold text-white shadow-md shadow-brand/25 dark:shadow-black/25">
           AF
         </div>
         <span className="text-lg font-extrabold tracking-tight text-card-foreground">
