@@ -6,6 +6,7 @@ import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 import { PageLoader } from "@/components/ui/page-loader";
 import { AuthProvider } from "@/lib/auth-context";
+import { api } from "@/lib/api";
 import type { User } from "@/lib/auth";
 
 export default function DashboardLayout({
@@ -21,11 +22,7 @@ export default function DashboardLayout({
   useEffect(() => {
     async function check() {
       try {
-        const res = await fetch("/api/auth/me", {
-          credentials: "include",
-        });
-        if (!res.ok) throw new Error("Não autenticado");
-        const data: User = await res.json();
+        const data = await api.get<User>("/auth/me");
         setUser(data);
       } catch {
         router.push("/login");
@@ -38,10 +35,7 @@ export default function DashboardLayout({
   }, []);
 
   async function handleLogout() {
-    await fetch("/api/auth/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+    await api.post("/auth/logout");
     toast.success("Deslogado com sucesso");
     router.push("/login");
   }

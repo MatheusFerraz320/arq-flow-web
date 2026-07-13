@@ -7,21 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { PageLoader } from "@/components/ui/page-loader";
 import { getInitials, bgForName, cn } from "@/lib/utils";
 import { useAuth } from "@/lib/auth-context";
+import { api } from "@/lib/api";
+import { getAssetUrl } from "@/lib/asset-url";
 import type { User as UserType } from "@/lib/auth";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 const AVATAR_BG = ["bg-brand/10 text-brand", "bg-accent/10 text-accent", "bg-muted text-muted-foreground"];
 
 type ProfileUser = Pick<UserType, "id" | "name" | "email" | "photo" | "role">;
-
-async function fetchProfile(): Promise<ProfileUser> {
-  const res = await fetch("/api/users/me", {
-    credentials: "include",
-  });
-  if (!res.ok) throw new Error("Erro ao carregar perfil");
-  return res.json();
-}
 
 export default function ProfilePage() {
   const { updateUser } = useAuth();
@@ -36,7 +28,7 @@ export default function ProfilePage() {
 
     async function load() {
       try {
-        const data = await fetchProfile();
+        const data = await api.get<ProfileUser>("/users/me");
         if (!cancelled) setProfile(data);
       } catch (err: unknown) {
         if (!cancelled) {
@@ -68,13 +60,7 @@ export default function ProfilePage() {
     formData.append("file", file);
 
     try {
-      const res = await fetch("/api/users/me/photo", {
-        method: "POST",
-        credentials: "include",
-        body: formData,
-      });
-      if (!res.ok) throw new Error("Erro ao atualizar foto");
-      const updated: ProfileUser = await res.json();
+      const updated = await api.upload<ProfileUser>("/users/me/photo", formData);
       setProfile(updated);
       updateUser({ photo: updated.photo });
       toast.success("Foto atualizada com sucesso");
@@ -131,7 +117,7 @@ export default function ProfilePage() {
           <div className="relative group">
             {profile.photo ? (
               <img
-                src={`${API_URL}${profile.photo}`}
+                src={getAssetUrl(profile.photo)}
                 alt={profile.name}
                 className="size-32 rounded-full object-cover ring-4 ring-border shadow-lg"
               />

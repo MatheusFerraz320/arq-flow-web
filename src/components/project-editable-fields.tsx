@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { api } from "@/lib/api";
 
 function calcDaysRemaining(dueDate: string): number | null {
   const due = new Date(dueDate);
@@ -52,13 +53,7 @@ export function BudgetCard({
 
     setSaving(true);
     try {
-      const res = await fetch(`/api/projects/${projectId}`, {
-        method: "PATCH",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ budget: val }),
-      });
-      if (!res.ok) throw new Error();
+      await api.patch(`/projects/${projectId}`, { budget: val });
       toast.success("Orçamento atualizado");
       setEditing(false);
       router.refresh();
@@ -175,13 +170,7 @@ export function DeadlineCard({
 
     setSaving(true);
     try {
-      const res = await fetch(`/api/projects/${projectId}`, {
-        method: "PATCH",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ startDate: s, dueDate: d }),
-      });
-      if (!res.ok) throw new Error();
+      await api.patch(`/projects/${projectId}`, { startDate: s, dueDate: d });
       toast.success("Prazo atualizado");
       setEditing(false);
       router.refresh();
@@ -332,13 +321,7 @@ export function TypeCard({
 
     setSaving(true);
     try {
-      const res = await fetch(`/api/projects/${projectId}`, {
-        method: "PATCH",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: val }),
-      });
-      if (!res.ok) throw new Error();
+      await api.patch(`/projects/${projectId}`, { type: val });
       toast.success("Tipo atualizado");
       setEditing(false);
       router.refresh();

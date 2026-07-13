@@ -4,9 +4,9 @@ import { useEffect, useState, useRef } from "react";
 import { ImageIcon, Upload, X, Loader2, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { api } from "@/lib/api";
+import { getAssetUrl } from "@/lib/asset-url";
 import type { ProjectPhoto } from "@/lib/types";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 interface ProjectPhotosProps {
   projectId: string;
@@ -22,11 +22,7 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
 
   async function load() {
     try {
-      const res = await fetch(`/api/projects/${projectId}/photos`, {
-        credentials: "include",
-      });
-      if (!res.ok) throw new Error("Erro ao carregar fotos");
-      const data: ProjectPhoto[] = await res.json();
+      const data = await api.get<ProjectPhoto[]>(`/projects/${projectId}/photos`);
       setPhotos(data);
     } catch (err: unknown) {
       const message =
@@ -57,12 +53,7 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
     formData.append("file", file);
 
     try {
-      const res = await fetch(`/api/projects/${projectId}/photos`, {
-        method: "POST",
-        credentials: "include",
-        body: formData,
-      });
-      if (!res.ok) throw new Error("Erro ao fazer upload");
+      await api.upload(`/projects/${projectId}/photos`, formData);
       toast.success("Foto adicionada");
       load();
     } catch (err: unknown) {
@@ -77,14 +68,7 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
   async function handleDelete(photoId: string) {
     setDeleting(photoId);
     try {
-      const res = await fetch(
-        `/api/projects/${projectId}/photos/${photoId}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        },
-      );
-      if (!res.ok) throw new Error("Erro ao remover foto");
+      await api.delete(`/projects/${projectId}/photos/${photoId}`);
       toast.success("Foto removida");
       setPhotos((prev) => prev.filter((p) => p.id !== photoId));
     } catch (err: unknown) {
@@ -171,7 +155,7 @@ export function ProjectPhotos({ projectId }: ProjectPhotosProps) {
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <img
-                  src={`${API_URL}${photo.url}`}
+                  src={getAssetUrl(photo.url)}
                   alt={photo.caption ?? "Foto do projeto"}
                   className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />

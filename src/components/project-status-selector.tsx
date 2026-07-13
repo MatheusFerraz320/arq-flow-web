@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ClipboardList, PencilRuler, Search, CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { api } from "@/lib/api";
 import type { ProjectStatus } from "@/lib/types";
 
 const STATUS_ITEMS: { value: ProjectStatus; label: string; icon: typeof ClipboardList; color: string; bg: string; ring: string }[] = [
@@ -34,13 +35,7 @@ export function ProjectStatusSelector({
     setUpdating(true);
 
     try {
-      const res = await fetch(`/api/projects/${projectId}`, {
-        method: "PATCH",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: newStatus }),
-      });
-      if (!res.ok) throw new Error("Erro ao atualizar status");
+      await api.patch(`/projects/${projectId}`, { status: newStatus });
       toast.success("Status atualizado");
       router.refresh();
     } catch (err: unknown) {

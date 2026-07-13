@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Clock, Loader2, Send, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
+import { api } from "@/lib/api";
 import type { ProjectUpdate } from "@/lib/types";
 
 interface ProjectTimelineProps {
@@ -26,13 +27,7 @@ export function ProjectTimeline({ projectId, updates }: ProjectTimelineProps) {
 
     setSaving(true);
     try {
-      const res = await fetch(`/api/projects/${projectId}`, {
-        method: "PATCH",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: message.trim() }),
-      });
-      if (!res.ok) throw new Error("Erro ao registrar atualização");
+      await api.patch(`/projects/${projectId}`, { message: message.trim() });
       setMessage("");
       toast.success("Atualização registrada");
       router.refresh();
