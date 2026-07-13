@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { User, Mail, Shield, Camera } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { User, Mail, Shield, Camera, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { getInitials, bgForName, cn } from "@/lib/utils";
 import type { User as UserType } from "@/lib/auth";
@@ -24,6 +25,8 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState<ProfileUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const photoInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -45,6 +48,39 @@ export default function ProfilePage() {
     load();
     return () => { cancelled = true; };
   }, []);
+
+  async function handlePhotoUpload(file: File) {
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("A imagem deve ter no máximo 5 MB");
+      return;
+    }
+
+    if (!file.type.startsWith("image/")) {
+      toast.error("Apenas imagens são permitidas");
+      return;
+    }
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("photo", file);
+
+    try {
+      const res = await fetch(`${API_URL}/users/me`, {
+        method: "PATCH",
+        credentials: "include",
+        body: formData,
+      });
+      if (!res.ok) throw new Error("Erro ao atualizar foto");
+      const updated: ProfileUser = await res.json();
+      setProfile(updated);
+      toast.success("Foto atualizada com sucesso");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Erro ao atualizar foto";
+      toast.error(message);
+    } finally {
+      setUploading(false);
+    }
+  }
 
   if (loading) {
     return (
@@ -111,7 +147,7 @@ export default function ProfilePage() {
           <div className="relative group">
             {profile.photo ? (
               <img
-                src={profile.photo}
+                src={`${API_URL}${profile.photo}`}
                 alt={profile.name}
                 className="size-32 rounded-full object-cover ring-4 ring-border shadow-lg"
               />
@@ -125,12 +161,28 @@ export default function ProfilePage() {
                 {getInitials(profile.name)}
               </div>
             )}
+            <input
+              ref={photoInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) handlePhotoUpload(file);
+                e.target.value = "";
+              }}
+            />
             <button
-              disabled
-              className="absolute inset-0 flex size-32 items-center justify-center rounded-full bg-background/60 opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:opacity-100 cursor-not-allowed"
-              title="Em breve — alteração de foto"
+              disabled={uploading}
+              onClick={() => photoInputRef.current?.click()}
+              className="absolute inset-0 flex size-32 items-center justify-center rounded-full bg-background/60 opacity-0 backdrop-blur-sm transition-all duration-200 group-hover:opacity-100 disabled:cursor-wait"
+              title="Alterar foto de perfil"
             >
-              <Camera className="size-8 text-muted-foreground" />
+              {uploading ? (
+                <Loader2 className="size-8 text-muted-foreground animate-spin" />
+              ) : (
+                <Camera className="size-8 text-muted-foreground" />
+              )}
             </button>
           </div>
 
