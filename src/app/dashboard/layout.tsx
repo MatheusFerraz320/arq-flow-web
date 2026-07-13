@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
+import { PageLoader } from "@/components/ui/page-loader";
 import { AuthProvider } from "@/lib/auth-context";
 import type { User } from "@/lib/auth";
 
@@ -47,16 +48,7 @@ export default function DashboardLayout({
   }
 
   if (checking) {
-    return (
-      <div className="flex min-h-dvh flex-col">
-        <div className="flex flex-1 items-center justify-center">
-          <div className="space-y-3 text-center">
-            <div className="mx-auto size-8 animate-pulse rounded-full bg-muted" />
-            <div className="mx-auto h-3 w-32 animate-pulse rounded bg-muted" />
-          </div>
-        </div>
-      </div>
-    );
+    return <PageLoader />;
   }
 
   return (
