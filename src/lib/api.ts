@@ -44,6 +44,18 @@ export const api = {
       method: "PATCH",
       body: JSON.stringify(body),
     }).then(handleResponse),
+
+  delete: <T = unknown>(path: string): Promise<T> =>
+    fetch(`${BASE_URL}${path}`, { ...defaultOptions, method: "DELETE" }).then(
+      handleResponse,
+    ),
+
+  upload: <T = unknown>(path: string, formData: FormData): Promise<T> =>
+    fetch(`${BASE_URL}${path}`, {
+      credentials: "include",
+      method: "POST",
+      body: formData,
+    }).then(handleResponse),
 };
 
 export { ApiError };
