@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { User, Mail, Shield, Camera, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
+import { PageLoader } from "@/components/ui/page-loader";
 import { getInitials, bgForName, cn } from "@/lib/utils";
 import { useAuth } from "@/lib/auth-context";
 import type { User as UserType } from "@/lib/auth";
@@ -85,27 +86,7 @@ export default function ProfilePage() {
     }
   }
 
-  if (loading) {
-    return (
-      <div className="space-y-6 animate-fade-in">
-        <div className="rounded-xl bg-gradient-to-r from-brand/[0.07] via-brand/[0.03] to-transparent p-6 ring-1 ring-brand/10">
-          <div className="space-y-2">
-            <div className="h-4 w-24 animate-skeleton rounded-md" />
-            <div className="h-9 w-48 animate-skeleton rounded-md" />
-            <div className="h-4 w-64 animate-skeleton rounded-md" />
-          </div>
-        </div>
-        <div className="flex flex-col items-center gap-6 rounded-xl border bg-card p-8 shadow-lg shadow-foreground/[0.04]">
-          <div className="size-32 animate-skeleton rounded-full" />
-          <div className="space-y-3 text-center">
-            <div className="mx-auto h-7 w-48 animate-skeleton rounded-md" />
-            <div className="mx-auto h-5 w-64 animate-skeleton rounded-md" />
-            <div className="mx-auto h-6 w-24 animate-skeleton rounded-full" />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  if (loading) return <PageLoader />;
 
   if (error) {
     return (

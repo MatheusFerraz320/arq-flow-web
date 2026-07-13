@@ -36,7 +36,8 @@ export default function DashboardLayout({
       }
     }
     check();
-  }, [router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleLogout() {
     await fetch(`${API_URL}/auth/logout`, {

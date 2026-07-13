@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Users, FolderKanban, ClipboardList, PencilRuler, Search, CheckCircle2, Plus, BarChart3 } from "lucide-react";
+import { PageLoader } from "@/components/ui/page-loader";
 import { useAuth } from "@/lib/auth-context";
 import type { Client } from "@/lib/types";
 
@@ -87,25 +88,7 @@ export default function DashboardPage() {
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Bom dia" : hour < 18 ? "Boa tarde" : "Boa noite";
 
-  if (loading) {
-    return (
-      <div className="space-y-6 animate-fade-in">
-        <div className="rounded-xl bg-gradient-to-r from-brand/[0.07] via-brand/[0.03] to-transparent p-6 ring-1 ring-brand/10">
-          <div className="space-y-2">
-            <div className="h-9 w-64 animate-skeleton rounded-md" />
-            <div className="h-4 w-48 animate-skeleton rounded-md" />
-          </div>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="h-40 animate-skeleton rounded-xl" />
-          <div className="h-40 animate-skeleton rounded-xl" />
-        </div>
-        <div className="h-20 animate-skeleton rounded-xl" />
-        <div className="h-56 animate-skeleton rounded-xl" />
-        <div className="h-48 animate-skeleton rounded-xl" />
-      </div>
-    );
-  }
+  if (loading) return <PageLoader />;
 
   if (error) {
     return (

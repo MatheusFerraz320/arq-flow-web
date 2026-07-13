@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FolderKanban, Search as SearchIcon, ClipboardList, PencilRuler, CheckCircle2 } from "lucide-react";
 import { ProjectCard } from "@/components/project-card";
 import { Input } from "@/components/ui/input";
+import { PageLoader } from "@/components/ui/page-loader";
 import type { Project } from "@/lib/types";
 
 async function fetchWithAuth<T>(path: string): Promise<T> {
@@ -77,30 +78,7 @@ export default function ProjetosPage() {
     p.client.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  if (loading) {
-    return (
-      <div className="space-y-6 animate-fade-in">
-        <div className="rounded-xl bg-gradient-to-r from-purple-500/[0.07] via-purple-500/[0.03] to-transparent p-6 ring-1 ring-purple-500/10">
-          <div className="space-y-2">
-            <div className="h-4 w-24 animate-skeleton rounded-md" />
-            <div className="h-9 w-48 animate-skeleton rounded-md" />
-            <div className="h-4 w-64 animate-skeleton rounded-md" />
-          </div>
-        </div>
-        <div className="grid gap-5 sm:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="h-24 animate-skeleton rounded-xl" />
-          ))}
-        </div>
-        <div className="h-12 animate-skeleton rounded-xl" />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="h-56 animate-skeleton rounded-xl animate-fade-in-up" style={{ animationDelay: `${i * 80}ms` }} />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  if (loading) return <PageLoader />;
 
   if (error) {
     return (

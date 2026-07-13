@@ -5,6 +5,7 @@ import { Users, Plus, Search as SearchIcon, FolderKanban, UserPlus } from "lucid
 import { ClientCard } from "@/components/client-card";
 import { NewClientDialog } from "@/components/new-client-dialog";
 import { Input } from "@/components/ui/input";
+import { PageLoader } from "@/components/ui/page-loader";
 import type { Client } from "@/lib/types";
 
 async function fetchWithAuth<T>(path: string): Promise<T> {
@@ -88,34 +89,7 @@ export default function ClientsPage() {
   const animatedTotal = useCountUp(clients.length);
   const animatedWithProjects = useCountUp(clientsWithProjects);
 
-  if (loading) {
-    return (
-      <div className="space-y-6 animate-fade-in">
-        <div className="rounded-xl bg-gradient-to-r from-brand/[0.07] via-brand/[0.03] to-transparent p-6 ring-1 ring-brand/10">
-          <div className="space-y-2">
-            <div className="h-4 w-24 animate-skeleton rounded-md" />
-            <div className="h-9 w-48 animate-skeleton rounded-md" />
-            <div className="h-4 w-64 animate-skeleton rounded-md" />
-          </div>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div className="h-24 animate-skeleton rounded-xl" />
-          <div className="h-24 animate-skeleton rounded-xl" />
-          <div className="h-24 animate-skeleton rounded-xl" />
-        </div>
-        <div className="h-12 animate-skeleton rounded-xl" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-56 animate-skeleton rounded-xl animate-fade-in-up"
-              style={{ animationDelay: `${i * 80}ms` }}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  if (loading) return <PageLoader />;
 
   if (error) {
     return (
